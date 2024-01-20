@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    /* This is needed if you want the boxes to take up the whole screen
+    else they would only take the amount of pixels they are allotted.*/
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.box {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box1 {
+    background-color: red;
+}
+
+.box2 {
+    background-color: blue;
+    align-self: flex-end;
+}
+
+.box3 {
+    background-color: yellow;
+    order: -1;
+}
