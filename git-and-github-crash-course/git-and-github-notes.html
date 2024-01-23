@@ -10,57 +10,88 @@
 </head>
 <body>
 
-    <h1>Git & Github Crash Course For Beginners</h1>
+    <div class="CrashCourseNotes">
+        <h1>Git & Github Crash Course For Beginners</h1>
 
-    <h2>Commands</h2>
-        <ul>
-            <li><strong>git init</strong> Initializes a local git repository.</li>
-            <li><strong>git add &lt;file&gt;</strong> Adds the specified file or files to the index, use a "." to denote all files in the pwd.</li>
-            <li><strong>git status</strong> Checks the status of the working tree.</li>
-            <li><strong>git commit</strong> Commit your changes in the index to the remote repository.
-            Adding <strong>"-m"</strong> will allow you to provide a description of the changes you are committing.</li>
-            <li><strong>git push</strong> Push to your remote repository. Adding <strong>-u origin &lt;branch-name&gt;</strong> will push your indexed files in your local repository to your remote repository.</li>
-            <li><strong>git pull</strong> Pulls the latest changes from your remote repository</li>
-            <li><strong>git clone</strong> Clones a repository into a new directory.</li>
-            <li><strong>git config --global user.name &lt;username&gt;</strong> Links your github username for use with git commands.</li>
-            <li><strong>git config --global user.email &lt;email&gt;</strong> Links your email address that you used for github for use with bash commands.</li>
-            <li><strong>git rm --cached &lt;file&gt;</strong> Removes a file from the staging area if you don't want them to be indexed.</li>
-            <li><strong>git branch &lt;branch-name&gt;</strong> Create/change to a different branch in the repository. Adding "-M &lt;branch-name&gt;" will allow you to move/rename the branch you specify.</li>
-            <li><strong>git checkout &lt;branch-name&gt;</strong> Allows you to switch between the different branches in the repository.</li>
-            <li><strong>git merge &lt;branch-name&gt;</strong> Merges the changes from a branch to the main branch.</li>
-            <li><strong>git remote add origin &lt;remote-repository-url&gt;</strong> Links a remote repository to the local repository on your machine.</li>
-        </ul>
+        <h2>Commands</h2>
+            <ul>
+                <li><strong>git init</strong> Initializes a local git repository.</li>
+                <li><strong>git add &lt;file&gt;</strong> Adds the specified file or files to the index, use a "." to denote all files in the pwd.</li>
+                <li><strong>git status</strong> Checks the status of the working tree.</li>
+                <li><strong>git commit</strong> Commit your changes in the index to the remote repository.
+                Adding <strong>"-m"</strong> will allow you to provide a description of the changes you are committing.</li>
+                <li><strong>git push</strong> Push to your remote repository. Adding <strong>-u origin &lt;branch-name&gt;</strong> will push your indexed files in your local repository to your remote repository.</li>
+                <li><strong>git pull</strong> Pulls the latest changes from your remote repository</li>
+                <li><strong>git clone</strong> Clones a repository into a new directory.</li>
+                <li><strong>git config --global user.name &lt;username&gt;</strong> Links your github username for use with git commands.</li>
+                <li><strong>git config --global user.email &lt;email&gt;</strong> Links your email address that you used for github for use with bash commands.</li>
+                <li><strong>git rm --cached &lt;file&gt;</strong> Removes a file from the staging area if you don't want them to be indexed.</li>
+                <li><strong>git branch &lt;branch-name&gt;</strong> Create/change to a different branch in the repository. Adding "-M &lt;branch-name&gt;" will allow you to move/rename the branch you specify.</li>
+                <li><strong>git checkout &lt;branch-name&gt;</strong> Allows you to switch between the different branches in the repository.</li>
+                <li><strong>git merge &lt;branch-name&gt;</strong> Merges the changes from a branch to the main branch.</li>
+                <li><strong>git remote add origin &lt;remote-repository-url&gt;</strong> Links a remote repository to the local repository on your machine.</li>
+            </ul>
 
-    <h2>Notes:</h2>
-        <ul>
-            <li>Git is able to keep track of your code history by taking snapshot of your files and you can decide if these snapshots will be applied to the main remote repository.</li>
-            <li>Git is available on windows, linux, and macos. Macos and Windows use a basic installer while linux uses package commands to download them.</li>
-            <li>It is recommended to use the Bash shell as opposed to the GUI to better understand how Git works.</li>
-            <li>For windows, you can also use the CMD or powershell to run all of the git commands but it is best to use the bash shell instead.</li>
-            <li>You can create a file labeled ".gitignore" to prevent git add from indexing any file listed in .gitignore.
-                Simply adding the file name or an entire directory name in the .gitignore file will prevent it from being indexed even when all files are specified with the git add command</div></li>
-            <li>The main branch in the repository is now labeled as main and no longer listed as master, so be sure to specify the branch name as main when committing to the remote repository.</li>
-            <li>Branches can be used to work parallel to the main branch to prevent anyone person from over writing work from another person.</li>
-            <li>It is always useful to have a readme.md file in your repository to provide insight for viewers by displaying a description of your project.</li>
-            <li>Remote repositories are separated via the initialized git folder that was created when using git init. You can name the remote repository something other than origin
-                which is useful if you have multiple remote repositories to add. If you have separated projects though it is unnecessary to do so.
-            </li>
-        </ul>
-    
-    <h2>Examples:</h2>
-        <h3>Initializing a Directory</h3>
-        <p> Before doing anything, you first have to add your username and email address for the bash shell using the git config --global commands. 
-            Afterwards, the first command you will use will be git init,this will create an empty git repository in your folder to allow you to use git commands.
-            Then you would add the files you want to index with the git add &lt;file&gt; command, usually you will use "git add ." to add all files in your current pwd.
-            From here you would then commit the changes with the git commit command.
-        </p>
+        <h2>Notes:</h2>
+            <ul>
+                <li>Git is able to keep track of your code history by taking snapshot of your files and you can decide if these snapshots will be applied to the main remote repository.</li>
+                <li>Git is available on windows, linux, and macos. Macos and Windows use a basic installer while linux uses package commands to download them.</li>
+                <li>It is recommended to use the Bash shell as opposed to the GUI to better understand how Git works.</li>
+                <li>For windows, you can also use the CMD or powershell to run all of the git commands but it is best to use the bash shell instead.</li>
+                <li>You can create a file labeled ".gitignore" to prevent git add from indexing any file listed in .gitignore.
+                    Simply adding the file name or an entire directory name in the .gitignore file will prevent it from being indexed even when all files are specified with the git add command</li>
+                <li>The main branch in the repository is now labeled as main and no longer listed as master, so be sure to specify the branch name as main when committing to the remote repository.</li>
+                <li>Branches can be used to work parallel to the main branch to prevent anyone person from over writing work from another person.</li>
+                <li>It is always useful to have a readme.md file in your repository to provide insight for viewers by displaying a description of your project.</li>
+                <li>Remote repositories are separated via the initialized git folder that was created when using git init. You can name the remote repository something other than origin
+                    which is useful if you have multiple remote repositories to add. If you have separated projects though it is unnecessary to do so.
+                </li>
+            </ul>
+        
+        <h2>Examples:</h2>
+            <h3>Initializing a Directory</h3>
+            <p> Before doing anything, you first have to add your username and email address for the bash shell using the git config --global commands. 
+                Afterwards, the first command you will use will be git init,this will create an empty git repository in your folder to allow you to use git commands.
+                Then you would add the files you want to index with the git add &lt;file&gt; command, usually you will use "git add ." to add all files in your current pwd.
+                From here you would then commit the changes with the git commit command.
+            </p>
 
-    <h2>Quiz Notes:</h2>
-        <ul>
-            <li><strong>What is step one when you are ready to push your code?</strong> Step one is to go to github and create an empty repository.</li>
-            <li><strong>After making an empty repository, what do you do next?</strong> After making the empty repository, you would then want to run the command git init in the local repository.</li>
-            <li><strong>What is the command structure for branching to main?</strong> The command for branching is "git branch -M main."</li>
-            <li><strong>What is the command structure for pushing your indexed files to the remote repository?</strong> The command to push the files from your indexed files to the remote repository is "git push -u origin main" with origin being the name of the remote repository and main being the branch you want to push.</li>
-        </ul>
+        <h2>Quiz Notes:</h2>
+            <ul>
+                <li><strong>What is step one when you are ready to push your code?</strong> Step one is to go to github and create an empty repository.</li>
+                <li><strong>After making an empty repository, what do you do next?</strong> After making the empty repository, you would then want to run the command git init in the local repository.</li>
+                <li><strong>What is the command structure for branching to main?</strong> The command for branching is "git branch -M main."</li>
+                <li><strong>What is the command structure for pushing your indexed files to the remote repository?</strong> The command to push the files from your indexed files to the remote repository is "git push -u origin main" with origin being the name of the remote repository and main being the branch you want to push.</li>
+            </ul>
+    </div>
+
+    <div class="PushingToGithub">
+        <h1>Pushing to Github</h1>
+
+        <h2>Notes:</h2>
+            <ul>
+                <li>Always use kabab-case when naming repositories, everything is lowercase with "-" as opposed to spaces between words.</li>
+                <li>Note that by default powershell may be the terminal VSCode uses so be sure to switch to the bashshell before using git as that is the recommended terminal.</li>
+                <li>Either code or touch can be used to create new files from the terminal.</li>
+                <li>Don't forget to save all of your changes to your files before adding files to the git index.</li>
+            </ul>
+    </div>
+
+    <div class="GitIt">
+        <h1>Git It? How to use Git and Github</h1>
+            <ul>
+                <li>Git is a version control system that basically manages files and it lets you keep track of changes by branching which allows changes to be made in parallel with the work of others.</li>
+                <li>You can initialize a git repository in the pwd either through VSCode or through the terminal, it is recommended to do so through the terminal.</li>
+                <li>The icons next to your files in the workspace can show different info about the files, a U means untracked or newly created and M means modified since the last commit.</li>
+                <li>.gitignore can be used to have git ignore certain folders or files that are either sensitive or unneeded when adding files to index.</li>
+                <li>It is better to make small commits since it makes the code process easier to follow and there is less risk to losing important code.</li>
+                <li>Commit comments can be multiple lines to allow for a quick title and description to better explain all the changes made.</li>
+                <li>The git checkout command allows you to change the current branch and the -b option to make the branch if it doesn't exist yet.</li>
+                <li>Git stash can be used to store code that might be unfinished or not yet ready to commit, it will save it without requiring you to commit it permanently.</li>
+                <li>Git merge can be used to merge branches, do note that it is best to fix any merge conflicts manually to avoid automatic merging from changing code incorrectly.</li>
+                <li>For git merge, you can use the --squash command to merge multiple branches into the main branch without having to do each individually.</li>
+                <li>git remote is used to connect you local repository to your remote repository.</li>
+            </ul> 
+    </div>
 </body>
 </html>

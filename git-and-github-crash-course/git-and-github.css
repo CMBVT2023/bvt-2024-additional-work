@@ -1,9 +1,20 @@
 /* This is the css styling file for git-and-github-notes.html*/
 body {
     background-color: bisque;
-    color: maroon;
 }
 
 strong {
     font-size: 1.5em;
+}
+
+.CrashCourseNotes {
+    color: maroon;
+}
+
+.PushingToGithub {
+    color: saddlebrown;
+}
+
+.GitIt {
+    color: sienna;
 }
