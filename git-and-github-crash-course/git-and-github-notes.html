@@ -25,7 +25,7 @@
             <li><strong>git config --global user.name &lt;username&gt;</strong> Links your github username for use with git commands.</li>
             <li><strong>git config --global user.email &lt;email&gt;</strong> Links your email address that you used for github for use with bash commands.</li>
             <li><strong>git rm --cached &lt;file&gt;</strong> Removes a file from the staging area if you don't want them to be indexed.</li>
-            <li><strong>git branch &lt;branch-name&gt;</strong> Create/change to a different branch in the repository.</li>
+            <li><strong>git branch &lt;branch-name&gt;</strong> Create/change to a different branch in the repository. Adding "-M &lt;branch-name&gt;" will allow you to move/rename the branch you specify.</li>
             <li><strong>git checkout &lt;branch-name&gt;</strong> Allows you to switch between the different branches in the repository.</li>
             <li><strong>git merge &lt;branch-name&gt;</strong> Merges the changes from a branch to the main branch.</li>
             <li><strong>git remote add origin &lt;remote-repository-url&gt;</strong> Links a remote repository to the local repository on your machine.</li>
@@ -54,5 +54,13 @@
             Then you would add the files you want to index with the git add &lt;file&gt; command, usually you will use "git add ." to add all files in your current pwd.
             From here you would then commit the changes with the git commit command.
         </p>
+
+    <h2>Quiz Notes:</h2>
+        <ul>
+            <li><strong>What is step one when you are ready to push your code?</strong> Step one is to go to github and create an empty repository.</li>
+            <li><strong>After making an empty repository, what do you do next?</strong> After making the empty repository, you would then want to run the command git init in the local repository.</li>
+            <li><strong>What is the command structure for branching to main?</strong> The command for branching is "git branch -M main."</li>
+            <li><strong>What is the command structure for pushing your indexed files to the remote repository?</strong> The command to push the files from your indexed files to the remote repository is "git push -u origin main" with origin being the name of the remote repository and main being the branch you want to push.</li>
+        </ul>
 </body>
 </html>
