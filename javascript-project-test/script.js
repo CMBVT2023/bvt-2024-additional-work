@@ -13,8 +13,12 @@ function cookieClicked() {
     cookieTotalDisplay.innerHTML = `<h4>Total Cookie Crumbs Clicked: ${cookieTotal}</h4>`;
 };
 
-cookie.addEventListener('click', cookieClicked);
-cookie.addEventListener('mousedown', () => {cookie.style.color = 'red';});
-cookie.addEventListener('mouseup', () => {cookie.style.color = 'black';});
-document.querySelector('body').addEventListener('keydown', (e) => {e.key === 's' ? addCookie = 2 : addCookie = 1});
-document.querySelector('body').addEventListener('keyup', () => {addCookie = 1});
+function pageEvents() {
+    cookie.addEventListener('click', cookieClicked);
+    cookie.addEventListener('mousedown', () => {cookie.style.color = 'red';});
+    cookie.addEventListener('mouseup', () => {cookie.style.color = 'black';});
+    document.querySelector('body').addEventListener('keydown', (e) => {e.key === 's' ? addCookie = 2 : addCookie = 1});
+    document.querySelector('body').addEventListener('keyup', () => {addCookie = 1});
+}
+
+pageEvents();
