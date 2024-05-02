@@ -1,0 +1,15 @@
+html {
+    height: 100%;
+    width: 100%;
+    min-width: 500px;
+}
+
+body {
+    background-color: bisque;
+    color:olive;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
