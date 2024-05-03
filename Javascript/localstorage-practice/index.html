@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <title>LocalStorage Practice Webpage</title>
+</head>
+<body>
+    <h1>Local Storage Practice & Notes</h1>
+
+    <h3>Various Commands</h3>
+    <ul>
+        <li>
+            setItem - Stores an item in LocalStorage<br>
+            For this to work, the item must be stored with a key, such as user or score, and the item itself must be a string. Things like objects and arrays must be stringified before being saved to LocalStorage.          
+        </li>
+            
+        <li>
+            JSON.stringify - Takes in an parameter and converts it to a string, this is necessary if an object, array, or even a number is being stored in local storage.
+        </li>
+
+        <li>
+            JSON.parse - Takes a string and converts it back into it original format, such as an object or an array.<br>
+            This is necessary if pulling a stringified item from LocalStorage, note that this also includes any number since the only thing localStorage can save is text or a string. 
+        </li>
+
+        <li>
+            getItem - Retrieves an item from localStorage based on the key value entered into its parameter.<br>
+            This is used to retrieve an item from localStorage, the value entered into its parameter is what determines what information it pulls from localStorage.
+        </li>
+
+        <li>
+            removeItem - Removes an item from localStorage based on the key entered into its parameter.<br>
+            This is used to remove a specific item from localStorage, note that the key value itself is also removed from localStorage, as opposed to it just setting it equal to an empty string.
+        </li>
+
+        <li>
+            clear() - This is a method used to remove everything in localStorage.
+            This is useful when you want to remove everything without have to call each individual key pair with the removeItem method, but it can be problematic if you wish to keep some of the info since it doesn't have the ability to be selective when removing items.
+        </li>
+
+        <li>
+            StorageEvent - This is an event that is triggered after adding an event handler to the window element, or the main page, using the "storage" event.
+            This seems to only be triggered if the user edits localStorage values from within the console or actual localStorage file, using the setItem or removeItem methods don't seem to trigger it.
+        </li>
+    </ul>
+
+
+    <h1>Local Storage Items</h1>
+
+    <div id="localStorage-container">
+        <input type="text" placeholder="Name" id="user-name" class="user-input"><br>
+        <input type="text" placeholder="Food" id="user-food" class="user-input"><br>
+        
+        <div id="localStorage-buttons">
+            <div id="localStorage-set">
+                <button id="user-set-name-btn" class="user-selection">Add Name Only</button>
+                <button id="user-set-food-btn" class="user-selection">Add Food Only</button>
+                <button id="set-user-btn" class="user-selection">Add Both Values</button>    
+            </div>
+            <div id="localStorage-get">
+                <button id="user-get-name-btn" class="user-selection">Get Name Only</button>
+                <button id="user-get-food-btn" class="user-selection">Get Food Only</button>
+                <button id="get-user-btn" class="user-selection">Get Both Values</button>
+            </div>
+            <div id="localStorage-remove">
+                <button id="user-remove-name-btn" class="user-selection">Remove Name Only</button>
+                <button id="user-remove-food-btn" class="user-selection">Remove Food Only</button>
+                <button id="remove-user-btn" class="user-selection">Remove Both Values</button>
+            </div>
+            <div id="localStorage-remove-all">
+                <button id="remove-all" class="user-selection">Remove All Info</button>
+            </div>
+            <div id="localStorage-event">
+                <button id="add-localStorage-event" class="user-selection">Add Storage Event</button>
+            </div>
+        </div>
+
+        <div id="display">
+            <div class="display-setting">
+                <h2 class="display-info">User Name:</h2>
+                <h2 id="user-name-display"></h2>
+            </div>
+            <div class="display-setting">   
+                <h2 class="display-info">User's Food:</h2>
+                <h2 id="user-food-display"></h2>
+            </div>
+        </div>
+
+        <div class="display-obj">   
+            <h2 class="display-info">User Obj String:</h2>
+            <h2 id="user-obj-display"></h2>
+        </div>            
+    </div>
+</body>
+
+<script src="./app.js"></script>
+</html>
