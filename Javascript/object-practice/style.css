@@ -1,0 +1,53 @@
+html {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    min-width: 550px;
+}
+
+body {
+    background-color: #639FAB;
+    color: #F7F7FF;
+}
+
+#external-info {
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#user-practice {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.user-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.text-boxes {
+    width: 250px;
+    height: 20px;
+}
+
+#user-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+#user-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 500px;
+    align-items: center;
+}
+
+.user-item {
+    margin-left: 25px;
+}

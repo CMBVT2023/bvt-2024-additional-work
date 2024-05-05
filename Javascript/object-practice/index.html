@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Practice Webpage</title>
+</head>
+<body>
+    <div id="object-notes">
+        <h1>Object Notes</h1>
+
+        <ul>
+            <li>
+                Objects are collections of related properties and/or methods.<br>
+                This is useful since objects can be used to represent real world items or people and their various functions/ information.<br>
+                Like a person object would have a name property and a wave method in their object.
+            </li>
+            <li>
+                Objects use key:value to store an objects properties and function() to house the objects methods.<br>
+                Similar to how a class uses function() for their methods and how localStorage uses key:value to store their objects.
+            </li>
+            <li>
+                The basic way to create an object is through declaring a variable and then setting it equal to {}.<br>
+                Within the braces can be the various key:value and methods for the object.
+            </li>
+            <li>
+                Object properties can be accessed via appending'.' and the property name after the variable.<br>
+                For example, a person object with a firstName property can be accessed by typing person.firstName
+            </li>
+            <li>
+                Object properties can also include other objects or arrays. In this case the same practice can be used to access these properties as mentioned above.<br>
+                To access specific data from the object or array, appending '.' and the property name or '[]' and the items index respectively will allow you to access the desired data.
+            </li>
+            <li>
+                In addition to have initially declared objects, an object can be created as a constructor in the case of making multiple objects with similar properties or methods.<br>
+                Rather than declaring multiple objects using "const objectName = {}" you would use "function objectConstructorName(parameters) {}" and with this any newly declared variable that is set equal to the object constructor will inherit all of the predefined properties and methods, and any parameters passed can initially be set equal to those defined in the constructor.<br>
+                Example, a person object constructor can take in a firstName and lastName parameter and set them equal to the object's firstName and lastName properties upon the objects creation.
+            </li>
+        </ul>
+
+        <div id="external-info">
+            <h5>Websites & Videos:</h5>
+            
+            <ul>
+                <li>
+                    <a href="https://medium.com/@francesco.saviano87/javascript-objects-10-real-world-exercises-c4fe8c206edd">JavaScript Objects: 10 Real-World Exercises</a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/watch?v=lo7o91qLzxc">Learn JavaScript OBJECTS in 7 minutes!</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="user-practice">
+        <div class="user-inputs">
+            <h3>Enter person's first name:</h3>
+            <input class="text-boxes" id="user-first-name" type="text" placeholder="Enter first name...">
+        </div>
+
+        <div class="user-inputs">
+            <h3>Enter person's last name:</h3>
+            <input class="text-boxes" id="user-last-name" type="text" placeholder="Enter last name...">
+        </div>
+
+        <div class="user-inputs">
+            <h3>Enter person's age:</h3>
+            <input class="text-boxes" id="user-age" type="text" placeholder="Enter age...">
+        </div>
+
+        
+        <div class="user-inputs">
+            <h3>Is the person employed?:</h3>
+            <label><input type="checkbox" id="user-employment">Yes</label>
+        </div>
+
+        <div id="user-buttons">
+            <button id="user-add">Add Person</button>
+            <button id="user-fill">Auto Populate</button><br>
+
+            <button id="user-clear">Remove Last</button>
+            <button id="clear-all">Remove All</button>
+        </div>
+
+        <div id="user-display">
+            <ul id="user-list">
+
+            </ul>
+        </div>
+    </div>
+
+
+
+
+</body>
+<script src="./app.js"></script>
+</html>
