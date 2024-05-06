@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Object Prototype Practice Webpage</title>
+</head>
+<body>
+    <div id="object-prototpe-info">
+        <h1>Object Prototype Notes:</h1>
+
+        <ul>
+            <li>
+                A prototype is used to provide access to certain methods that are already mapped or available to other objects.
+                The ability to do this is useful in the sense that once an object already has a specific method, it can be mapped to a similar object rather than creating repeat code for the other object.
+            </li>
+            <li>
+                Every object has a prototype property, whether it be a function, array, or an object. Even user created objects have their own prototype properties.
+            </li>
+            <li>
+                To access this property you enter the item's name, like User for a object, and append '.prototype'<br>
+                Note that only the constructor of an object can access the prototype property, not any of the objects created from it.<br>
+                Instead, they have the __proto__ property.
+            </li>
+            <li>
+                To attach methods to the prototype property, you enter the item and with the appended '.prototype' and then append a period followed by the name of the method you will be adding.<br>
+                Example would look like User.prototype.login = function(). This would added to the User object constructor prototype a method called login that would run a function. 
+            </li>
+            <li>
+                Inheritance is useful with prototypes since it allows the creation of other objects that are similar while basing them off an already made object.<br>
+                Like with a User object being the base object for an Admin object that would also have a username and email, but additional properties and methods as well.
+            </li>
+            <li>
+                When utilizing Inheritance, rather than having to rewrite the variables for the inherited objects in the parameter, you can instead insert '...args' in the new object's parameter<br>
+                This will accept all parameters passed in and insert them into an array
+            </li>
+            <li>
+                In the constructor of the new object, you would use the '.apply' method on object being inherited.<br>
+                For this to work, you will need to pass in a parameter of what the 'this' keyword will be referring to within the inherited object, more often than not, it will be the 'this' since it will be used to reference the current object constructor.<br>
+                Example, an admin object would use the User.apply(this, args) within its constructor to inherit the properties and methods from the User object constructor. This will allow the User Object Constructor to reference the Admin Object and the necessary parameters to initialize the new object.
+            </li>
+            <li>
+                The prototype chain is exactly as it states, it is a chain of prototypes that an element has available to it. <br>
+                For example, the Admin Object would have a prototype chain of Admin.prototype to User.prototype to Object.prototype, note that Object.prototype is created by javascript itself.<br>
+                Having this chain allows the Admin Object to utilize ant of the methods or properties created by any of these prototypes.
+            </li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div id="website-info">
+        <ul> 
+            <li><a href="https://www.youtube.com/watch?v=4jb4AYEyhRc">Object Oriented JavaScript Tutorial #10 - Prototype</a></li>
+            <li><a href="https://www.youtube.com/watch?v=Fsp42zUNJYU">Object Oriented JavaScript Tutorial #11 - Prototype Inheritance</a></li>
+        </ul>
+    </div>
+
+    <div id="object-prototpe-practice">
+        <div id="animal-display">
+            <h1 id="animal-name-display"></h1>
+            <ul id="animal-properties">
+
+            </ul>
+        </div>
+
+        <div id="animal-buttons">
+            <button class="user-input" id="parrot-button">Click For a Parrot</button>
+            <button class="user-input" id="cat-button">Click For a Cat</button>
+            <button class="user-input" id="dog-button">Click For a Dog</button>
+            <button class="user-input" id="dolphin-button">Click For a Dolphin</button>
+        </div>
+    </div>
+</body>
+
+<script src="./app.js"></script>
+</html>

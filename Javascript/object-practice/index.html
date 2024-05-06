@@ -39,6 +39,15 @@
                 Rather than declaring multiple objects using "const objectName = {}" you would use "function objectConstructorName(parameters) {}" and with this any newly declared variable that is set equal to the object constructor will inherit all of the predefined properties and methods, and any parameters passed can initially be set equal to those defined in the constructor.<br>
                 Example, a person object constructor can take in a firstName and lastName parameter and set them equal to the object's firstName and lastName properties upon the objects creation.
             </li>
+            <li>
+                The delete keyword can be used to delete certain properties or methods from an object.<br>
+                Example, "delete Person.firstName" would remove the first name property from the person object.
+            </li>
+            <li>
+                To view all of the properties an object has, you can use the Object.getOwnPropertyNames() and pass in said object as a parameter.<br>
+                This is useful when iterating through all keys an object has and using it in conjunction with Object.values() and passing in the object again, will allow you to grab the property values to display those too.  
+            </li>
+            <
         </ul>
 
         <div id="external-info">
@@ -50,6 +59,12 @@
                 </li>
                 <li>
                     <a href="https://www.youtube.com/watch?v=lo7o91qLzxc">Learn JavaScript OBJECTS in 7 minutes!</a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames">Object.getOwnPropertyNames()</a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values">Object.values()</a>
                 </li>
             </ul>
         </div>
