@@ -5,3 +5,39 @@ html, body {
     background-color: #FECEE9;
     color: #03254E;
 }
+
+#switch-external-info {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+
+    font-size: 12px;
+}
+
+#switch-practice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#selection, #check {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#user-animal {
+    height: 25px;
+}
+
+#check {
+    justify-content: space-evenly;
+}
+
+#user-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}

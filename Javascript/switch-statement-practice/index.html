@@ -28,14 +28,37 @@
             <li></li>
             <li></li>
         </ul>
-
-        <ul id="switch-external-info">
+    </div>
+    
+    <div id="switch-external-info">
+        <h3>Videos & Additional Info Links</h3>
+        <ul>
             <li><a href="https://www.youtube.com/watch?v=2gE2K8i5tvs&ab_channel=WebDevSimplified">Learn Switch Statements In 7 Minutes</a></li>
         </ul>
-    </div>
+    </div> 
 
     <div id="switch-practice">
+        <div id="selection">
+            <h3>Select an Animal: </h3>
+            <select id="user-animal">
+                <option value="">Choose an Option</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="puppy">Puppy</option>
+                <option value="kitten">Kitten</option>
+                <option value="dolphin">Dolphin</option>
+            </select>
+        </div>
 
+        <div id="check">
+            <label>Do you like this Animal?</label>
+            <input type="checkbox" id="user-choice">
+        </div>
+
+        <div id="user-display">
+            <h1 id="user-selection-display">User has not decided on their animal yet.</h1>
+            <h2 id="user-choice-display"></h2>
+        </div>
     </div>
 </body>
 
