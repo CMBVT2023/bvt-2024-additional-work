@@ -1,0 +1,38 @@
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+.object{
+    /* width: 50vw; */
+    /* height: 33vh; */
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.object-one{
+    flex-direction: row;
+    background-color: red;
+}
+.object-two{
+    flex-direction: row;
+    background-color: yellow;
+    order: -1;
+} 
+.object-three{
+    flex-direction: row;
+    background-color: blue;
+    align-self: flex-end;
+}
