@@ -1,0 +1,45 @@
+.container {
+    /* 
+    This is the code used to represent the container to show the flexbox when styling the 
+    html file.
+    border: 1px green solid;
+    height: 100vh; 
+    */
+
+    /*This activates the flexbox mode, which switches it from being column based to being row based.*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}   
+
+.red, .yellow, .blue {
+    height: 300px;
+    width: 300px;
+    /* While the child containers already have display flex from the parent container, it doesn't 
+    mean that the containers can take flex orders for their internal items, in this case their text,
+    they will need to be setup as parent containers themselves */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+    
+    /* Align-self is used to change a child in a parent container to a different alignment */
+    align-self: flex-end;
+}
+
+.yellow {
+    background-color: yellow;
+
+    /* Order can be used to change a specific child's order in a parent container 
+    sometimes you would use it on all child containers for full control, other times
+    you will just alter one child in the parent container*/
+    order: -1;
+}

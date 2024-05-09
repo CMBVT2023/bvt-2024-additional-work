@@ -1,0 +1,31 @@
+/* This is the stylesheet for the coding exercise from the video "10/07/2021 - Cohort 219 Class Recording - Introduction to Bootstrap and Bootstrap Grid" */
+
+.notes {
+    margin-top: 500px;
+}
+
+body {
+    margin: 0;
+}
+
+
+.my-container {
+    border: 1px solid green;
+}
+
+
+.my-row {
+    border: 3px solid red;
+    height: 300px;
+}
+
+
+.my-col {
+    border: 3px dotted blue;
+}
+
+
+#special-col{
+    display: flex;
+    justify-content: center;
+}
