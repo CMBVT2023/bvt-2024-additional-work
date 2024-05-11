@@ -16,3 +16,7 @@ html, body {
     right: 10px;
     top: 10px;
 }
+
+#character {
+    min-height: 100px;
+}
