@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+    <title>HTML Input Element Practice</title>
+</head>
+<body>
+    <div id="tag-notes">
+        <h1>Tag Element Notes & Examples:</h1>
+        <ul>
+            <li>
+                The input tag can be used to gather different types of info from the user, like numbers, text, or dates.
+            </li>
+            <li>
+                All input tags are made the same way, &lt input &gt, and to change the kind of input they accept, you would assign them a type="".<br>
+                Like radio, check, text, or password.
+            </li>
+            <li>
+
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div id="external-info">
+        <ul>
+            <li>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">&lt input &gt: The Input (Form Input) element</a>
+            </li>
+            <li>
+                <a href="https://css-tricks.com/html-inputs-and-labels-a-love-story/#:~:text=Don't%3A%20Put%20interactive%20elements%20inside%20labels&text=Also%2C%20if%20someone%20wants%20to,click%20the%20link%20by%20mistake.">HTML Inputs and Labels: A Love Story</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="tag-examples">
+        <div>
+            <h3 id="user-text">Want to see a magic trick?</h3>
+            <input type="text" placeholder="Type any thing..." id="user-text-box-input">
+        </div>
+
+        <div>
+            <h3 id="user-number">Can you guess my number?</h3>
+            <input type="number" min="1" max="10" placeholder="Enter any number from 1-10." id="user-number-input">
+        </div>
+
+        <div>
+            <h3 id="user-radio">Do you have any animals?</h3>
+            <input type="radio" name="user-choice" value="yes" id="radio-1">
+            <label for="radio-1">Yes I do!</label>
+            <input type="radio" name="user-choice" value="no" id="radio-2">
+            <label for="radio-2">No, I do not.</label>
+        </div>
+
+        <div>
+            <h3 id="user-check-box">Help me describe this cartoon character.</h3>
+            <label for="checkbox-1">Square</label><input type="checkbox" value="square" class="character-description" id="checkbox-1">
+            <label for="checkbox-2">Yellow</label><input type="checkbox" value="yellow" class="character-description" id="checkbox-2">
+            <label for="checkbox-3">Has a pet snail</label><input type="checkbox" value="snail" class="character-description" id="checkbox-3">
+            <label for="checkbox-4">Lives in a pineapple</label><input type="checkbox" value="pineapple" class="character-description" id="checkbox-4">
+            <label for="checkbox-5">His best friend is a starfish</label><input type="checkbox" value="friend" class="character-description" id="checkbox-5">
+        </div>
+    </div>
+</body>
+
+<script src="./app.js"></script>
+</html>

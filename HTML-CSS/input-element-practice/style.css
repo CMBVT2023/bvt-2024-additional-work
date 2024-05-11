@@ -1,0 +1,18 @@
+html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #806b80;
+    color: #9b0b0b;
+
+    /* Image Credit: Andrea Román */
+    /* Pexels image link https://www.pexels.com/photo/panoramic-view-of-a-large-mountain-16076712/ */
+    background-image: url(https://images.pexels.com/photos/16076712/pexels-photo-16076712/free-photo-of-panoramic-view-of-a-large-mountain.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background-size: cover;
+}
+
+#external-info {
+    position: absolute;    
+    right: 10px;
+    top: 10px;
+}
