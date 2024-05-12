@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+    <title>Multi-Page JavaScript Practice</title>
+</head>
+<body>
+    <div id="multi-page-info">
+        <h3>JavaScript Multi-Page Files (Import & Export Features) Notes</h3>
+
+        <ul>
+            <li>
+                The import and export feature allows multiple javascript files to be utilized within a single webpage.<br>
+                The only difference in assigning these script files to the webpage is to provide them with type="module" to allow them to utilize the import and export features.
+            </li>
+            <li>
+                Export is used make functions, variables, or entire class objects available in other files.<br>
+                Import is used to make these function usable within other files via the import feature.
+            </li>
+            <li>
+                When exporting files, the template for export is to write "export { 'item name to be exported' }" and multiple items can be exported by adding commas after each item. <br>
+                There is no wildcard when it comes to exporting, so the best way to export everything in a module is to start add the word export before any variable or function that you know you will end up wanting exported.<br>
+                From here, you can luckily use the wildcard to import everything from a module at once.
+            </li>
+            <li>
+                When importing from files, you can either use deconstruction to specify a single variable or function to import, and you can use the "as ..." keyword to provide an alias to the import.<br>
+                You can also utilize the wildcard "*" character to import everything from another module. Again, you can use the "as ..." keyword to provide an alias for the entire module.<br>
+                Example, writing "import * as template from "./template.js" would provide access to all exported items from the template file and to access it all you would need to do is type "template.'item or function'".
+            </li>
+            <li>
+                
+            </li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div id="external-info">
+        <h4>Website/Video Resources:</h4>
+        <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">import</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">export</a></li>
+            <li><a href="https://stackoverflow.com/questions/49616639/how-can-i-export-all-functions-from-a-file-in-js">How can I export all functions from a file in JS?</a></li>
+            <li><a href="https://javascript.info/import-export">Export and Import</a></li>
+        </ul>
+    </div>
+
+    <div id="multi-page-practice">
+        <div id="squaring">
+            <h3 id="squared-display">Enter any number to be squared.</h3>
+            <input type="number" placeholder="Enter a number..." id="squared-number">
+            <button id="squared-button">Square</button>
+        </div>
+
+        <div id="person">
+            <h3 id="person-display">Enter a name and age.</h3>
+            <input type="text" placeholder="Name" id="person-name">
+            <input type="number" placeholder="Age" id="person-age">
+            <button id="person-button">Enter</button>
+        </div>
+
+        <div id="concatenate">
+            <h3 id="concatenate-display">Compounding Words</h3>
+            <input type="text" placeholder="Word #1" id="concatenate-1">
+            <input type="text" placeholder="Word #2" id="concatenate-2">
+            <button id="concatenate-button">Compound</button>
+        </div>
+    </div>
+</body>
+<script src="./js/square.js" type="module"></script>
+<script src="./js/person.js" type="module"></script>
+<script src="./js/concatenate.js" type="module"></script>
+
+<script src="./js/app.js" type="module"></script>
+</html>
