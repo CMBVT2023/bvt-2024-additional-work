@@ -1,8 +1,8 @@
 
 
 // // You can either use deconstruction or the wildcard method to import a single item or everything respectively.
-import * as squareModule from "./square.js";
 // import { squareNumber as userSquare } from "./square.js";
+import * as squareModule from "./square.js";
 
 import * as personModule from "./person.js";
 import * as concatenateModule from "./concatenate.js";
