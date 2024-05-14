@@ -1,0 +1,41 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #BFB48F;
+    color: #252627;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#gradebook{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 250px;
+    justify-content: space-between;
+}
+
+.course {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course label {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.course input {
+    text-align: center;
+    height: 20px;
+}
+
+#calculate, #clear {
+    width: 150px;
+    height: 30px;
+    align-self: center;
+}
