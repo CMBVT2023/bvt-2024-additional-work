@@ -1,0 +1,191 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 99%;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 10px solid red; */
+}
+
+.container1, .container2 {
+    display: flex;
+    /* border: 10px solid black; */
+    height: 50%;
+    width: 100%;
+}
+
+.box {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.pink {
+    background-color: pink;
+}
+
+.brown {
+    background-color: brown;
+}
+
+
+
+/* Media Queries */
+
+/* Practice Examples */
+    /* @media screen and (max-width: 1200px) {
+        .container{
+            flex-direction: row-reverse;
+        }
+        .yellow {
+            align-self: flex-start;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .container {
+            flex-direction: column;
+        }
+        .yellow {
+            align-self: inherit;
+        }
+    } */
+
+/* My First Attempt at trying to make the practice models, I achieved it
+but the execution was poor and didn't use flexbox and instead
+mainly relied on margins and translate */
+    /* @media screen and (max-width: 1200px) {
+        .container {
+            flex-wrap: wrap;
+            width: 650px;
+            justify-content: space-around;
+        }
+        .pink {
+            align-self: center;
+            margin-right: 200px;
+            margin-left: 200px;
+        }
+
+        .brown {
+            align-self: flex-end;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        html,body {
+            min-width: 450px;
+            min-height: 600px;
+            
+        }
+        .container {
+            width: 100%;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .red {
+            order: -1;
+            translate: -10vw 5vh;
+        }
+        
+        .yellow {
+            translate: 35vw 33vh;
+        }
+        
+        .blue {
+            translate: 0px 3vh;
+        }
+        
+        .pink {
+            order: -2;
+            margin: 0px;
+            align-self: inherit;
+            translate: -5vw;
+        }
+        
+        .brown {
+            translate: -30vw;
+        }
+    } */
+
+
+/* Actual solution or the best solution since it uses flex box and separates
+boxes into separate divs.
+
+    Biggest Take away, nothing is off limits, rather than trying to get something 
+    to work in a specific and difficult way, instead change things around
+    and don't fear doing things differently than before.
+*/
+
+@media screen and (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .container1 {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .container2 {
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        flex-direction: row-reverse;
+    }
+
+    .container1, .container2 {
+        width: 50%;
+        height: 100%;
+    }
+
+    .container1 {
+        flex-direction: column;
+    }
+
+    .container2 {
+        justify-content: space-between;
+    }
+
+    .red {
+        align-self: flex-start;
+    }
+
+    .yellow {
+        order: 1;
+    }
+
+    .blue {
+        align-self: flex-end;
+    }
+}
