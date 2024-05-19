@@ -25,6 +25,18 @@ const whereforeArtThouOptionOne = document.getElementById('wherefore-art-thou-op
 const whereforeArtThouOptionTwo = document.getElementById('wherefore-art-thou-option-2');
 const whereforeArtThouOptionThree = document.getElementById('wherefore-art-thou-option-3');
 
+const dnaPairingDisplay = document.getElementById('dna-pairing-display');
+const dnaPairingButton = document.getElementById('dna-pairing-button');
+
+const sortedUnionInitialDisplay = document.getElementById('sorted-union-initial-display');
+const sortedUnionFinalDisplay = document.getElementById('sorted-union-final-display');
+const sortedUnionOptionOne = document.getElementById('sorted-union-option-1');
+const sortedUnionOptionTwo = document.getElementById('sorted-union-option-2');
+const sortedUnionOptionThree = document.getElementById('sorted-union-option-3');
+
+const sumAllOddFibonacciNumbersDisplay = document.getElementById('sum-all-odd-fibonacci-numbers-display');
+const sumAllOddFibonacciNumbersInput = document.getElementById('sum-all-odd-fibonacci-numbers-input');
+
 function sumNumbersInARange(arr) {
     let first;
     let last;
@@ -148,6 +160,87 @@ function whereforeArtThou(collection, source) {
     whereforeArtThouDisplay.innerHTML = JSON.stringify(finalArr);
 }
 
+function dnaPairing(str) {
+    // // This is the method that I originally used to solve the problem, while it does work and is acceptable, I did find a way through the help feature afterwards to accomplish
+    // // this using .map() and object key:pairs which I found to be simpler and more useful to know how to implement.
+    
+    // let newArr = str.split('');
+    // let finalArr = [];
+
+    // for (const item of newArr) {
+    //     switch (item) {
+    //     case 'G': {
+    //         finalArr.push([item, 'C'])
+    //         break;
+    //     }
+    //     case 'C': {
+    //         finalArr.push([item, 'G'])
+    //         break;
+    //     }
+    //     case 'A': {
+    //         finalArr.push([item, 'T'])
+    //         break;
+    //     }
+    //     case 'T': {
+    //         finalArr.push([item, 'A'])
+    //         break;
+    //     }
+    //     }
+    // }
+
+    // Arguably better way to do this,
+
+    const dnaPairs = {
+        C: 'G',
+        G: 'C',
+        A: 'T',
+        T: 'A'
+    }
+
+    // The .map method creates a new array with every element of the previous array, the benefit is that through using an arrow function, I can add the dnaPair with said element while
+    // also making it into an array, thus, without having to iterate through each element and append it to a new array, I can meet both requirements using the .map() feature.
+    dnaPairingDisplay.innerHTML = JSON.stringify(str.split('').map((element) => [element, dnaPairs[element]]))
+}
+
+function sortedUnion(...arr) {
+    sortedUnionInitialDisplay.innerHTML = JSON.stringify(arr);
+
+    let finalArr = [];
+    
+    for (const currentArr of arr) {
+        for (const item of currentArr) {
+            if (finalArr.indexOf(item) === -1) {
+                finalArr.push(item);
+            }
+        }
+    }
+
+    sortedUnionFinalDisplay.innerHTML = JSON.stringify(finalArr);
+}
+
+function sumAllOddFibonacciNumbers(num) {
+    let total = 0;
+  
+    if (num > 1) {
+      let first = 0;
+      let last = 1;
+      let result = 0;
+  
+      while (last <= num) {
+        result = last + first;
+        if (last % 2 !== 0) {
+          total += last;
+        }
+        first = last;
+        last = result;
+      }
+  
+      sumAllOddFibonacciNumbersDisplay.innerHTML = total;
+    } else {
+        sumAllOddFibonacciNumbersDisplay.innerHTML = 1;
+    }
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -184,6 +277,24 @@ function loadEventHandlers() {
     })
     whereforeArtThouOptionThree.addEventListener('click', () => {
         whereforeArtThou([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }, { first: "Juliet", last: null }], { last: null })
+    })
+
+    dnaPairingButton.addEventListener('click', () => {
+        dnaPairing('CTCTAGAT')
+    })
+
+    sortedUnionOptionOne.addEventListener('click', () => {
+        sortedUnion([1, 3, 2], [5, 2, 1, 4], [2, 1])
+    })
+    sortedUnionOptionTwo.addEventListener('click', () => {
+        sortedUnion([1, 2, 3], [5, 2, 1])
+    })
+    sortedUnionOptionThree.addEventListener('click', () => {
+        sortedUnion([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8])
+    })
+
+    sumAllOddFibonacciNumbersInput.addEventListener('change', (e) => {
+        sumAllOddFibonacciNumbers(e.target.value)
     })
 }
 
