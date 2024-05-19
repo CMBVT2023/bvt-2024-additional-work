@@ -12,8 +12,13 @@ const personLastNameButton = document.getElementById('person-set-last');
 const personFullNameButton = document.getElementById('person-set-full');
 
 const differenceDisplay = document.getElementById('diff-two-arr-display');
-const arrayOptionOne = document.getElementById('option-1');
-const arrayOptionTwo = document.getElementById('option-2');
+const arrayOptionOne = document.getElementById('diff-two-arr-option-1');
+const arrayOptionTwo = document.getElementById('diff-two-arr-option-2');
+
+const seekAndDestroyDisplay = document.getElementById('seek-and-destroy-display');
+const sADOptionOne = document.getElementById('seek-and-destroy-option-1');
+const sADOptionTwo = document.getElementById('seek-and-destroy-option-2');
+const sADOptionThree = document.getElementById('seek-and-destroy-option-3');
 
 function sumNumbersInARange(arr) {
     let first;
@@ -110,6 +115,17 @@ function diffArray(arr1, arr2) {
     }
 }
 
+function seekAndDestroy(array, ...arr) {
+
+    for (const number of arr) {
+        while (array.indexOf(number) !== -1) {
+            array.splice(array.indexOf(number), 1)
+        }
+    }
+    
+    seekAndDestroyDisplay.innerHTML = array.join(' ');
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -126,6 +142,16 @@ function loadEventHandlers() {
     })
     arrayOptionTwo.addEventListener('click', () => {
         diffArray(["diorite", "andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]);
+    })
+
+    sADOptionOne.addEventListener('click', () => {
+        seekAndDestroy([1, 2, 3, 1, 2, 3, 4, 4, 4, 5, 5, 6, 1, 2, 3, 4, 5, 6, 4, 5, 6], 1)
+    });
+    sADOptionTwo.addEventListener('click', () => {
+        seekAndDestroy([1, 2, 3, 1, 2, 3, 4, 4, 4, 5, 5, 6, 1, 2, 3, 4, 5, 6, 4, 5, 6], 2, 3)
+    })
+    sADOptionThree.addEventListener('click', () => {
+        seekAndDestroy([1, 2, 3, 1, 2, 3, 4, 4, 4, 5, 5, 6, 1, 2, 3, 4, 5, 6, 4, 5, 6], 4, 5, 6)
     })
 }
 
