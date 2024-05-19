@@ -48,40 +48,49 @@ let enemyHealth = 0;
 let enemyAttack = 0;
 let enemyXpDrop = 0;
 
-let potentialItems = ["keys", "cat shirt", "arcade token", "shoes"]
-
-// Make it a random chance to go to the arcade or laser tag,
-// Arcade will allow xp gain while taking less damage and laster tag will result in faster xp but high damage in return.
+let potentialItems = ["keys", "cat shirt", "arcade token", "shoes"];
 
 const locations = [
     {
         name: "Parking Lot",
         buttons: ["Go to the mall", "Find something to hit", "Challenge the elder"],
-        buttonFunctions: [shop, fight, finalBoss],
+        buttonFunctions: [mall, playArea, finalBoss],
         text: "You are back in the parking lot, and like usual you are met with three options to choose from."
     },
     {
         name: "Mall",
-        buttons: ["Buy a new weapon (40 Gold)", "Sell Items", "Go back to the parking lot"],
-        buttonFunctions: [buyWeapon, sellItem, parkingLot],
-        text: "You end up at the mall and here you can buy a variety of weapons or sell the items you have obtained."
+        buttons: ["Go to the shopping center", "Go to the food court", "Go back to the parking lot"],
+        buttonFunctions: [shoppingCenter, foodCourt, parkingLot],
+        text: "You end up at the mall and here you can choose to go to the shopping center to buy and sell items or go to the food court to replenish health."
+    },
+    {
+        name: "Shopping Center",
+        buttons: ["Buy a new weapon (40 Gold)", "Sell Items", "Leave"],
+        buttonFunctions: [buyWeapon, sellItem, mall],
+        text: "You go to the shopping center and here you can buy a variety of weapons or sell the items you have obtained."
     },
     {
         name: "Food Court",
         buttons: ["Buy food (30 Gold)", "Buy a drink (10 Gold)", "Leave"],
-        buttonFunctions: [buyFood, buyDrink, parkingLot],
+        buttonFunctions: [buyFood, buyDrink, mall],
         text: "You end up at the food court and here you can buy some food or a drink to regain some health."
+    },
+    {
+        name: "Play Area",
+        buttons: ["Go to laser tag", "Go to the arcade", "Go back to the parking lot"],
+        buttonFunctions: [laserTag, arcade, parkingLot],
+        text: "You end up at the play area. From here you can either go to play laser tag or go to the arcade."
     },
     {
         name: "Laser Tag",
         buttons: ["Play with the older kids", "Play with the younger kids", "Run"],
-        buttonFunctions: [olderKids, youngerKids, parkingLot],
+        buttonFunctions: [olderKids, youngerKids, playArea],
         text: "You find yourself at the laser tag arena, this is a great place to strike some people down with your lasers. You have the choice of either joining a game with some of the older kids or some of the younger kids. You could also just run away as fast as you can if that is your thing."
     },
     {
         name: "Arcade",
         buttons: ["Play", "Watch someone else play", "Leave"],
-        buttonFunctions: [arcadePlay, arcadeView, parkingLot],
+        buttonFunctions: [arcadePlay, arcadeView, playArea],
         text: "You find yourself at the arcade, this is a great place to dominate the competition by getting the high score."
     },
     {
@@ -102,62 +111,78 @@ const locations = [
         buttonFunctions: [laserAttack, laserDodge, parkingLot],
         text: "Ok, this game isn't too bad but don't underestimate these kids, they have some serious stamina."
     },
-]
+    {
+        name: "You Lose",
+        buttons: ["Replay", "Replay", "Replay"],
+        buttonFunctions: [resetGame, resetGame, resetGame],
+        text: "Your health depleted and now you can no longer go on, restart the game to play."
+    },
+    {
+        name: "You Win",
+        buttons: ["Replay", "Replay", "Replay"],
+        buttonFunctions: [resetGame, resetGame, resetGame],
+        text: "You finally won the game by defeating the final boss and have now everyone in the area from their evil ways."
+    },
+];
 
 function updateInterface(area) {
     gameTitleDisplay.innerHTML = area.name;
     gameTextDisplay.innerHTML = area.text;
 
-    button1.innerHTML = area.buttons[0]
-    button2.innerHTML = area.buttons[1]
-    button3.innerHTML = area.buttons[2]
+    button1.innerHTML = area.buttons[0];
+    button2.innerHTML = area.buttons[1];
+    button3.innerHTML = area.buttons[2];
 
-    button1.onclick = area.buttonFunctions[0]
-    button2.onclick = area.buttonFunctions[1]
-    button3.onclick = area.buttonFunctions[2]
-}
-
-function shop() {
-    let randomNum = Math.ceil(Math.random() * 2);
-
-    if (randomNum > 1) {
-        updateInterface(locations[1]);
-    } else {
-        updateInterface(locations[2]);
-    };
-}
-
-function fight() { 
-    let randomNum = Math.ceil(Math.random() * 2);
-
-    if (randomNum > 1) {
-        updateInterface(locations[3]);
-    } else {
-        updateInterface(locations[4]);
-    };
+    button1.onclick = area.buttonFunctions[0];
+    button2.onclick = area.buttonFunctions[1];
+    button3.onclick = area.buttonFunctions[2];
 }
 
 function parkingLot() {
     updateInterface(locations[0]);
-}
+};
+
+function mall() {
+    updateInterface(locations[1]);
+};
+
+function shoppingCenter() {
+    updateInterface(locations[2]);
+};
+
+function foodCourt() {
+    updateInterface(locations[3]);
+};
+
+function playArea() { 
+    updateInterface(locations[4]);
+};
+
+function laserTag() {
+    updateInterface(locations[5]);
+};
+
+function arcade() {
+    updateInterface(locations[6]);
+};
 
 function finalBoss() {
-    updateInterface(locations[5])
-}
+    updateInterface(locations[7]);
+};
 
 function buyWeapon() {
     if (userGold >= 40) {
-        currentWeapon++
+        currentWeapon++;
 
         gameTitleDisplay.innerHTML = "New Weapon Acquired!";
-        gameTextDisplay.innerHTML = `You have acquired a new weapon. You now have a ${weapons[currentWeapon]}.`;
+        gameTextDisplay.innerHTML = `You have acquired a new weapon. You now have a ${weapons[currentWeapon].name}.`;
 
         userGold -= 40;
         userGoldDisplay.innerHTML = userGold;
     } else {
         gameTitleDisplay.innerHTML = "You are Broke!";
         gameTextDisplay.innerHTML = "You do not have enough gold to buy a new weapon.";
-    }
+    };
 }
 
 function sellItem() {
@@ -216,7 +241,7 @@ function buyFood() {
         gameTextDisplay.innerHTML = `You have acquired a some food and gained back ${randomNum} Health.`;
 
         userHealth += randomNum;
-        userHealth.innerHTML = userHealth;
+        userHealthDisplay.innerHTML = userHealth;
 
         userGold -= 30;
         userGoldDisplay.innerHTML = userGold;
@@ -234,7 +259,7 @@ function buyDrink() {
         gameTextDisplay.innerHTML = `You have acquired a drink and gained back ${randomNum} Health.`;
 
         userHealth += randomNum;
-        userHealth.innerHTML = userHealth;
+        userHealthDisplay.innerHTML = userHealth;
 
         userGold -= 10;
         userGoldDisplay.innerHTML = userGold;
@@ -245,42 +270,54 @@ function buyDrink() {
 }
 
 function olderKids() {
-    updateInterface(locations[6]);
+    updateInterface(locations[8]);
 
-    loadEnemy(50, 15, 25)
+    loadEnemy(50, 15, 25);
 }
 
 function youngerKids() {
-    updateInterface(locations[7]);
+    updateInterface(locations[9]);
+
+    loadEnemy(30, 8, 10);
 }
 
-function loadEnemy(hitPoints, attack, xpDrop) {
+function loadEnemy(hitPoints, attack, xpDrop, name) {
     enemyHealth = hitPoints;
 
-    enemyAttack = Math.ceil(Math.random() * userXp) + attack; 
+    enemyAttack = Math.ceil(Math.random() * (userXp / 4)) + attack; 
     
     enemyXpDrop = Math.ceil(Math.random() * attack) + xpDrop;
+
 }
 
 function laserAttack() {
-    if (gameTitleDisplay.innerHTML === "Older Kids") {
-
-        console.log(enemyHealth)
-        
-        enemyHealth -= weapons[currentWeapon].attackPower + Math.ceil(Math.random() * userXp);
-
-        userHealth -= enemyAttack;
+        enemyHealth -= weapons[currentWeapon].attackPower + Math.ceil(Math.random() * (userXp / 2));
 
         if (enemyHealth <= 0) {
             userXp += enemyXpDrop;
             userXPDisplay.innerHTML = userXp;
 
+            let goldReturn = Math.ceil(Math.random() * (userXp / 2)) + 8; 
+
+            userGold += goldReturn;
+            userGoldDisplay.innerHTML = userGold;
+
             updateInterface(locations[0]);
 
             gameTitleDisplay.innerHTML = "You Won the Fight!";
-            gameTextDisplay.innerHTML = `You won and received ${enemyXpDrop} xp in return. You return to the parking lot after winning.`;
+            gameTextDisplay.innerHTML = `You won and received ${enemyXpDrop} xp and ${goldReturn} gold in return. You return to the parking lot after winning.`;
+        } else {
+            userHealth -= enemyAttack;
+            if (userHealth <= 0) {
+                userHealthDisplay.innerHTML = 0;
+                updateInterface(locations[10]);
+            } else {
+                userHealthDisplay.innerHTML = userHealth;
+
+                gameTitleDisplay.innerHTML = "Keep Fighting!";
+                gameTextDisplay.innerHTML = `The enemy is taking damage, they have ${enemyHealth} health left.`;
+            }
         }
-    }
 }
 
 function laserDodge() {
@@ -319,7 +356,17 @@ function resetGame() {
     userGoldDisplay.innerHTML = userGold;
     userHealthDisplay.innerHTML = userHealth;
 
+    enemyHealth = 0;
+    enemyAttack = 0;
+    enemyXpDrop = 0;
+
     parkingLot();
 }
 
 resetGame()
+
+// TODO: Have a 25% chance to receive a random item after fighting an enemy.
+//  Create the chance to dodge and strike even, have dodging be a 75% chance and a 50% chance to get a hit in after wards
+//  Create the arcade events
+// Create the final boss fight
+// 

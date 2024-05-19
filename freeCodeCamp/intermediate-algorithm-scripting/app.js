@@ -20,6 +20,11 @@ const sADOptionOne = document.getElementById('seek-and-destroy-option-1');
 const sADOptionTwo = document.getElementById('seek-and-destroy-option-2');
 const sADOptionThree = document.getElementById('seek-and-destroy-option-3');
 
+const whereforeArtThouDisplay = document.getElementById('wherefore-art-thou-display');
+const whereforeArtThouOptionOne = document.getElementById('wherefore-art-thou-option-1');
+const whereforeArtThouOptionTwo = document.getElementById('wherefore-art-thou-option-2');
+const whereforeArtThouOptionThree = document.getElementById('wherefore-art-thou-option-3');
+
 function sumNumbersInARange(arr) {
     let first;
     let last;
@@ -126,6 +131,23 @@ function seekAndDestroy(array, ...arr) {
     seekAndDestroyDisplay.innerHTML = array.join(' ');
 }
 
+function whereforeArtThou(collection, source) {
+    let finalArr = []
+
+    for (const item of collection) {
+        let valid = true;
+        for (const sourceKey in source) {
+            if (item[sourceKey] !== source[sourceKey]) {
+                valid = false;
+            }
+        }
+
+        valid === true ? finalArr.push(item) : '';
+    }
+
+    whereforeArtThouDisplay.innerHTML = JSON.stringify(finalArr);
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -152,6 +174,16 @@ function loadEventHandlers() {
     })
     sADOptionThree.addEventListener('click', () => {
         seekAndDestroy([1, 2, 3, 1, 2, 3, 4, 4, 4, 5, 5, 6, 1, 2, 3, 4, 5, 6, 4, 5, 6], 4, 5, 6)
+    })
+
+    whereforeArtThouOptionOne.addEventListener('click', () => {
+        whereforeArtThou([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }, { first: "Juliet", last: null }], { last: "Capulet" })
+    })
+    whereforeArtThouOptionTwo.addEventListener('click', () => {
+        whereforeArtThou([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }, { first: "Juliet", last: null }], { first: "Romeo" })
+    })
+    whereforeArtThouOptionThree.addEventListener('click', () => {
+        whereforeArtThou([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }, { first: "Juliet", last: null }], { last: null })
     })
 }
 

@@ -49,6 +49,20 @@
         <input type="radio" name="seek-and-destroy" id="seek-and-destroy-option-2"><label for="seek-and-destroy-option-2">Remove 2 & 3</label>
         <input type="radio" name="seek-and-destroy" id="seek-and-destroy-option-3"><label for="seek-and-destroy-option-3">Remove 4, 5, & 6</label>
     </div>
+
+    <!-- I had a lot of difficulty on this one, I really didn't understand how I should iterate through the list and it tripped me up, instead of trying to find what is 
+         different and flagging that I actually flagged if things matched which created issues. These issues stemmed from the fact that if an object did have even one of the source
+            properties it would add it to the list even though the object did not have all of the necessary properties. Also, my attempt to filter the list was poorly executed
+                since I only focused on how many keys an object had instead of filtering them out based on their names. -->
+    <div id="wherefore-art-thou">
+        <h3>Wherefore Art Thou</h3>
+        <h4>Original Array: [{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }, { first: "Juliet", last: null }]</h4>
+        <h4>Modified Array: <span id="wherefore-art-thou-display"></span></h4>
+
+        <input type="radio" name="wherefore-art-thou" id="wherefore-art-thou-option-1"><label for="wherefore-art-thou-option-1">Filter { last: "Capulet" }</label>
+        <input type="radio" name="wherefore-art-thou" id="wherefore-art-thou-option-2"><label for="wherefore-art-thou-option-2">Filter { first: "Romeo" }</label>
+        <input type="radio" name="wherefore-art-thou" id="wherefore-art-thou-option-3"><label for="wherefore-art-thou-option-3">Filter { last: null }</label>
+    </div>
 </body>
 
 <script src="./app.js"></script>
