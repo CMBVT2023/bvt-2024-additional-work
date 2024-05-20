@@ -123,6 +123,18 @@ const locations = [
         buttonFunctions: [resetGame, resetGame, resetGame],
         text: "You finally won the game by defeating the final boss and have now everyone in the area from their evil ways."
     },
+    {
+        name: "High Score Battle Royal",
+        buttons: ["Go for glory", "Bide your time", "Quit"],
+        buttonFunctions: [arcadeAttack, arcadeWait, parkingLot],
+        text: "You join in on a battle royal style arcade game, be the last person standing and you will win."
+    },
+    {
+        name: "Tutorial/Demonstration",
+        buttons: ["Advance", "ReWatch", "Quit"],
+        buttonFunctions: [arcadeAdvance, arcadeReWatch, parkingLot],
+        text: "You admit to yourself that you need some lessons and instead of playing a game, you decide to watch the tutorial for it."
+    }
 ];
 
 function updateInterface(area) {
@@ -191,7 +203,7 @@ function sellItem() {
 
         switch (sold) {
             case "keys": {
-                gold += 35;
+                userGold += 35;
                 userGoldDisplay.innerHTML = userGold;
 
                 gameTitleDisplay.innerHTML = "You Sold Some Keys You Found";
@@ -200,7 +212,7 @@ function sellItem() {
                 break;
             };
             case "cat shirt": {
-                gold += 25;
+                userGold += 25;
                 userGoldDisplay.innerHTML = userGold;
 
                 gameTitleDisplay.innerHTML = "You Sold a Cat Shirt You Found";
@@ -209,7 +221,7 @@ function sellItem() {
                 break;
             };
             case "arcade token": {
-                gold += 5;
+                userGold += 5;
                 userGoldDisplay.innerHTML = userGold;
 
                 gameTitleDisplay.innerHTML = "You Sold an Arcade Token You Found";
@@ -218,7 +230,7 @@ function sellItem() {
                 break;
             };
             case "shoes": {
-                gold += 40;
+                userGold += 40;
                 userGoldDisplay.innerHTML = userGold;
 
                 gameTitleDisplay.innerHTML = "You Sold a Pair of Shoes You Found";
@@ -269,6 +281,19 @@ function buyDrink() {
     }
 }
 
+function randomDrop() {
+    let randomNum = Math.ceil(Math.random() * 100);
+
+    if (randomNum >= 75) {
+        let num = Math.ceil(Math.random() * 4);
+
+        userInventory.push(potentialItems[num]);
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function olderKids() {
     updateInterface(locations[8]);
 
@@ -281,7 +306,7 @@ function youngerKids() {
     loadEnemy(30, 8, 10);
 }
 
-function loadEnemy(hitPoints, attack, xpDrop, name) {
+function loadEnemy(hitPoints, attack, xpDrop) {
     enemyHealth = hitPoints;
 
     enemyAttack = Math.ceil(Math.random() * (userXp / 4)) + attack; 
@@ -290,22 +315,40 @@ function loadEnemy(hitPoints, attack, xpDrop, name) {
 
 }
 
+function defeatedEnemy(event) {
+    userXp += enemyXpDrop;
+    userXPDisplay.innerHTML = userXp;
+
+    let goldReturn = Math.ceil(Math.random() * enemyXpDrop) + 8;
+    let itemDrop = randomDrop();
+
+    userGold += goldReturn;
+    userGoldDisplay.innerHTML = userGold;
+    
+
+    updateInterface(locations[0]);
+
+    if (event === "laser") {
+        gameTitleDisplay.innerHTML = "You Won the Fight!";
+        gameTextDisplay.innerHTML = `You won and received ${enemyXpDrop} xp and ${goldReturn} gold in return. You return to the parking lot after winning.`;
+    } else if(event === "arcadePlay") {
+        gameTitleDisplay.innerHTML = "You Won the Battle Royal Game!";
+        gameTextDisplay.innerHTML = `You won and received ${enemyXpDrop} xp and ${goldReturn} gold in return. You return to the parking lot after winning.`;
+    } else if (event === "arcadeWatch") {
+        gameTitleDisplay.innerHTML = "You Finished the Video!";
+        gameTextDisplay.innerHTML = `You received ${enemyXpDrop} xp and ${goldReturn} gold in return. You return to the parking lot after winning.`;
+    }
+    
+    if (itemDrop) {
+        gameTextDisplay.innerHTML += ` In addition, you manage to find an item and put it in your inventory, the item you found was ${userInventory[userInventory.length - 1]}`
+    }
+}
+
 function laserAttack() {
         enemyHealth -= weapons[currentWeapon].attackPower + Math.ceil(Math.random() * (userXp / 2));
 
         if (enemyHealth <= 0) {
-            userXp += enemyXpDrop;
-            userXPDisplay.innerHTML = userXp;
-
-            let goldReturn = Math.ceil(Math.random() * (userXp / 2)) + 8; 
-
-            userGold += goldReturn;
-            userGoldDisplay.innerHTML = userGold;
-
-            updateInterface(locations[0]);
-
-            gameTitleDisplay.innerHTML = "You Won the Fight!";
-            gameTextDisplay.innerHTML = `You won and received ${enemyXpDrop} xp and ${goldReturn} gold in return. You return to the parking lot after winning.`;
+            defeatedEnemy('laser');
         } else {
             userHealth -= enemyAttack;
             if (userHealth <= 0) {
@@ -321,15 +364,145 @@ function laserAttack() {
 }
 
 function laserDodge() {
+    let randomNum = Math.ceil(Math.random() * 100) + (userXp / 8);
 
+    if (randomNum >= 75) {
+        enemyHealth -= weapons[currentWeapon].attackPower;
+
+        if (enemyHealth <= 0) {
+            defeatedEnemy('laser');
+        } else {
+            gameTitleDisplay.innerHTML = "Counter Attack Successful!";
+            gameTextDisplay.innerHTML = `You manage to dodge the laser successfully and it instead damaged the enemy who now has ${enemyHealth} health left.`;
+        }
+    } else if (randomNum >= 25) {
+        gameTitleDisplay.innerHTML = "Dodge Successful!";
+        gameTextDisplay.innerHTML = `You manage to dodge the laser successfully without taking any damage.`;
+    } else {
+        userHealth -= enemyAttack;
+
+        if (userHealth <= 0) {
+            userHealthDisplay.innerHTML = 0;
+            updateInterface(locations[10]);
+        } else {
+            userHealthDisplay.innerHTML = userHealth;
+
+            gameTitleDisplay.innerHTML = "Dodging Failed!";
+            gameTextDisplay.innerHTML = `You failed to dodge the laser successfully.`;
+        }
+    }
 }
 
 function arcadePlay() {
+    updateInterface(locations[12]);
 
+    loadEnemy(100, 2, 10);
 }
 
 function arcadeView() {
-     
+     updateInterface(locations[13]);
+
+     loadEnemy(50, 1, 6);
+}
+
+function arcadeAttack() {
+    enemyHealth -= Math.ceil(Math.random() * (userXp) + 5);
+
+    if (enemyHealth <= 0) {
+        defeatedEnemy('arcadePlay');
+    } else {
+        userHealth -= enemyAttack;
+
+        if (userHealth <= 0) {
+            userHealthDisplay.innerHTML = 0;
+            updateInterface(locations[10]);
+        } else {
+            userHealthDisplay.innerHTML = userHealth;
+
+            gameTitleDisplay.innerHTML = "Keep Playing!";
+            gameTextDisplay.innerHTML = `Keep going, there are only ${enemyHealth} players left to defeat.`;
+        }
+    }
+}
+
+function arcadeWait() {
+    let randomNum = Math.ceil(Math.random() * 100) + (userXp / 8);
+
+    if (randomNum >= 75) {
+        enemyHealth -= Math.ceil(Math.random() * (userXp / 2) + 2);
+
+        if (enemyHealth <= 0) {
+            defeatedEnemy('arcadePlay');
+        } else {
+            gameTitleDisplay.innerHTML = "Surprise Attack!";
+            gameTextDisplay.innerHTML = `You manage to get the jump on some players, there are now only ${enemyHealth} players left to defeat.`;
+        }
+    } else if (randomNum >= 25) {
+        gameTitleDisplay.innerHTML = "Now You Wait!";
+        gameTextDisplay.innerHTML = `You find an area to hide from the other players.`;
+    } else {
+        userHealth -= enemyAttack;
+
+        if (userHealth <= 0) {
+            userHealthDisplay.innerHTML = 0;
+            updateInterface(locations[10]);
+        } else {
+            userHealthDisplay.innerHTML = userHealth;
+
+            gameTitleDisplay.innerHTML = "Ambush!";
+            gameTextDisplay.innerHTML = `You failed to find a place to hide and other players attacked you.`;
+        }
+    }
+}
+
+function arcadeAdvance() {
+    enemyHealth -= Math.ceil(Math.random() * (userXp) + 5);
+
+    if (enemyHealth <= 0) {
+        defeatedEnemy('arcadeWatch');
+    } else {
+        userHealth -= enemyAttack;
+
+        if (userHealth <= 0) {
+            userHealthDisplay.innerHTML = 0;
+            updateInterface(locations[10]);
+        } else {
+            userHealthDisplay.innerHTML = userHealth;
+
+            gameTitleDisplay.innerHTML = "This is a Good Video";
+            gameTextDisplay.innerHTML = `Keep watching, there are only ${enemyHealth} minutes left to on the video.`;
+        }
+    }
+}
+
+function arcadeReWatch() {
+    let randomNum = Math.ceil(Math.random() * 100) + (userXp / 8);
+
+    if (randomNum >= 75) {
+        enemyHealth -= Math.ceil(Math.random() * (userXp / 2) + 2);
+
+        if (enemyHealth <= 0) {
+            defeatedEnemy('arcadeWatch');
+        } else {
+            gameTitleDisplay.innerHTML = "Pleasant Surprise!";
+            gameTextDisplay.innerHTML = `You come across an ad in the video that you can easily skip, there are now only ${enemyHealth} minutes left in the video.`;
+        }
+    } else if (randomNum >= 25) {
+        gameTitleDisplay.innerHTML = "I Get It Now!";
+        gameTextDisplay.innerHTML = `After the quick rewatch, you now understand the section of the video.`;
+    } else {
+        userHealth -= enemyAttack;
+
+        if (userHealth <= 0) {
+            userHealthDisplay.innerHTML = 0;
+            updateInterface(locations[10]);
+        } else {
+            userHealthDisplay.innerHTML = userHealth;
+
+            gameTitleDisplay.innerHTML = "Still Confused!";
+            gameTextDisplay.innerHTML = `You failed to understand the video even after a quick rewatch and it some how caused your health to deplete.`;
+        }
+    }
 }
 
 function finalAttack() {
@@ -366,7 +539,5 @@ function resetGame() {
 resetGame()
 
 // TODO: Have a 25% chance to receive a random item after fighting an enemy.
-//  Create the chance to dodge and strike even, have dodging be a 75% chance and a 50% chance to get a hit in after wards
-//  Create the arcade events
 // Create the final boss fight
 // 
