@@ -5,10 +5,13 @@ const userGoldDisplay = document.getElementById('user-gold');
 const button1 = document.getElementById('button-1');
 const button2 = document.getElementById('button-2');
 const button3 = document.getElementById('button-3');
+const inventoryButton = document.getElementById('inventory-button');
 
 const gameTitleDisplay = document.getElementById('game-info-title');
 const gameTextDisplay = document.getElementById('game-info-text');
 const gameImagesDisplay = document.getElementById('game-assets');
+const inventoryDisplay = document.getElementById('user-inventory');
+const inventoryTitle = document.getElementById('inventory-title');
 
 let userXp = 0;
 let userHealth = 100;
@@ -43,79 +46,90 @@ let weapons = [
 ];
 let currentWeapon = 0;
 let userInventory = [];
+let inventoryActive = false;
 
 let enemyHealth = 0;
 let enemyAttack = 0;
 let enemyXpDrop = 0;
 
-let potentialItems = ["keys", "cat shirt", "arcade token", "shoes"];
+let potentialItems = ["Keys", "Cat Shirt", "Arcade Token", "Shoes"];
 
 const locations = [
     {
         name: "Parking Lot",
         buttons: ["Go to the mall", "Find something to hit", "Challenge the elder"],
         buttonFunctions: [mall, playArea, finalBoss],
-        text: "You are back in the parking lot, and like usual you are met with three options to choose from."
+        text: "You are back in the parking lot, and like usual you are met with three options to choose from.",
+        image: "https://images.pexels.com/photos/1500459/pexels-photo-1500459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         name: "Mall",
         buttons: ["Go to the shopping center", "Go to the food court", "Go back to the parking lot"],
         buttonFunctions: [shoppingCenter, foodCourt, parkingLot],
-        text: "You end up at the mall and here you can choose to go to the shopping center to buy and sell items or go to the food court to replenish health."
+        text: "You end up at the mall and here you can choose to go to the shopping center to buy and sell items or go to the food court to replenish health.",
+        image: "https://images.pexels.com/photos/2954405/pexels-photo-2954405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         name: "Shopping Center",
         buttons: ["Buy a new weapon (40 Gold)", "Sell Items", "Leave"],
         buttonFunctions: [buyWeapon, sellItem, mall],
-        text: "You go to the shopping center and here you can buy a variety of weapons or sell the items you have obtained."
+        text: "You go to the shopping center and here you can buy a variety of weapons or sell the items you have obtained.",
+        image: "https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         name: "Food Court",
         buttons: ["Buy food (30 Gold)", "Buy a drink (10 Gold)", "Leave"],
         buttonFunctions: [buyFood, buyDrink, mall],
-        text: "You end up at the food court and here you can buy some food or a drink to regain some health."
+        text: "You end up at the food court and here you can buy some food or a drink to regain some health.",
+        image: "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         name: "Play Area",
         buttons: ["Go to laser tag", "Go to the arcade", "Go back to the parking lot"],
         buttonFunctions: [laserTag, arcade, parkingLot],
-        text: "You end up at the play area. From here you can either go to play laser tag or go to the arcade."
+        text: "You end up at the play area. From here you can either go to play laser tag or go to the arcade.",
+        image: "https://images.pexels.com/photos/5027381/pexels-photo-5027381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         name: "Laser Tag",
         buttons: ["Play with the older kids", "Play with the younger kids", "Run"],
         buttonFunctions: [olderKids, youngerKids, playArea],
-        text: "You find yourself at the laser tag arena, this is a great place to strike some people down with your lasers. You have the choice of either joining a game with some of the older kids or some of the younger kids. You could also just run away as fast as you can if that is your thing."
+        text: "You find yourself at the laser tag arena, this is a great place to strike some people down with your lasers. You have the choice of either joining a game with some of the older kids or some of the younger kids. You could also just run away as fast as you can if that is your thing.",
+        image: "https://images.pexels.com/photos/3869072/pexels-photo-3869072.jpeg?auto=compress&cs=tinysrgb&w=300"
     },
     {
         name: "Arcade",
         buttons: ["Play", "Watch someone else play", "Leave"],
         buttonFunctions: [arcadePlay, arcadeView, playArea],
-        text: "You find yourself at the arcade, this is a great place to dominate the competition by getting the high score."
+        text: "You find yourself at the arcade, this is a great place to dominate the competition by getting the high score.",
+        image: "https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         name: "Final Boss Arena",
         buttons: ["Attack", "Dodge and strike", "Ask the boss to leave"],
         buttonFunctions: [finalAttack, finalDodge, finalLeave],
-        text: "Are you sure you can do this because it might be too late to back out now."
+        text: "Are you sure you can do this because it might be too late to back out now.",
+        image: "https://images.pexels.com/photos/8744796/pexels-photo-8744796.jpeg?auto=compress&cs=tinysrgb&w=300"
     },
     {
         name: "Older Kids",
         buttons: ["Attack", "Dodge and strike", "Leave"],
         buttonFunctions: [laserAttack, laserDodge, parkingLot],
-        text: "This game is intense, it is far more than you were expecting but you ready your weapon for whats to come.."
+        text: "This game is intense, it is far more than you were expecting but you ready your weapon for whats to come.",
+        image: "https://images.pexels.com/photos/2710282/pexels-photo-2710282.jpeg?auto=compress&cs=tinysrgb&w=300"
     },
     {
         name: "Younger Kids",
         buttons: ["Attack", "Dodge and strike", "Leave"],
         buttonFunctions: [laserAttack, laserDodge, parkingLot],
-        text: "Ok, this game isn't too bad but don't underestimate these kids, they have some serious stamina."
+        text: "Ok, this game isn't too bad but don't underestimate these kids, they have some serious stamina.",
+        image: "https://images.pexels.com/photos/3869083/pexels-photo-3869083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         name: "You Lose",
         buttons: ["Replay", "Replay", "Replay"],
         buttonFunctions: [resetGame, resetGame, resetGame],
-        text: "Your health depleted and now you can no longer go on, restart the game to play."
+        text: "Your health depleted and now you can no longer go on, restart the game to try again."
     },
     {
         name: "You Win",
@@ -127,15 +141,39 @@ const locations = [
         name: "High Score Battle Royal",
         buttons: ["Go for glory", "Bide your time", "Quit"],
         buttonFunctions: [arcadeAttack, arcadeWait, parkingLot],
-        text: "You join in on a battle royal style arcade game, be the last person standing and you will win."
+        text: "You join in on a battle royal style arcade game, be the last person standing and you will win.",
+        image: "https://images.pexels.com/photos/20131184/pexels-photo-20131184/free-photo-of-yu-gi-oh-application-on-smartphone-in-hand.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
         name: "Tutorial/Demonstration",
         buttons: ["Advance", "ReWatch", "Quit"],
         buttonFunctions: [arcadeAdvance, arcadeReWatch, parkingLot],
-        text: "You admit to yourself that you need some lessons and instead of playing a game, you decide to watch the tutorial for it."
+        text: "You admit to yourself that you need some lessons and instead of playing a game, you decide to watch the tutorial for it.",
+        image: "https://images.pexels.com/photos/34407/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     }
 ];
+
+inventoryButton.onclick = toggleInventory;
+
+function toggleInventory() {
+    updateInventory();
+
+    if (inventoryActive) {
+        inventoryDisplay.classList.toggle('toggle');
+        inventoryTitle.classList.toggle('toggle');
+    } else {
+        inventoryDisplay.classList.toggle('toggle');
+        inventoryTitle.classList.toggle('toggle');
+    }
+}
+
+function updateInventory() {
+    inventoryDisplay.innerHTML = ``;
+
+    for (const item in userInventory) {
+        inventoryDisplay.innerHTML += `${userInventory[item]}${item < userInventory.length - 1 ? ', ' : ' '}`;
+    }
+}
 
 function updateInterface(area) {
     gameTitleDisplay.innerHTML = area.name;
@@ -148,6 +186,8 @@ function updateInterface(area) {
     button1.onclick = area.buttonFunctions[0];
     button2.onclick = area.buttonFunctions[1];
     button3.onclick = area.buttonFunctions[2];
+
+    gameImagesDisplay.innerHTML = `<img src="${area.image}" class="image"></img>`
 }
 
 function parkingLot() {
@@ -180,17 +220,25 @@ function arcade() {
 
 function finalBoss() {
     updateInterface(locations[7]);
+
+    loadEnemy(500, 25, 250);
 };
 
 function buyWeapon() {
     if (userGold >= 40) {
-        currentWeapon++;
 
-        gameTitleDisplay.innerHTML = "New Weapon Acquired!";
-        gameTextDisplay.innerHTML = `You have acquired a new weapon. You now have a ${weapons[currentWeapon].name}.`;
+        if (currentWeapon < weapons.length) {
+            currentWeapon++;
 
-        userGold -= 40;
-        userGoldDisplay.innerHTML = userGold;
+            gameTitleDisplay.innerHTML = "New Weapon Acquired!";
+            gameTextDisplay.innerHTML = `You have acquired a new weapon. You now have a ${weapons[currentWeapon].name}.`;
+
+            userGold -= 40;
+            userGoldDisplay.innerHTML = userGold;
+        } else {
+            gameTitleDisplay.innerHTML = "Stick With What You Got!";
+            gameTextDisplay.innerHTML = `You already have the strongest weapon around.`;
+        }
     } else {
         gameTitleDisplay.innerHTML = "You are Broke!";
         gameTextDisplay.innerHTML = "You do not have enough gold to buy a new weapon.";
@@ -200,9 +248,10 @@ function buyWeapon() {
 function sellItem() {
     if (userInventory.length > 0) {
         let sold = userInventory.pop();
+        updateInventory();
 
         switch (sold) {
-            case "keys": {
+            case "Keys": {
                 userGold += 35;
                 userGoldDisplay.innerHTML = userGold;
 
@@ -211,7 +260,7 @@ function sellItem() {
 
                 break;
             };
-            case "cat shirt": {
+            case "Cat Shirt": {
                 userGold += 25;
                 userGoldDisplay.innerHTML = userGold;
 
@@ -220,7 +269,7 @@ function sellItem() {
 
                 break;
             };
-            case "arcade token": {
+            case "Arcade Token": {
                 userGold += 5;
                 userGoldDisplay.innerHTML = userGold;
 
@@ -229,7 +278,7 @@ function sellItem() {
 
                 break;
             };
-            case "shoes": {
+            case "Shoes": {
                 userGold += 40;
                 userGoldDisplay.innerHTML = userGold;
 
@@ -247,7 +296,7 @@ function sellItem() {
 
 function buyFood() {
     if (userGold >= 30) {
-        let randomNum = Math.ceil(Math.random() * 20) + 10;
+        let randomNum = Math.ceil(Math.random() * 25) + 5;
 
         gameTitleDisplay.innerHTML = "Health Recovered!";
         gameTextDisplay.innerHTML = `You have acquired a some food and gained back ${randomNum} Health.`;
@@ -265,7 +314,7 @@ function buyFood() {
 
 function buyDrink() {
     if (userGold >= 10) {
-        let randomNum = Math.ceil(Math.random() * 5) + 5;
+        let randomNum = Math.ceil(Math.random() * 20) + 5;
 
         gameTitleDisplay.innerHTML = "Health Recovered!";
         gameTextDisplay.innerHTML = `You have acquired a drink and gained back ${randomNum} Health.`;
@@ -288,6 +337,7 @@ function randomDrop() {
         let num = Math.ceil(Math.random() * 4);
 
         userInventory.push(potentialItems[num]);
+        updateInventory();
         return true;
     } else {
         return false;
@@ -340,7 +390,7 @@ function defeatedEnemy(event) {
     }
     
     if (itemDrop) {
-        gameTextDisplay.innerHTML += ` In addition, you manage to find an item and put it in your inventory, the item you found was ${userInventory[userInventory.length - 1]}`
+        gameTextDisplay.innerHTML += ` In addition, you manage to find an item and put it in your inventory. Item Found: ${userInventory[userInventory.length - 1]}.`
     }
 }
 
@@ -506,15 +556,57 @@ function arcadeReWatch() {
 }
 
 function finalAttack() {
+    enemyHealth -= weapons[currentWeapon].attackPower + Math.ceil(Math.random() * (userXp / 2));
 
+    if (enemyHealth <= 0) {
+        updateInterface(locations[11]);
+    } else {
+        userHealth -= enemyAttack;
+        if (userHealth <= 0) {
+            userHealthDisplay.innerHTML = 0;
+            updateInterface(locations[10]);
+        } else {
+            userHealthDisplay.innerHTML = userHealth;
+
+            gameTitleDisplay.innerHTML = "Keep Fighting!";
+            gameTextDisplay.innerHTML = `The final boss is weakening, it has ${enemyHealth} health left.`;
+        }
+    }
 }
 
 function finalDodge() {
+    let randomNum = Math.ceil(Math.random() * 100) + (userXp / 8);
 
+    if (randomNum >= 75) {
+        enemyHealth -= weapons[currentWeapon].attackPower;
+
+        if (enemyHealth <= 0) {
+            updateInterface(locations[11]);
+        } else {
+            gameTitleDisplay.innerHTML = "It Hurt Itself in its Confusion!";
+            gameTextDisplay.innerHTML = `You manage to dodge the final boss' attack and it damaged itself. The final boss now has ${enemyHealth} health left.`;
+        }
+    } else if (randomNum >= 25) {
+        gameTitleDisplay.innerHTML = "Weaved!";
+        gameTextDisplay.innerHTML = `You manage to dodge the attack successfully without taking any damage from the boss.`;
+    } else {
+        userHealth -= enemyAttack;
+
+        if (userHealth <= 0) {
+            userHealthDisplay.innerHTML = 0;
+            updateInterface(locations[10]);
+        } else {
+            userHealthDisplay.innerHTML = userHealth;
+
+            gameTitleDisplay.innerHTML = "That was a Mistake!";
+            gameTextDisplay.innerHTML = `You failed to dodge the boss' attack and it hurt really badly.`;
+        }
+    }
 }
 
 function finalLeave() {
-
+    gameTitleDisplay.innerHTML = "Hope You Are Prepared!";
+    gameTextDisplay.innerHTML = `Yeah, leaving isn't really a thing once you get here.`;
 }
 
 function resetGame() {
@@ -524,6 +616,7 @@ function resetGame() {
 
     currentWeapon = 0;
     userInventory = [];
+    inventoryActive = false;
 
     userXPDisplay.innerHTML = userXp;
     userGoldDisplay.innerHTML = userGold;
@@ -533,11 +626,8 @@ function resetGame() {
     enemyAttack = 0;
     enemyXpDrop = 0;
 
+    updateInventory();
     parkingLot();
 }
 
-resetGame()
-
-// TODO: Have a 25% chance to receive a random item after fighting an enemy.
-// Create the final boss fight
-// 
+resetGame();
