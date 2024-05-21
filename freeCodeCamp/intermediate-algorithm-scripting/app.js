@@ -249,6 +249,7 @@ function sumAllOddFibonacciNumbers(num) {
     }
 }
 
+// For this one, I needed to look up a formula for finding if a number is a prime number.
 function sumAllPrimes(num) {
   let tempArr = [];
   let total = 0;
