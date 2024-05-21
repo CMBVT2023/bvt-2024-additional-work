@@ -37,6 +37,14 @@ const sortedUnionOptionThree = document.getElementById('sorted-union-option-3');
 const sumAllOddFibonacciNumbersDisplay = document.getElementById('sum-all-odd-fibonacci-numbers-display');
 const sumAllOddFibonacciNumbersInput = document.getElementById('sum-all-odd-fibonacci-numbers-input');
 
+const sumAllPrimesDisplay = document.getElementById('sum-all-primes-display');
+const sumAllPrimesInput = document.getElementById('sum-all-primes-input');
+
+const smallestCommonMultipleDisplay = document.getElementById('smallest-common-multiple-display');
+const smallestCommonMultipleButton = document.getElementById('smallest-common-multiple-button');
+const smallestCommonMultipleInputOne = document.getElementById('smallest-common-multiple-input-one');
+const smallestCommonMultipleInputTwo = document.getElementById('smallest-common-multiple-input-two');
+
 function sumNumbersInARange(arr) {
     let first;
     let last;
@@ -241,6 +249,84 @@ function sumAllOddFibonacciNumbers(num) {
     }
 }
 
+function sumAllPrimes(num) {
+  let tempArr = [];
+  let total = 0;
+  let currentNum = num;
+
+  while (currentNum > 0) {
+    let lowestDivisor = Math.floor(Math.sqrt(currentNum));
+    let isPrime = true;
+    for (let i = 2; i <= lowestDivisor; i++) {
+      if (currentNum % i == 0) {
+        isPrime = false;
+      }
+    }
+    if (isPrime && currentNum !== 1) {
+      tempArr.push(currentNum);
+    }
+
+    currentNum--;
+  }
+
+
+
+  for (const value of tempArr) {
+    // Had to specify that value was a number when being added to the total, otherwise, it was being treated as a string within the tempArr
+    total += +value;
+  }
+  sumAllPrimesDisplay.innerHTML = total;
+}
+
+// I also had trouble with this one, while I was pretty much at the solution already, I had no idea of how to check if all items in between the two values would work with the current
+// number, or continue on to the next until the smallest common multiple was found. I found the way to do so by looking at the hint and by taking a tally via += 1 to a variable
+// and comparing that to the total numbers between the first and last values it provided a way to tell if all variables met the requirements, in this case if they were evenly
+// divisible by the current number. 
+// // Key take away: Even though I figured out the methodology behind the problem, I got stuck at how to flag when certain parameters were met so I need to try and think
+// // about what I am trying to check for. Otherwise, I got a majority of the code on my own, and this was the only part I got stuck on.
+function smallestCommonMultiple(arr) {
+    if (arr[0] === 0 || arr[1] === 0) {
+        confirm('Enter Two Numbers Other Than 0.')
+        return;
+    }
+    
+    let first;
+    let last;
+    if (arr[0] > arr[1]) {
+      first = arr[1];
+      last = arr[0];
+    } else {
+      first = arr[0];
+      last = arr[1];
+    }
+
+    let middleValues = [];
+    for (let i = first; i <= last; i++) {
+      middleValues.push(i);
+    }
+
+    let smallestFound = false;
+    let multiplier = 1;
+    let currentNum;
+    while (smallestFound === false) {
+      currentNum = first * multiplier;
+      let divisorCount = 0;
+
+      for (const value in middleValues) {
+        if (currentNum % middleValues[value] == 0) {
+          divisorCount += 1;
+        }
+      }
+
+      if (divisorCount === middleValues.length) {
+        smallestFound = true;
+      }
+      multiplier++;
+    }
+
+    smallestCommonMultipleDisplay.innerHTML = currentNum;
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -295,6 +381,14 @@ function loadEventHandlers() {
 
     sumAllOddFibonacciNumbersInput.addEventListener('change', (e) => {
         sumAllOddFibonacciNumbers(e.target.value)
+    })
+
+    sumAllPrimesInput.addEventListener('change', (e) => {
+        sumAllPrimes(e.target.value)
+    })
+
+    smallestCommonMultipleButton.addEventListener('click', (e) => {
+        smallestCommonMultiple([+smallestCommonMultipleInputOne.value, +smallestCommonMultipleInputTwo.value])
     })
 }
 
