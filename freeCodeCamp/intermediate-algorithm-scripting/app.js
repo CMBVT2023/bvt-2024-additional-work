@@ -45,6 +45,18 @@ const smallestCommonMultipleButton = document.getElementById('smallest-common-mu
 const smallestCommonMultipleInputOne = document.getElementById('smallest-common-multiple-input-one');
 const smallestCommonMultipleInputTwo = document.getElementById('smallest-common-multiple-input-two');
 
+const argumentsOptionalDisplay = document.getElementById('arguments-optional-display');
+const argumentsOptionalButton = document.getElementById('arguments-optional-button');
+const argumentsOptionalInputOne = document.getElementById('arguments-optional-input-one');
+const argumentsOptionalInputTwo = document.getElementById('arguments-optional-input-two');
+
+const dropItInitialDisplay = document.getElementById('drop-it-initial-display');
+const dropItFunctionDisplay = document.getElementById('drop-it-function-display');
+const dropItFinalDisplay = document.getElementById('drop-it-final-display');
+const dropItOptionOne = document.getElementById('drop-it-option-1');
+const dropItOptionTwo = document.getElementById('drop-it-option-2');
+const dropItOptionThree = document.getElementById('drop-it-option-3');
+
 function sumNumbersInARange(arr) {
     let first;
     let last;
@@ -328,6 +340,69 @@ function smallestCommonMultiple(arr) {
     smallestCommonMultipleDisplay.innerHTML = currentNum;
 }
 
+function argumentsOptional(...args) {
+    // // This was my original method, it works and is passable but I wanted to find a more efficient way of doing so.
+    // if (args.length === 2) {
+    //     if (typeof args[0] === 'number' && typeof args[1] === 'number') {
+    //       return args[0] + args[1];
+    //     }
+    //   }
+    
+    //   if (typeof args[0] === 'number' && args.length === 1) {
+    //     function sumTogether(value) {
+    //       if (typeof value === 'number') {
+    //         return +args[0] + value;
+    //       } else {
+    //         return undefined
+    //       }
+    //     }
+    
+    //     return sumTogether;
+    //   }
+      
+    
+    //   return undefined;
+
+    const [one, two] = [...args]
+
+    function addTwo(value) {
+        let result;
+        typeof value === 'number' ? result = value + one : result = undefined
+        return result
+    }
+
+    if (typeof one === 'number') {
+        if (args.length === 1) {return addTwo}
+        if (args.length === 2) {return addTwo(two)};
+    }
+}
+
+function dropIt(arr, func) {
+    dropItInitialDisplay.innerHTML = JSON.stringify(arr);
+    dropItFunctionDisplay.innerHTML = func;
+
+    // // This is the method that I came up with to solve this problem, it uses the findIndex() method and returns the first occurrence,
+    // // but I wanted to try and use the shift method to learn how to do it that way also.
+    // let index = arr.findIndex((element) => {
+    //     if (func(element)) {
+    //         return element;
+    //     }
+    // })
+
+    // if (index !== -1) {
+    //     dropItFinalDisplay.innerHTML = JSON.stringify(arr.splice(index, arr.length - index))
+    // } else {
+    //     dropItFinalDisplay.innerHTML = `none`;
+    // }
+
+    // This method is far more efficient, it will only go until the function's conditions are met in which it will stop removing items from the array,
+    // also rather than splicing the array this method alters the original array and simply passes it back.
+    while (arr.length > 0 && !func(arr[0])) {
+        arr.shift()
+      }
+      dropItFinalDisplay.innerHTML = JSON.stringify(arr);
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -388,8 +463,22 @@ function loadEventHandlers() {
         sumAllPrimes(e.target.value)
     })
 
-    smallestCommonMultipleButton.addEventListener('click', (e) => {
+    smallestCommonMultipleButton.addEventListener('click', () => {
         smallestCommonMultiple([+smallestCommonMultipleInputOne.value, +smallestCommonMultipleInputTwo.value])
+    })
+
+    argumentsOptionalButton.addEventListener('click', () => {
+        argumentsOptionalDisplay.innerHTML = argumentsOptional(+argumentsOptionalInputOne.value, +argumentsOptionalInputTwo.value);
+    })
+
+    dropItOptionOne.addEventListener('change', () => {
+        dropIt([1, 2, 3, 4], function(n) {return n >= 3;})
+    })
+    dropItOptionTwo.addEventListener('change', () => {
+        dropIt([0, 1, 0, 1], function(n) {return n === 1;})
+    })
+    dropItOptionThree.addEventListener('change', () => {
+        dropIt([1, 2, 3, 7, 4], function(n) {return n > 3;})
     })
 }
 
