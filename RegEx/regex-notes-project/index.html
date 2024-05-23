@@ -15,18 +15,51 @@
             <ul>
                 <li>
                     To utilize regex, you need to create a literal expression which is done by entering a pattern you want to search for between two forward slashes<br>
-                    Example, /test/ will look for the characters "test" within a string.
+                    Example, /test/ will look for the characters "test" within a string. The values within the //, in this case 'test', are called tokens.
                 </li>
                 <li>
                     By default, an expression will only search for the first occurrence of a pattern within a string, but this can be changed by adding flags<br>
-                    There are various flags that can be added after the last /, like g for global which will show all occurrences of the specific pattern.
+                    There are various flags that can be added after the last /, like g for global which will show all occurrences of the specific pattern.<br>
+                    Another useful flag that can be added at the end of a regex pattern is i, which is case sensitivity so it will ignore case within the pattern.
                 </li>
                 <li>
-                    More complex search patterns can also be created by using special characters, like ".", "^", "$", and more, which allows more dynamic patterns.
+                    More complex search patterns can also be created by using special characters, like ".", "^", "$", and more, which allows more dynamic patterns.<br>
+                    Another useful special character is "+" and when used within the regex pattern it signifies that the pattern requires one or more of the proceeding variable.<br>
+                    The "?" special character signifies that the pattern is optional, meaning that the proceeding token has one occurrence or none, basically it is like an optional flag.<br>
+                    The "*" special character is a combination of the "+" and "?" since it signifies that the proceeding token is optional or can occur more than once.<br>
+                    The "." special character functions as a wild card, it will match any value in its place in the string aside from a new line.<br>
+                    The "^" special character is used to specify to look for a token at only the start of the string of text and the "$" does the opposite in which it looks for a token only at the end of the string.<br>
+
                 </li>
                 <li>
                     Within a regex pattern, a "\" can be used to escape any special characters to allow them to be used within a search pattern.
                 </li>
+                <li>
+                    Another important thing are character classes, these allow the regex pattern to match to any specific set of characters.<br>
+                    Example, "\w" signifies the word class so any alphabetical, number, or "_" character would be flagged by the regex pattern.<br>
+                    Other character classes are "\s" which matches any form of whitespace and "\d" which matches any digit. <br>
+                    Also, all of these have opposing versions, so simply capitalizing character will have it match the opposite of its character class, like a "\S" would match everything expect whitespace.
+                </li>
+                <li>
+                    "{}" can be used to specify how many occurrences of a token within the pattern should be looked for and adding a comma within the braces allows you to do a min and max value, or only a min if you don't add a value after the comma. 
+                </li>
+                <li>
+                    "[]" can be used to allow any value within the braces to be match in the specific spot. This allows you to specify a range like [a-z] to allow only lowercase characters to be at said specific point in the pattern.<br>
+                </li>
+                <li>
+                    "()" can be used to isolate tokens to a specific part of the pattern, which is useful when using things like '|' or ranges, like if you wanted to make sure the first character was a 't' or a 'T'. You could type /(t|T)he/.
+                    This will allow either an uppercase or lowercase "t" to still flag the pattern. 
+                </li>
+                <li>
+                    There are also options called lookAround, which allows you to find all proceeding or following characters after a specific pattern is found.<br>
+                    This can be useful if you are trying to grab certain areas of the text the occur after certain patterns, without requiring you to flag or interact with said pattern, only the characters after or before it.<br>
+                </li>
+                <li>
+                    Groupings can be given a name by using '?&lt;&gt;' within the braces, '()'.
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
                 <li></li>
             </ul>
         </div>
@@ -38,7 +71,18 @@
                 <li><a href="https://www.youtube.com/watch?v=sXQxhojSdZM&ab_channel=Fireship">Regular Expressions (RegEx) in 100 Seconds</a></li>
                 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions">Regular expressions</a></li>
                 <li><a href="https://www.youtube.com/watch?v=rhzKDrUiJVk&ab_channel=WebDevSimplified">Learn Regular Expressions In 20 Minutes</a></li>
+                <li><a href="https://regexr.com/">RegExr</a>: This site can be used to build and test RegEx patterns.</li>
             </ul>
+        </div>
+    </div>
+
+    <div id="regex-practice-and-examples">
+        <div id="phone-number-verifier">
+            <h2>Phone Number Verifier</h2>
+            <h4>The value entered is <span id="phone-number-verifier-display"></span></h4>
+
+            <!-- There is an input for phone numbers specifically but to learn how to use regex I'm utilizing the text input to allow for any values to be entered. -->
+            <input type="text" id="phone-number-verifier-input">
         </div>
 
     </div>
