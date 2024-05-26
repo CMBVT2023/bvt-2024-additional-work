@@ -1,7 +1,33 @@
-html, body {
+html {
     height: 100vh;
     width: 100vw;
     overflow-x: hidden;
     background-color: #6ABEA7;
     color: #582630;
+}
+
+body {
+    padding: 5px;
+}
+
+#regex-external-info {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: 12px;
+}
+
+#regex-practice-and-examples {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#phone-number-verifier, #email-verifier {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-around;
+    line-height: 0px;
+    align-items: center;
 }

@@ -1,6 +1,12 @@
-const phoneNumberVerifierBooleanDisplay = document.getElementById('phone-number-verifier-display-boolean');
-const phoneNumberVerifierNumberDisplay = document.getElementById('phone-number-verifier-display-number');
+const phoneNumberVerifierBooleanDisplay = document.getElementById('phone-number-verifier-boolean-display');
+const phoneNumberVerifierNumberDisplay = document.getElementById('phone-number-verifier-number-display');
 const phoneNumberVerifierInput = document.getElementById('phone-number-verifier-input');
+
+const emailVerifierBooleanDisplay = document.getElementById('email-verifier-boolean-display');
+const emailVerifierMainEmailDisplay = document.getElementById('email-verifier-main-display');
+const emailVerifierEmailUserDisplay = document.getElementById('email-verifier-user-display');
+const emailVerifierEmailDomainDisplay = document.getElementById('email-verifier-domain-display');
+const emailVerifierInput = document.getElementById('email-verifier-input');
 
 function phoneNumberVerifier(string) {
     let regexPattern = /(\+1[ -]?)?\(?(?<areaCode>\d{3})\)?[ -]?(\d{3})[ -]?(\d{4})/
@@ -24,14 +30,38 @@ function phoneNumberVerifier(string) {
         // Displays that the phone number is not valid.
         phoneNumberVerifierBooleanDisplay.innerText = 'not valid.'
     }
+}
 
-    
-    
+function emailVerifier(string) {
+    let regexPattern = /(?<email>\d|\w+)(?<domain>@[a-z|A-z]+\.com)/
+    let result = /.+@.+\.com/.test(string)
+
+    string = string.match(regexPattern);
+
+    if (result && string !== null) {
+        emailVerifierBooleanDisplay.innerText = 'has a \'@\' and a \'.com\'.';
+
+        emailVerifierMainEmailDisplay.innerText = string[0];
+
+        emailVerifierEmailUserDisplay.innerText = string.groups.email;
+
+        emailVerifierEmailDomainDisplay.innerText = string.groups.domain;
+    } else {
+        emailVerifierBooleanDisplay.innerText = 'does not have a valid \'@\' and a \'.com\'.';
+
+        emailVerifierMainEmailDisplay.innerText = ``;
+        emailVerifierEmailUserDisplay.innerText = ``;
+        emailVerifierEmailDomainDisplay.innerText = ``;
+    }
 }
 
 function loadEventListeners() {
     phoneNumberVerifierInput.addEventListener('change', (e) => {
         phoneNumberVerifier(e.target.value);
+    })
+
+    emailVerifierInput.addEventListener('change', (e) => {
+        emailVerifier(e.target.value);
     })
 }
 
