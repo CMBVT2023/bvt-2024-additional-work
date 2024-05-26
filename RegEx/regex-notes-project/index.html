@@ -57,7 +57,10 @@
                 <li>
                     Groupings can be given a name by using '?&lt;&gt;' within the braces, '()'.
                 </li>
-                <li></li>
+                <li>
+                    When using .replace() the first parameter is the pattern being tested and the second parameter is what you will replace the pattern with.<br>
+                    Special characters like a "$" can be used to reference the original text or group, '$&' will reference the entire string or '$1' will reference only the first group within the pattern.  
+                </li>
                 <li></li>
                 <li></li>
                 <li></li>
@@ -72,6 +75,7 @@
                 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions">Regular expressions</a></li>
                 <li><a href="https://www.youtube.com/watch?v=rhzKDrUiJVk&ab_channel=WebDevSimplified">Learn Regular Expressions In 20 Minutes</a></li>
                 <li><a href="https://regexr.com/">RegExr</a>: This site can be used to build and test RegEx patterns.</li>
+                <li><a href="https://www.youtube.com/watch?v=909NfO1St0A&ab_channel=freeCodeCamp.org">Regular Expressions (Regex) in JavaScript - tutorial</a></li>
             </ul>
         </div>
     </div>
@@ -79,7 +83,8 @@
     <div id="regex-practice-and-examples">
         <div id="phone-number-verifier">
             <h2>Phone Number Verifier</h2>
-            <h4>The value entered is <span id="phone-number-verifier-display"></span></h4>
+            <h4>The number entered is <span id="phone-number-verifier-display-boolean"></span></h4>
+            <h5>The phone number is <span id="phone-number-verifier-display-number"></span></h5>
 
             <!-- There is an input for phone numbers specifically but to learn how to use regex I'm utilizing the text input to allow for any values to be entered. -->
             <input type="text" id="phone-number-verifier-input">
