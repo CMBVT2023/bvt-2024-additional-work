@@ -65,6 +65,14 @@ const pigLatinInitialDisplay = document.getElementById('pig-latin-initial-displa
 const pigLatinFinalDisplay = document.getElementById('pig-latin-final-display');
 const pigLatinInput = document.getElementById('pig-latin-input');
 
+const missingLettersInitialDisplay = document.getElementById('missing-letters-initial-display');
+const missingLettersFinalDisplay = document.getElementById('missing-letters-final-display');
+const missingLettersOptionOne = document.getElementById('missing-letters-option-1')
+const missingLettersOptionTwo = document.getElementById('missing-letters-option-2')
+const missingLettersOptionThree = document.getElementById('missing-letters-option-3')
+const missingLettersOptionFour = document.getElementById('missing-letters-option-4')
+
+
 function sumNumbersInARange(arr) {
     let first;
     let last;
@@ -472,6 +480,30 @@ function pigLatin(str) {
     pigLatinFinalDisplay.innerText = str;
 }
 
+function searchAndReplace(str, before, after) {
+
+}
+
+function missingLetters(str) {
+    missingLettersInitialDisplay.innerText = str;
+
+    let allLetters = "abcdefghijklmnopqrstuvwxyz";
+
+    let first = allLetters.indexOf(str[0]);
+    let last = allLetters.indexOf(str[str.length - 1]);
+
+    let char;
+    for (let i = 0; i < str.length; i++) {
+      str[i] === allLetters[first + i] ? '' : char = allLetters[first + i];
+      if (char !== undefined) {
+        missingLettersFinalDisplay.innerText = char;
+        return;
+      }
+    }
+
+    missingLettersFinalDisplay.innerText = 'No Missing Letters';
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -556,6 +588,19 @@ function loadEventHandlers() {
 
     pigLatinInput.addEventListener('change', (e) => {
         pigLatin(e.target.value);
+    })
+
+    missingLettersOptionOne.addEventListener('change', () => {
+        missingLetters('abcefg');
+    })
+    missingLettersOptionTwo.addEventListener('change', () => {
+        missingLetters('hiklmnop');
+    })
+    missingLettersOptionThree.addEventListener('change', () => {
+        missingLetters('qrstvwx');
+    })
+    missingLettersOptionFour.addEventListener('change', () => {
+        missingLetters('abcdefg');
     })
 }
 
