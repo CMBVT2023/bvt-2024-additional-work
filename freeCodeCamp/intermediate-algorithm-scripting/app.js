@@ -80,6 +80,21 @@ const missingLettersOptionTwo = document.getElementById('missing-letters-option-
 const missingLettersOptionThree = document.getElementById('missing-letters-option-3')
 const missingLettersOptionFour = document.getElementById('missing-letters-option-4')
 
+const convertHTMLEntitiesInitialDisplay = document.getElementById('convert-html-entities-initial-display');
+const convertHTMLEntitiesFinalDisplay = document.getElementById('convert-html-entities-final-display');
+const convertHTMLEntitiesInput = document.getElementById('convert-html-entities-input');
+
+const steamrollerInitialDisplay = document.getElementById('steamroller-initial-display');
+const steamrollerFinalDisplay = document.getElementById('steamroller-final-display');
+const steamrollerOptionOne = document.getElementById('steamroller-option-1')
+const steamrollerOptionTwo = document.getElementById('steamroller-option-2')
+const steamrollerOptionThree = document.getElementById('steamroller-option-3')
+const steamrollerOptionFour = document.getElementById('steamroller-option-4')
+
+const binaryAgentsInitialDisplay = document.getElementById('binary-agents-initial-display');
+const binaryAgentsFinalDisplay = document.getElementById('binary-agents-final-display');
+const binaryAgentsOptionOne = document.getElementById('binary-agents-option-1')
+const binaryAgentsOptionTwo = document.getElementById('binary-agents-option-2')
 
 function sumNumbersInARange(arr) {
     let first;
@@ -551,6 +566,103 @@ function missingLetters(str) {
     missingLettersFinalDisplay.innerText = 'No Missing Letters';
 }
 
+function convertHTMLEntities(str) {
+    convertHTMLEntitiesInitialDisplay.innerText = str;
+
+    // // This was the solution I used to solve the issue, and it was nearly optimal but there was one small change that I could have made to make this method
+    // // as clean and optimized as I could.
+    // const htmlEntities = {
+    //     '&': "&amp;",
+    //     '<': "&lt;",
+    //     '>': "&gt;",
+    //     '"': "&quot;",
+    //     "'": "&apos;"
+    //     }
+    //   function replace(match) {
+    //     return htmlEntities[match]
+    //   }
+    //   let regexPattern = /([&<>"'])/g
+    //   convertHTMLEntitiesFinalDisplay.innerText = str.replace(regexPattern, replace);
+
+    // // The improvement I could have made was to create an arrow function instead of initializing a whole function earlier in the code since all it was doing was taking the
+    // // found match and returning its value pair found in the htmlEntities object.
+    const htmlEntities = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&apos;",
+    };
+    let regexPattern = /([&<>"'])/g;
+    convertHTMLEntitiesFinalDisplay.innerText = str.replace(
+        regexPattern,
+        (match) => htmlEntities[match]
+    );
+}
+
+function steamroller(arr) {
+    // // This was the method I came up with to solve this problem, it uses recursion to iterate through all of the arrays until it finds the element within and then appends it
+    // // to a new array that is finally returned. 
+
+    // let finalArr = [];
+    // function unPack(item) {
+    //     if (Array.isArray(item)) {
+    //     for (let i = 0; i < item.length; i++) {
+    //         unPack(item[i]);
+    //     }
+    //     } else {
+    //     finalArr.push(item);
+    //     }
+    // }
+
+    // arr.forEach(item => unPack(item));
+
+    // return finalArr;
+
+    // // This method is a bit more efficient since it makes the main function the recursive call, but it all depends on the way it is being implemented
+    // // I had to make a lot of changes for this to display correctly on this project since it was recursively being called, thus the initial display and final display had to be set
+    // // outside of this function, and while it was not a problem, it shows that in some cases even the arguably better optimized functions might not be the best optimized for the
+    // // situation.
+    const finalArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            finalArr.push(...steamroller(arr[i]))
+        } else {
+            finalArr.push(arr[i])
+        }
+    }
+
+    return finalArr;
+}
+
+function binaryAgents(str) {
+    binaryAgentsInitialDisplay.innerText = str;
+
+    // // My method is pretty optimized if you wanted to first convert the binary to decimal but after looking at the get help page, javascript has a build in function to convert binary to decimal that makes the nested
+    // // for loops unnecessary. Also, I only just realized the regex is unnecessary also since I could just use .split() with a " " passed in. 
+    // let arr = str.match(/\d{8}/g)
+    // let finalArr = []
+
+    // for (const item of arr) {
+    //     let total = 0;
+    //     for (let i = 0; i < item.length; i++) {
+    //     total += (2**(item.length - i - 1) * item[i])
+    //     }
+    //     finalArr.push(String.fromCharCode(total))
+    // }
+
+    // // This method uses the parseInt method that allows you to convert a string to a value, and you can specify what base system to use, and the fromCharCode is then able to convert the value to the appropriate character.
+    let arr = str.split(" ");
+    let finalArr = [];
+
+    for (const item of arr) {
+        finalArr.push(String.fromCharCode(parseInt(item, 2)))
+    }
+
+    binaryAgentsFinalDisplay.innerText = finalArr.join('')
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -661,6 +773,36 @@ function loadEventHandlers() {
     })
     missingLettersOptionFour.addEventListener('change', () => {
         missingLetters('abcdefg');
+    })
+
+    convertHTMLEntitiesInput.addEventListener('change', (e) => {
+        convertHTMLEntities(e.target.value)
+    })
+
+    steamrollerOptionOne.addEventListener('change', () => {
+        steamrollerInitialDisplay.innerText = JSON.stringify([[["a"]], [["b"]]]);
+        steamrollerFinalDisplay.innerText = JSON.stringify(steamroller([[["a"]], [["b"]]]));
+    })
+    steamrollerOptionTwo.addEventListener('change', () => {
+        steamrollerInitialDisplay.innerText = JSON.stringify([1, [2], [3, [[4]]]])
+        steamrollerFinalDisplay.innerText = JSON.stringify(steamroller([1, [2], [3, [[4]]]]));
+
+    })
+    steamrollerOptionThree.addEventListener('change', () => {
+        steamrollerInitialDisplay.innerText = JSON.stringify([1, [], [3, [[4]]]])
+        steamrollerFinalDisplay.innerText = JSON.stringify(steamroller([1, [], [3, [[4]]]]));
+
+    })
+    steamrollerOptionFour.addEventListener('change', () => {
+        steamrollerInitialDisplay.innerText = JSON.stringify([1, {}, [3, [[4]]]])
+        steamrollerFinalDisplay.innerText = JSON.stringify(steamroller([1, {}, [3, [[4]]]]));
+    })
+
+    binaryAgentsOptionOne.addEventListener('change', () => {
+        binaryAgents("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
+    })
+    binaryAgentsOptionTwo.addEventListener('change', () => {
+        binaryAgents("01001001 00100000 01101100 01101111 01110110 01100101 00100000 01000110 01110010 01100101 01100101 01000011 01101111 01100100 01100101 01000011 01100001 01101101 01110000 00100001");
     })
 }
 
