@@ -57,6 +57,11 @@ const dropItOptionOne = document.getElementById('drop-it-option-1');
 const dropItOptionTwo = document.getElementById('drop-it-option-2');
 const dropItOptionThree = document.getElementById('drop-it-option-3');
 
+const spinalTapCaseInitialDisplay = document.getElementById('spinal-tap-case-initial-display');
+const spinalTapCaseFinalDisplay = document.getElementById('spinal-tap-case-final-display');
+const spinalTapCaseInput = document.getElementById('spinal-tap-case-input');
+
+
 function sumNumbersInARange(arr) {
     let first;
     let last;
@@ -403,6 +408,25 @@ function dropIt(arr, func) {
       dropItFinalDisplay.innerHTML = JSON.stringify(arr);
 }
 
+function spinalTapCase(str) {
+    // // This is my initial solution to the problem, it does use regex but also utilizes a for loop to cycle through and remove any empty string in the array.
+    // // This solution is messy and unnecessary so I defiantly wanted to go back and find a better solution.
+    spinalTapCaseInitialDisplay.innerText = str;
+    
+    str = str.replace(/\B[A-Z]/g, ' $&')
+    let pattern = /[\W_]/g;
+    str = str.split(pattern);
+  
+    let finalArr = [];
+    for (const item of str) {
+      if (item !== '') {
+        finalArr.push(item);
+      }
+    }
+    
+    spinalTapCaseFinalDisplay.innerText = finalArr.join('-').toLowerCase();
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -479,6 +503,10 @@ function loadEventHandlers() {
     })
     dropItOptionThree.addEventListener('change', () => {
         dropIt([1, 2, 3, 7, 4], function(n) {return n > 3;})
+    })
+
+    spinalTapCaseInput.addEventListener('change', (e) => {
+        spinalTapCase(e.target.value);
     })
 }
 
