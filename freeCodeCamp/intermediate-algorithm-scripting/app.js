@@ -65,6 +65,14 @@ const pigLatinInitialDisplay = document.getElementById('pig-latin-initial-displa
 const pigLatinFinalDisplay = document.getElementById('pig-latin-final-display');
 const pigLatinInput = document.getElementById('pig-latin-input');
 
+const searchAndReplaceInitialDisplay = document.getElementById('search-and-replace-initial-display');
+const searchAndReplaceSelectedWordDisplay = document.getElementById('search-and-replace-selection-display');
+const searchAndReplaceFinalDisplay = document.getElementById('search-and-replace-final-display');
+const searchAndReplaceSentenceInput = document.getElementById('search-and-replace-sentence-input');
+const searchAndReplaceReplacementInput = document.getElementById('search-and-replace-replacement-input');
+const searchAndReplaceRadioInputs = document.getElementById('search-and-replace-radio-inputs')
+const searchAndReplaceButton = document.getElementById('search-and-replace-button');
+
 const missingLettersInitialDisplay = document.getElementById('missing-letters-initial-display');
 const missingLettersFinalDisplay = document.getElementById('missing-letters-final-display');
 const missingLettersOptionOne = document.getElementById('missing-letters-option-1')
@@ -480,8 +488,47 @@ function pigLatin(str) {
     pigLatinFinalDisplay.innerText = str;
 }
 
-function searchAndReplace(str, before, after) {
+function searchAndReplaceOptions(str) {
+    searchAndReplaceInitialDisplay.innerText = str;
+    let arr = str.split(' ');
 
+    for (const index in arr) {
+        searchAndReplaceRadioInputs.innerHTML += `<li>
+        <input type="radio" name="searchAndReplace" id="search-and-replace-option-${index}" value="${arr[index]}">
+        <label for="search-and-replace-option-${index}">${arr[index]}</label>
+        </li>`
+    }
+}
+
+// I found a bug within my code and even the get help code guides that would alter a separate word the includes the selected word within it,
+// Example, attempting to replace is caused this to have its is replaced instead.
+function searchAndReplace(str, before, after) {
+    searchAndReplaceSelectedWordDisplay.innerText = before;
+
+    // // This was the method I used to solve the problem, it works but I wanted to find a cleaner way to write the code.
+    // let capitalize = /[A-Z]/
+    // let matching = new RegExp(before, 'i');
+    // str = str.replace(matching, `${capitalize.test(before[0]) ? after[0].toUpperCase() : after[0].toLowerCase()}${after.slice(1, after.length)}`);
+    
+    // // I found this example that made use of the substring method which is simpler to use as opposed to the slice method in this case since I intend to slice to the end of 
+    // // the word and not only a part of it. I decided to use the concat method instead of "+" to also make it more straight forward
+    // // I fixed the bug I found amongst the code too.
+
+    // First checks if the starting letter is capitalized or not and appropriately alters the word to be replaced to match it.
+    if (/^[A-Z]/.test(before)) {
+        after = after[0].toUpperCase().concat(after.substring(1));
+    } else {
+        after = after[0].toLowerCase().concat(after.substring(1));
+    }
+
+    // Creates a new regex expression that checks for the selected word in the sentence and ensures that it has a white space in front of it or is at the start of the sentence
+    // to prevent it from altering the characters in the middle of a word.
+    // // This regex expression checks that the selected word has white space before it but it uses the look after special function to not include the whitespace in the grouping.
+    // // and it uses the "|" special character to also check if the select word is at the start of the sentence.
+    let matching = new RegExp('(?<=\\W)(' + before + ')|^' + before)
+    str = str.replace(matching, after);
+
+    searchAndReplaceFinalDisplay.innerText = str;
 }
 
 function missingLetters(str) {
@@ -588,6 +635,19 @@ function loadEventHandlers() {
 
     pigLatinInput.addEventListener('change', (e) => {
         pigLatin(e.target.value);
+    })
+
+    searchAndReplaceSentenceInput.addEventListener('change', (e) => {
+        searchAndReplaceOptions(e.target.value)
+    })
+    searchAndReplaceButton.addEventListener('click', () => {
+        let string = searchAndReplaceSentenceInput.value
+        let replacement = searchAndReplaceReplacementInput.value
+        let radios = searchAndReplaceRadioInputs.querySelectorAll('input');
+        let checkedRadio;
+        radios.forEach((item) => {item.checked ? checkedRadio = item.value : ''})
+
+        searchAndReplace(string, checkedRadio, replacement);
     })
 
     missingLettersOptionOne.addEventListener('change', () => {
