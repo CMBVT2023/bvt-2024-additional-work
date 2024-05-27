@@ -61,6 +61,9 @@ const spinalTapCaseInitialDisplay = document.getElementById('spinal-tap-case-ini
 const spinalTapCaseFinalDisplay = document.getElementById('spinal-tap-case-final-display');
 const spinalTapCaseInput = document.getElementById('spinal-tap-case-input');
 
+const pigLatinInitialDisplay = document.getElementById('pig-latin-initial-display');
+const pigLatinFinalDisplay = document.getElementById('pig-latin-final-display');
+const pigLatinInput = document.getElementById('pig-latin-input');
 
 function sumNumbersInARange(arr) {
     let first;
@@ -413,18 +416,60 @@ function spinalTapCase(str) {
     // // This solution is messy and unnecessary so I defiantly wanted to go back and find a better solution.
     spinalTapCaseInitialDisplay.innerText = str;
     
-    str = str.replace(/\B[A-Z]/g, ' $&')
-    let pattern = /[\W_]/g;
-    str = str.split(pattern);
+    // str = str.replace(/\B[A-Z]/g, ' $&')
+    // let pattern = /[\W_]/g;
+    // str = str.split(pattern);
   
-    let finalArr = [];
-    for (const item of str) {
-      if (item !== '') {
-        finalArr.push(item);
-      }
-    }
+    // let finalArr = [];
+    // for (const item of str) {
+    //   if (item !== '') {
+    //     finalArr.push(item);
+    //   }
+    // }
     
-    spinalTapCaseFinalDisplay.innerText = finalArr.join('-').toLowerCase();
+    // spinalTapCaseFinalDisplay.innerText = finalArr.join('-').toLowerCase();
+
+    // This is the better solution that I found, I did use the get help for some guidance and it showed me that the .split() method can be used with regex patterns.
+    
+    // Uses .replace() to replace any instance where a lowercase character is followed by a uppercase, and it simply inserts a space between the two.
+    str = str.replace(/([a-z])([A-Z])/g, '$1 $2');
+
+    // Initializes the regexPattern variable that looks for all spaces or "_".
+    let regexPattern = /[ _]/g;
+
+    // Uses .split() method with the regexPattern to split the string at all spaces or "_" and then joins the words with a "-" and then converts any uppercase character to lowercase.
+    spinalTapCaseFinalDisplay.innerText = str.split(regexPattern).join('-').toLowerCase()
+}
+
+function pigLatin(str) {
+    pigLatinInitialDisplay.innerText = str;
+
+    // // This was the solution I came up with and I figured there has to be a better way, but after looking at help, most of what I did works.
+    // // The only thing I would change would be to optimize it so that it only checks the start of the string to avoid me having to check if a word starts with a vowel.
+    // let vowels = /[aeiou]/;
+    // 
+    // if (vowels.test(str) && vowels.test(str[0]) !== true) {
+    //   str = str.replace(/([^aeiou]+)(.+)/, "$2$1ay");
+    // } else if (vowels.test(str) && vowels.test(str[0])) {
+    //   str = `${str}way`;
+    // } else {
+    //   str = `${str}ay`;
+    // }
+
+    // // This is the solution I found on get help.
+    
+    // Sets up a regex pattern that checks for all non vowel characters only at the front of the string.
+    let consonantRegex = /^[^aeiou]+/;
+    // Saves the found regex pattern into a variable.
+    let myConsonants = str.match(consonantRegex);
+    // Checks if the myConsonants is null or has a value
+    //   If the variable has a value, the matching pattern is removed form the string and concatenated to the end of the left over word followed by the characters "ay"    
+    //   If the variable is null, then the word starts with a vowel and it just concatenates "way" to the end of the string.
+    myConsonants !== null ? str = str.replace(consonantRegex, "").concat(myConsonants).concat("ay") : str = str.concat("way");
+    
+          
+
+    pigLatinFinalDisplay.innerText = str;
 }
 
 function loadEventHandlers() {
@@ -507,6 +552,10 @@ function loadEventHandlers() {
 
     spinalTapCaseInput.addEventListener('change', (e) => {
         spinalTapCase(e.target.value);
+    })
+
+    pigLatinInput.addEventListener('change', (e) => {
+        pigLatin(e.target.value);
     })
 }
 
