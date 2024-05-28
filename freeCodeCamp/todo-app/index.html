@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+    <title>freeCodeCamp Todo App</title>
+</head>
+<body>
+    <div id="doc-container">
+        <h1>
+            Todo Application
+        </h1>
+
+        <div id="app-container">
+            <h3 class="header-button" id="new-task-button">
+                Add New Task
+            </h3>
+
+            <form id="form-container" class="hidden">
+                <h3 class="header-button" id="form-cancel-button">
+                    Cancel
+                </h3>
+
+                <h3><strong>Title</strong></h3>
+                <input type="text" id="form-title">
+                
+                <h3><strong>Date</strong></h3>
+                <input type="date" id="form-date">
+
+                <h3><strong>Description</strong></h3>
+                <textarea id="form-description" placeholder="Enter a description..."></textarea>
+
+                <h3 class="header-button" id="alter-tasks-button">Add Task</h3>
+            </form>
+
+            <div id="list-container">
+                <div class="task" id="item-1">
+                    <p><strong>Title:</strong> PlaceHolder</p>
+                    <p><strong>Date:</strong> PlaceHolder</p>
+                    <p><strong>Description:</strong> PlaceHolder</p>
+                    <h4 class="header-button">Edit</h4>
+                    <h4 class="header-button">Delete</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
