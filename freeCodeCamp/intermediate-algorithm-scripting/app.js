@@ -96,6 +96,11 @@ const binaryAgentsFinalDisplay = document.getElementById('binary-agents-final-di
 const binaryAgentsOptionOne = document.getElementById('binary-agents-option-1')
 const binaryAgentsOptionTwo = document.getElementById('binary-agents-option-2')
 
+const mapTheDebrisInitialDisplay = document.getElementById('map-the-debris-initial-display');
+const mapTheDebrisFinalDisplay = document.getElementById('map-the-debris-final-display');
+const mapTheDebrisOptionOne = document.getElementById('map-the-debris-option-1')
+const mapTheDebrisOptionTwo = document.getElementById('map-the-debris-option-2')
+
 function sumNumbersInARange(arr) {
     let first;
     let last;
@@ -663,6 +668,35 @@ function binaryAgents(str) {
     binaryAgentsFinalDisplay.innerText = finalArr.join('')
 }
 
+// On this one I needed to use the get help only to see what the value for a or the orbit's semi-major axis since I could not find any information on how to calculate or find it.
+function mapTheDebris(arr) {
+    mapTheDebrisInitialDisplay.innerText = JSON.stringify(arr);
+
+    // // This was my initial solution and it used a for loop to loop through each item and then calculated the orbital value and saved it to a new property after deleting the old one.
+    // // This solution was decent but it did mutate the passed in array and original objects so I wanted to find a way to solve this while maintaining the original array.
+    // const GM = 398600.4418;
+    // const earthRadius = 6367.4447;
+    
+    // for (const item of arr) {
+    //     let value = Math.round(2 * Math.PI * Math.sqrt(((earthRadius + item['avgAlt']) ** 3) / GM))
+    //     delete item['avgAlt']
+    //     item['orbitalPeriod'] = value;
+    // }
+    // mapTheDebrisFinalDisplay.innerText = JSON.stringify(arr);
+
+    // // This method creates a new array and simply appends a new object that contains the original objects name and the new orbital value that was calculated.
+    // // While it is not necessary, if the need arises and the original array was not meant to be changed then I wanted to know that there was an efficient way to do so.
+    const GM = 398600.4418;
+    const earthRadius = 6367.4447;
+    let finalArr = []
+    
+    for (const item of arr) {
+        let value = Math.round(2 * Math.PI * Math.sqrt(((earthRadius + item['avgAlt']) ** 3) / GM))
+        finalArr.push({ 'name': item['name'], 'orbitalPeriod': value});
+    }
+    mapTheDebrisFinalDisplay.innerText = JSON.stringify(finalArr)
+}
+
 function loadEventHandlers() {
     submitNumberButton.addEventListener('click', () => {
         // Takes the values entered in the two inputs and quickly converts them to number equivalents.
@@ -803,6 +837,13 @@ function loadEventHandlers() {
     })
     binaryAgentsOptionTwo.addEventListener('change', () => {
         binaryAgents("01001001 00100000 01101100 01101111 01110110 01100101 00100000 01000110 01110010 01100101 01100101 01000011 01101111 01100100 01100101 01000011 01100001 01101101 01110000 00100001");
+    })
+
+    mapTheDebrisOptionOne.addEventListener('change', () => {
+      mapTheDebris([{name : "sputnik", avgAlt : 35873.5553}])  
+    })
+    mapTheDebrisOptionTwo.addEventListener('change', () => {
+        mapTheDebris([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}])
     })
 }
 
