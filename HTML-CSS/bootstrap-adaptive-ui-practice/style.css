@@ -1,0 +1,27 @@
+#div-1 {
+    border: 3px solid red;
+}
+
+#div-2 {
+    border: 3px solid blue;
+}
+
+#div-3 {
+    border: 6px solid yellow;
+}
+
+#div-4 {
+    border: 6px solid pink;
+}
+
+#div-5 {
+    border: 6px solid rgb(70, 3, 14);
+}
+
+#div-6 {
+    border: 6px solid rgb(81, 83, 65);
+}
+
+#div-7 {
+    border: 6px solid rgb(36, 140, 226);
+}
