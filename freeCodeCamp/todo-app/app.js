@@ -18,6 +18,13 @@ if (taskData.length) {
     loadTaskData();
 }
 
+// Rewrites the date into an easier to read format.
+// // Parameter is to a date that will be converted.
+function formatDate(date) {
+    let newDate = new Date(date)
+    return `${newDate.toDateString()} ${newDate.toLocaleTimeString()}`;
+}
+
 // Loads all of the task items into the listContainer
 function loadTaskData() {
     // Clears the list container in case any task was edited or removed
@@ -27,7 +34,7 @@ function loadTaskData() {
         // Appends a the task item to the list container
         listContainer.innerHTML += `<div class="task" id="${index}">
             <p><strong>Title:</strong> ${taskData[index].taskName}</p>
-            <p><strong>Date:</strong> ${taskData[index].taskDate}</p>
+            <p><strong>Date:</strong> ${formatDate(taskData[index].taskDate)}</p>
             <p><strong>Description:</strong> ${taskData[index].taskDescription}</p>
             <h4 class="edit-button header-button">Edit</h4>
             <h4 class="delete-button header-button">Delete</h4>
@@ -138,11 +145,19 @@ function newItemCheck(newItem) {
 // Removes the task located at the specified index from the taskData array.
 // // The parameter is a number that specifies the location of the taskObj to be removed.
 function removeTask(taskIndex) {
-    // Removes the task from the specified index.
-    taskData.splice(taskIndex, 1)
+    // Triggers a confirm modal to ensure the user wishes 
+    let result = confirm("Are you sure you want to permanently remove this item?")
 
-    // Calls the method to reload all of the task data.
-    loadTaskData();
+    // Checks if the result from the confirm modal is true.
+    if (result) {  
+        // If the user confirms,
+
+        // Removes the task from the specified index.
+        taskData.splice(taskIndex, 1)
+
+        // Calls the method to reload all of the task data.
+        loadTaskData();
+    }
 }
 
 // Loads the respective values from the specified taskObj into the user inputs on the formContainer.
@@ -162,14 +177,27 @@ function createNewTaskObj() {
     let name = formTitleInput.value;
     let date = formDateInput.value;
     let description = formDescriptionInput.value;
-    
-    // Creates an id for the task in the form of the name which is converted to spinal-tap.
-    let id = name.split(' ').join('-').toLowerCase()
 
-    // Creates a new task item based on a new taskObject
-    let newItem = new taskObject(id, name, date, description);
+    // Checks and ensures that all fields are filled with values.
+    if (name === '' || date === '' || description === '') {
+        // If any of the inputs are empty,
 
-    return newItem;
+        // Popup a modal to alert the user to fill out all of the fields and return undefined.
+        confirm("Please Fill Out All Fields!");
+        return undefined;
+    } else {
+        // If all fields are filled,
+        
+        // Creates an id for the task in the form of the name which is converted to spinal-tap.
+        let id = name.split(' ').join('-').toLowerCase()
+
+        // Creates a new task item based on a new taskObject
+        let newItem = new taskObject(id, name, date, description);
+
+        // Returns the newly created item
+        return newItem;
+    }
+
 }
 
 // Edits the existing task at the currently selected task with the new values changed by the user.
@@ -179,14 +207,16 @@ function editTask() {
         // If so, the method to create a new taskObj is called and the result is stored in a variable.
         let replacementObj = createNewTaskObj();
 
-        // Replaces the object at the specified index with the newly updated taskObj
-        taskData[selectedTask] = replacementObj;
+        if (replacementObj !== undefined) {
+            // Replaces the object at the specified index with the newly updated taskObj
+            taskData[selectedTask] = replacementObj;
 
-        // Calls the method to load the tasks from the taskObj.
-        loadTaskData();
+            // Calls the method to load the tasks from the taskObj.
+            loadTaskData();
 
-        // Calls the method to reset the app to its default state.
-        reloadApp();
+            // Calls the method to reset the app to its default state.
+            reloadApp();
+        }
     }
 }
 
@@ -195,23 +225,25 @@ function addTask() {
     // Calls the method to create a new object based on the various inputs values and stores them in a variable.
     let newItem = createNewTaskObj() 
     
-    // Calls the newItemCheck method to check if the newItem being added is unique,
-    let result = newItemCheck(newItem);
+    if (newItem !== undefined) {
+        // Calls the newItemCheck method to check if the newItem being added is unique,
+        let result = newItemCheck(newItem);
 
-    // Checks the result from the newItemCheck method
-    if (result === false) {
-        // If it is false, the item is unique was appended to the taskData array. 
+        // Checks the result from the newItemCheck method
+        if (result === false) {
+            // If it is false, the item is unique was appended to the taskData array. 
 
-        // Calls the method to reload the taskData array.
-        loadTaskData();
+            // Calls the method to reload the taskData array.
+            loadTaskData();
 
-        // Calls the method to reset the containers back to their default views.
-        reloadApp();
-    } else {
-        // If the result was true, then the item was flagged as already existing.
+            // Calls the method to reset the containers back to their default views.
+            reloadApp();
+        } else {
+            // If the result was true, then the item was flagged as already existing.
 
-        // Pops up a modal that warns the user the item title is already in use
-        confirm('Item Already Exists in List, please choose a different title or edit the existing item.');
+            // Pops up a modal that warns the user the item title is already in use
+            confirm('Item Already Exists in List, Please Choose a Different Title or Edit the Existing Item.');
+        }
     }
 }
 
