@@ -5,12 +5,13 @@ const listContainer = document.getElementById('list-container');
 const newTaskButton = document.getElementById('new-task-button');
 const formTaskButton = document.getElementById('alter-tasks-button');
 const formCancelButton = document.getElementById('form-cancel-button');
+const clearAllTasksButton = document.getElementById('clear-all');
 
 const formTitleInput = document.getElementById('form-title');
 const formDateInput = document.getElementById('form-date');
 const formDescriptionInput = document.getElementById('form-description');
 
-const taskData = JSON.parse(localStorage.getItem('tasks')) || [];
+let taskData = JSON.parse(localStorage.getItem('tasks')) || [];
 let selectedTask = -1;
 
 // Checks if the taskData array has elements in it on page load, if so call the method to load all of the task items.
@@ -36,8 +37,10 @@ function loadTaskData() {
             <p><strong>Title:</strong> ${taskData[index].taskName}</p>
             <p><strong>Date:</strong> ${formatDate(taskData[index].taskDate)}</p>
             <p><strong>Description:</strong> ${taskData[index].taskDescription}</p>
-            <h4 class="edit-button header-button">Edit</h4>
-            <h4 class="delete-button header-button">Delete</h4>
+            <div class="task-buttons">
+                <h4 class="edit-button header-button">Edit</h4>
+                <h4 class="delete-button header-button">Delete</h4>
+            </div>
             </div>`
     }
 
@@ -46,6 +49,12 @@ function loadTaskData() {
 
     // Calls the method to load the necessary eventHandlers for the edit and delete buttons.
     loadTaskButtonEvents()
+
+    if (taskData.length) {
+        clearAllTasksButton.classList.remove('hidden')
+    } else {
+        clearAllTasksButton.classList.add('hidden')
+    }
 }
 
 // Initializes a new taskObject to store the necessary information for each task item.
@@ -63,11 +72,6 @@ function reloadApp() {
     listContainer.classList.toggle('hidden');
     newTaskButton.classList.toggle('hidden');
 
-    // Sets the user inputs on the formContainer to empty
-    formTitleInput.value = ``;
-    formDateInput.value = ``;
-    formDescriptionInput.value = ``;
-
     // Sets the currently selected task to -1.
     selectedTask = -1;
 
@@ -83,6 +87,12 @@ function displayFormContainer(value, taskObj) {
         newTaskButton.classList.toggle('hidden');
         formTaskButton.innerHTML = "Add Task";
         formTitleInput.readOnly = false;
+        clearAllTasksButton.classList.add('hidden')
+
+        // Sets the user inputs on the formContainer to empty
+        formTitleInput.value = ``;
+        formDateInput.value = '';
+        formDescriptionInput.value = ``;
     if (value) {
         // Sets the various inputs to the selected taskObj values
         formTitleInput.value = taskObj.taskName;
@@ -158,6 +168,20 @@ function removeTask(taskIndex) {
         // Calls the method to reload all of the task data.
         loadTaskData();
     }
+}
+
+// Removes all tasks from the taskData array.
+function clearAllTasks() {
+    let result = confirm("Warning, confirming will erase all tasks.")
+    // Pops up a confirm modal to ensure the user wants to remove all items.
+    if (result) {
+            // Sets taskData to an equal to an empty array.
+        taskData = [];
+    }
+
+
+    // Calls the function to load the taskData array.
+    loadTaskData();
 }
 
 // Loads the respective values from the specified taskObj into the user inputs on the formContainer.
@@ -264,11 +288,13 @@ function loadDefaultEventListeners() {
     formTaskButton.addEventListener('click', () => {
         formTaskButton.innerHTML === "Add Task" ? addTask() : editTask();
     })
+
+    // Initializes the evenListener for clearing all of the tasks from the taskData array.
+    clearAllTasksButton.addEventListener('click', clearAllTasks)
 }
 
 loadDefaultEventListeners();
 
 // ToDo: 
-// Add a clear all and reload button.
 // CSS styling.
 // Bug checking.
