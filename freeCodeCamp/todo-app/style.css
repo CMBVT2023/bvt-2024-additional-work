@@ -9,8 +9,38 @@ body {
     color: #3E2A35;
 }
 
+input, textarea{
+    background-color: #D7BBA8;
+    color: #3E2A35;
+    border-color: transparent;
+    border-radius: 3px;
+    border-bottom-color: #E26D5A;
+}
+
+input:focus, textarea:focus {
+    transform: scale(1.1);
+    outline: #E26D5A solid 1px;
+    box-shadow: 0px 0px 5px 1px #D7BBA8;
+}
+
+input {
+    width: 50%;
+    height: 4%;
+}
+
+textarea {
+    width: 75%;
+    height: 25%;
+}
+
 .header-button {
     color: #E26D5A;
+}
+
+.header-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    text-shadow: 0px 0px 1px #3e2a3563;
 }
 
 #doc-container {
@@ -59,4 +89,21 @@ body {
 
 #form-container {
     text-align: center;
+}
+
+.task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task .task-buttons{
+    width: 100%;
+}
+
+.task-main-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
 }

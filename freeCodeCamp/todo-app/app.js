@@ -34,9 +34,13 @@ function loadTaskData() {
     for (const index in taskData) {
         // Appends a the task item to the list container
         listContainer.innerHTML += `<div class="task" id="${index}">
-            <p><strong>Title:</strong> ${taskData[index].taskName}</p>
-            <p><strong>Date:</strong> ${formatDate(taskData[index].taskDate)}</p>
-            <p><strong>Description:</strong> ${taskData[index].taskDescription}</p>
+            <div class="task-main-info">    
+                <p><strong>Title:</strong> ${taskData[index].taskName}</p>
+                <p><strong>Date:</strong> ${formatDate(taskData[index].taskDate)}</p>
+            </div>
+            <div class="task-description">
+                <p><strong>Description:</strong> ${taskData[index].taskDescription}</p>
+            </div>
             <div class="task-buttons">
                 <h4 class="edit-button header-button">Edit</h4>
                 <h4 class="delete-button header-button">Delete</h4>
@@ -50,9 +54,12 @@ function loadTaskData() {
     // Calls the method to load the necessary eventHandlers for the edit and delete buttons.
     loadTaskButtonEvents()
 
+    // Checks if the taskData array contains any items.
     if (taskData.length) {
+        // If so, the clear all button is displayed to the user.
         clearAllTasksButton.classList.remove('hidden')
     } else {
+        // If not, the clear all button is hidden from the user.
         clearAllTasksButton.classList.add('hidden')
     }
 }
@@ -294,7 +301,3 @@ function loadDefaultEventListeners() {
 }
 
 loadDefaultEventListeners();
-
-// ToDo: 
-// CSS styling.
-// Bug checking.
