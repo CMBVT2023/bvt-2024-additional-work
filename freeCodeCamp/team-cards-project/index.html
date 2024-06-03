@@ -14,39 +14,36 @@
 
         <div id="info-container">
             <div id="team-info">
-                <h3>Business: <span id="Business-name">placeholder</span></h3>
+                <h3>Business: <span id="business-name">placeholder</span></h3>
                 <h3>Employee Count: <span id="employee-amount">placeholder</span></h3>
                 <h3>Owner: <span id="owner-name">placeholder</span></h3>
-                <h4 class="header-button">Change Business</h4>
+                <h4 class="header-button" id="change-business">Change Business</h4>
             </div>
 
-            <div id="team-form-container" class="hidden">
-                <h1>New Business</h1>
-
-                <div>
-                    <label for="business-name-input">Business Name:</label><input type="text" id="business-name-input">
-                    <label for="business-owner-input">Business Owner:</label><input type="text" id="business-owner-input">
-                </div>
-
-            <h4 class="header-button">Create New Employee</h4>
-            </div>
+            
 
             <div id="team-selection" class="hidden">
                 <h2>
                     Select A Team:
                 </h2>
-                <ul>
+                <ul id="business-list">
                     <input type="radio" id="business-1" name="business"><label for="business-1">placeholder</label>
                     <input type="radio" id="business-2" name="business"><label for="business-2">placeholder</label>
                 </ul>
+                <a class="header-button" href="./business-form.html">Create New Business</a>
             </div>
         </div>
 
         <div id="filter-container">
             <h1>Filter Employees By</h1>
             <div>
-                <label>Employee Position: </label>
-                <select>
+                <label>Employee Name:</label>
+                <input type="text" id="employee-name-filter" placeholder="Enter a name...">
+            </div>
+
+            <div>
+                <label for="employee-position-selector">Employee Position:</label>
+                <select id="employee-position-selector">
                     <option>
                         -Select an Item-
                     </option>
@@ -68,11 +65,12 @@
                     <label for="employee-position-input">Employee Position:</label><input type="text" id="employee-position-input">
                 </div>
 
-            <h4 class="header-button">Create New Employee</h4>
+            <h4 class="header-button" id="create-new-employee">Create New Employee</h4>
         </div>
 
         <div id="display-container">
             <h1>Employees:</h1>
+            <h4 class="header-button" id="toggle-new-employee-form">Add New Employee</h4>
             <div class="employee-cards">
                 <div id="employee-1">
                     <h1 id="employee-name-display-1">PlaceHolder</h1>
