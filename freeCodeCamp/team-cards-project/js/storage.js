@@ -4,10 +4,16 @@ export class businessStorage {
     }
 
     static getBusinessArray() {
-        return localStorage.getItem('businesses') || [];
+        return JSON.parse(localStorage.getItem('businesses')) || [];
     }
 
+    static addNewBusiness(obj) {
+        let list = this.getBusinessArray();
 
+        list.push(obj);
+
+        this.setBusinessArray(list);
+    } 
 }
 
 export class employeeStorage {
