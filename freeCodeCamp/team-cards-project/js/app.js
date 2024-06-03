@@ -9,19 +9,8 @@
 
 // Create ui class
 
-
-function employeeObject(name, position) {
-    this.employeeName = name;
-    this.employeePosition = position;
-}
-
-function businessObject(name, owner) {
-    this.businessName = name;
-    this.businessOwner = owner;
-    this.businessEmployeeAmount = function(arr) {
-        return arr.length;
-    };
-}
+// Imports the object constructors from the objects.js file.
+import * as objectsModule from "./objects.js"
 
 class AppUI {
     constructor() {
@@ -39,12 +28,6 @@ class AppUI {
         this._employeeAmountDisplay = document.getElementById('employee-amount');
         this._ownerNameDisplay = document.getElementById('owner-name');
         this._changeBusinessButton = document.getElementById('change-business');
-
-        // Elements relating to the team-form-container
-        this._teamFormContainer = document.getElementById('team-form-container');
-        this._newBusinessNameInput = document.getElementById('business-name-input');
-        this._newBusinessOwnerInput = document.getElementById('business-owner-input');
-        this._newBusinessButton = document.getElementById('create-new-business');
 
         // Elements relating to the team-selection container
         this._teamSelectionContainer = document.getElementById('team-selection');
@@ -70,13 +53,21 @@ class AppUI {
         this._teamSelectionContainer.classList.toggle('hidden');
     };
 
+    _redirectTeamFormPage() {
+        window.location.href = "./business-form.html"
+    }
+
     _toggleEmployeeForm() {
         this._employeeFormContainer.classList.toggle('hidden');
     }
 
     _loadEventListeners() {
+        // Event listeners associated with toggling hidden containers.
         this._changeBusinessButton.addEventListener('click', this._toggleTeamSelection.bind(this));
         this._newEmployeeFormButton.addEventListener('click', this._toggleEmployeeForm.bind(this));
+
+        // Event listeners associated with redirecting the webpage.
+        this._newBusinessFormButton.addEventListener('click', this._redirectTeamFormPage.bind(this));
     }
 }
 
