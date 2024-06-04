@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="./business-form.css">
+    <link rel="stylesheet" href="./style.css">
     <title>Business Form Page</title>
 </head>
 <body>
@@ -20,6 +20,7 @@
                 <label for="business-name-input">Business Name:</label><input type="text" id="business-name-input" placeholder="Business name..." required>
                 <label for="business-owner-input">Business Owner:</label><input type="text" id="business-owner-input" placeholder="Business owner..." required>
                 <input type="submit" id='form-submit-button' value="Create New Business">
+                <h4 class="header-button hidden" id="edit-mode-cancelation">Cancel</h4>
             </form>
         </div>
 
@@ -27,6 +28,7 @@
         <div id="team-list-container">
 
         </div>
+        <h4 class="header-button hidden" id="remove-all-businesses">Remove All</h4>
     </div>
 
     <!-- Return Button -->

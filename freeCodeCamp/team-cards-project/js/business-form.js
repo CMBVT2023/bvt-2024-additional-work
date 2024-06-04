@@ -10,6 +10,8 @@ const teamForm = document.getElementById('team-form');
 const teamFormReturnButton = document.getElementById('team-form-return');
 const teamListElement = document.getElementById('team-list-container');
 const teamFormSubmitButton = document.getElementById('form-submit-button');
+const teamFormCancelationButton = document.getElementById('edit-mode-cancelation');
+const removeAllBusinessButton = document.getElementById('remove-all-businesses');
 
 // Global variable that saves the index of the task currently being edited, else its value is set to -1.
 let selectedBusiness = -1;
@@ -25,6 +27,61 @@ function clearSelection() {
     newBusinessOwnerInput.value = '';
     teamFormSubmitButton.value = 'Create New Business';
     let selectedBusiness = -1;
+    toggleCancelationButton(false);
+}
+
+// Toggles the form's cancelation button based on the boolean passed in, true to toggle it on and false to toggle it off.
+function toggleCancelationButton(value) {
+    // Checks the passed in parameter's value.
+    if (value) {
+        // If the parameter is true,
+
+        // Displays the cancelation button.
+        teamFormCancelationButton.classList.remove('hidden');
+
+        // Assigns an eventlistener to clear the edit mode.
+        teamFormCancelationButton.addEventListener('click', () => {
+            confirm ("Are you sure you want to discard any changes made to this business?") ? clearSelection() : toggleCancelationButton(true);
+        }, {once:true});
+    } else {
+        // If the parameter is false,
+
+        // Hides the cancel button from the form.
+        teamFormCancelationButton.classList.add('hidden');
+    }
+}
+
+// Toggles the form's remove all button based on the boolean passed in, true to toggle it on and false to toggle it off.
+function toggleRemoveAllButton(value) {
+    // Checks the passed in parameter's value.
+    if (value) {
+        // If true,
+
+        // Displays the remove all button.
+        removeAllBusinessButton.classList.remove('hidden')
+
+        // Adds an eventListener to the remove all button 
+        removeAllBusinessButton.addEventListener('click', () => {
+            // Pops up a modal that confirms the user wants to remove all items from localStorage.
+            let result = confirm ("Warning, doing this will remove all businesses and their employee lists from storage permanently.") 
+            
+            // Checks the user's choice
+            if (result) {
+                // If true, or the user confirms.
+
+                // Clears the localStorage
+                localStorage.clear();
+
+                // Calls the method to load the team list.
+                loadTeamList();
+            };
+        })
+    } else {
+        // If false,
+
+        // Hides the remove all button from the user's display.
+        removeAllBusinessButton.classList.add('hidden')
+    }
 }
 
 // Loads the event listeners for the buttons associated with the various teams.
@@ -59,20 +116,28 @@ function loadTeamList() {
     // Clears all items being displayed in the teamListElement.
     teamListElement.innerHTML = ``;
 
-    // Iterates through the businessArray.
-    for (let index = 0; index < list.length; index++) {
-        // Appends a div with the currently selected business' values and necessary buttons.
-        teamListElement.innerHTML += `<div id='${index}'>
-            <h3>Business: ${list[index].businessName}</h3>
-            <h3>Employee Count: ${list[index].employeeAmount}</h3>
-            <h3>Owner: ${list[index].businessOwner}</h3>
-            <h4 class="header-button">Edit</h4>
-            <h4 class="header-button">Remove</h4>
-        </div>`
-    }
+    if (list.length) {
+        // Iterates through the businessArray.
+        for (let index = 0; index < list.length; index++) {
+            // Appends a div with the currently selected business' values and necessary buttons.
+            teamListElement.innerHTML += `<div id='${index}'>
+                <h3>Business: ${list[index].businessName}</h3>
+                <h3>Employee Count: ${list[index].employeeAmount}</h3>
+                <h3>Owner: ${list[index].businessOwner}</h3>
+                <h4 class="header-button">Edit</h4>
+                <h4 class="header-button">Remove</h4>
+            </div>`
+        }
 
-    // Calls the method to load the necessary evenListeners for the newly created buttons. 
-    loadTeamEventListeners();
+        // Calls the method to toggle the removeAllButton.
+        toggleRemoveAllButton(true);
+
+        // Calls the method to load the necessary evenListeners for the newly created buttons. 
+        loadTeamEventListeners();
+    } else {
+        // Calls the method to remove the removeAllButton from the user's display.
+        toggleRemoveAllButton(false);
+    }
 }
 
 // Checks that the newly created business does not conflict with a previously created business.
@@ -124,6 +189,9 @@ function createNewBusiness() {
     if (result) {
         // If true, signifies that the new business has no conflicts.
 
+        // Calls the storageModule's method to create a newEmployeeArray in localStorage with a key based on the newBusiness's id.
+        storageModule.employeeStorage.createEmployeeArray(newBusiness.businessID);
+
         // Calls the method to remove clear all user inputs.
         clearSelection();
 
@@ -146,7 +214,9 @@ function editBusiness(index) {
     let newBusiness = newBusinessObj();
 
     // Calls the storageModule method to overwrite the previous businessObject with the new changes at the specified index.
-    storageModule.businessStorage.editBusiness(index, newBusiness)
+    let oldObj = storageModule.businessStorage.editBusiness(index, newBusiness)
+
+    storageModule.employeeStorage.transferEmployeeArray(oldObj.businessID, newBusiness.businessID);
 
     // Calls the method to remove clear all user inputs.
     clearSelection();
@@ -166,8 +236,11 @@ function removeBusiness(index) {
 
         // // Add a way to Remove the business's employeeArray from localStorage.
 
-        // Remove the business from the businessArray.
-        storageModule.businessStorage.removeBusiness(index);
+        // Remove the business from the businessArray and temporarily stores the removed item into a variable.
+        let obj = storageModule.businessStorage.removeBusiness(index);
+
+        // Calls the storageModule's method to remove the business' employeeArray from local storage
+        storageModule.employeeStorage.removeEmployeeArray(obj.businessID);
 
         // Calls the method to remove clear all user inputs.
         clearSelection();
@@ -191,6 +264,9 @@ function loadEditMode(index) {
 
     // Changes the teamFormSubmitButton's value to "Edit Business" to signifies that an item is being edited.
     teamFormSubmitButton.value = "Edit Business";
+
+    // Calls the method to toggle the cancelation button
+    toggleCancelationButton(true);
 }
 
 // Loads the default eventListeners for the webpage.
@@ -204,10 +280,6 @@ function loadEventListeners() {
         teamFormSubmitButton.value === "Create New Business" ? createNewBusiness() : editBusiness(selectedBusiness);
     });
 }
-
-// TODO: Add buttons
-// // One for removing all businesses from the array.
-// // One for canceling the edit mode.
 
 loadEventListeners();
 loadTeamList();
