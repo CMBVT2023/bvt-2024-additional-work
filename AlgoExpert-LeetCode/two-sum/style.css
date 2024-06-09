@@ -58,6 +58,10 @@ html {
     color: var(--input-background-color);
 }
 
+.input-colors:focus::placeholder, .input-colors:hover::placeholder {
+    color: var(--input-background-color);
+}
+
 input[type="radio"] {
     accent-color: var(--input-text-color);
 }
