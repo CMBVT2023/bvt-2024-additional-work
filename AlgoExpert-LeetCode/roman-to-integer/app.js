@@ -111,3 +111,34 @@ function romanToIntegerV3(s) {
     return total;
 };
 
+// Biggest Takeaway, using the object helped with decreasing the amount of switch cases necessary. Also, while there may be different ways to accomplish a problem, I found that it
+// could have drawbacks or issues of its own. While the switch case did require more memory to run, it decreased the total run time. One the other hand, using a comparing if statement
+// decreased the run time but required more time to run. As of now, I remember hearing that the quicker something runs the more memory it takes so I need to take these findings with
+// a grain of salt since it could simply be that the method without using a switch statement just happens to be slower, and I especially think this since the method still uses an if
+// statement.
+
+const romanNumeralDisplay = document.getElementById('initial-display');
+const resultDisplay = document.getElementById('result-display');
+const romanNumeralInput = document.getElementById('roman-numeral-input');
+const showResultButton = document.getElementById('show-result');
+
+function limitInput(e) {
+    let key = e.target;
+    let badKeys = /[^ivxlcdm]+/gi
+
+    key.value = key.value.replace(badKeys, '');
+}
+
+function loadEventListeners() {
+    romanNumeralInput.addEventListener('keyup', limitInput);
+    romanNumeralInput.addEventListener('change', () => {
+        romanNumeralDisplay.innerHTML = romanNumeralInput.value.toUpperCase();
+        resultDisplay.innerHTML = ``;
+    })
+    showResultButton.addEventListener('click', () => {
+        let result = romanToIntegerV2(romanNumeralDisplay.innerHTML)
+        resultDisplay.innerHTML = result;
+    })
+}
+
+loadEventListeners();

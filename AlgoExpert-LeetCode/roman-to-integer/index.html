@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Roman to Integer LeetCode Problem</title>
+</head>
+<body>
+    <div id="main-container">
+        <div id="title-container">
+            <h1>Leet Code Problem:</h1>
+            <h2>13. Roman to Integer</h2>
+        </div>
+    
+        <div id="example-container">
+            <h3>Roman Numeral String: <span id="initial-display"></span></h3>
+
+            <h3>Decimal Equivalent: <span id="result-display"></span></h3>
+
+            <input  class="user-input input-colors" type="text" placeholder="Enter target value..." id="roman-numeral-input" pattern="[ivxlcdm]+gi">
+            <button class="user-input input-colors" id="show-result">Show Result</button>
+        </div>
+
+        <div id="notes-container">
+            <h2>TakeAway:</h2>
+            <p>
+                &emsp; Biggest Takeaway, using the object helped with decreasing the amount of switch cases necessary. Also, while there may be different ways to accomplish a problem, I found that it
+                could have drawbacks or issues of its own. While the switch case did require more memory to run, it decreased the total run time. One the other hand, using a comparing if statement
+                decreased the run time but required more time to run. As of now, I remember hearing that the quicker something runs the more memory it takes so I need to take these findings with
+                a grain of salt since it could simply be that the method without using a switch statement just happens to be slower, and I especially think this since the method still uses an if
+                statement.
+            </p>
+        </div>
+    </div>
+
+<script src="./app.js"></script>
+</body>
+</html>
