@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+    <title>Two Sum LeetCode Problem</title>
+</head>
+<body>
+    
+    <div id="main-container">
+        <div id="title-container">
+            <h1>Leet Code Problem:</h1>
+            <h2>1. Two Sum</h2>
+        </div>
+    
+        <div id="example-container">
+            <h3>Chosen Array: <span id="array-display"></span></h3>
+            <h3>Target Number: <span id="target-value-display"></span></h3>
+
+            <h3>Result: <span id="result-display"></span></h3>
+
+            <div id="array-options">
+                <div class="label-input-container user-input">
+                    <input type="radio" name="array-option" id="array-option-1" value="0"><label for="array-option-1">[2,7,11,15]</label>
+                </div>
+                <div class="label-input-container user-input">
+                    <input type="radio" name="array-option" id="array-option-2" value="1"><label for="array-option-2">[3,2,4]</label>
+                </div>
+                <div class="label-input-container user-input">
+                    <input type="radio" name="array-option" id="array-option-3" value="2"><label for="array-option-3">[3,3]</label>
+                </div>
+                <div class="label-input-container user-input">
+                    <input class="input-colors" type="radio" name="array-option" id="array-option-4" value="3"><label for="array-option-4">[1,2,3,4,5,6,7,8,9,10]</label>
+                </div>
+            </div>
+            <input  class="user-input input-colors" type="number" placeholder="Enter target value..." id="target-number-input">
+            <button class="user-input input-colors" id="show-result">Show Result</button>
+        </div>
+
+        <div id="notes-container">
+            <h2>TakeAway:</h2>
+            <p>
+                &emsp; Biggest takeaway, just because something works does not mean it can't become more optimized. Even milliseconds add up and can result in a lot of time being spent when all one has to do is
+                spend a bit more time rewriting or finding a better solution. While it may seem like a waste of time, it almost never is since finding a way to save time will add up greatly in the long run.
+                There is a point of diminishing return so I shouldn't become too obsessive with it, like my first solution was only around 80ms to execute while this newest one was around 40ms. It is double the 
+                time but it still works if needed. However, in the case of my other solutions that used around 250ms of time, that is by far a much greater increase and makes the time spent finding a 
+                better solution far more worth it.
+            </p>
+        </div>
+    </div>
+
+<script src="./app.js"></script>
+</body>
+</html>

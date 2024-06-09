@@ -30,7 +30,7 @@ function twoSumV2(nums, target) {
 }
 
 // I ended up switching to the while loop and it is actually slower again. It seems that the indexOf use is causing this delay so I'm going to try and find a way around it.
-function twoSumsV3(nums, target) {
+function twoSumV3(nums, target) {
     let num = 0;
     let found = false;
     let result = [];
@@ -50,7 +50,7 @@ function twoSumsV3(nums, target) {
 // After looking at some of the discussion, people recommended doing it with a hashmap. While I initially attempted this, I ran into the problem since I was using arrays, I had to either shallow
 // copy the array and then use indexOf to find the potential value which was causing a lot of additional time to execute. The couple of comments I found recommended using a object instead,
 // this allows me to not only store the seen value but to also include where its index is in the array.
-function twoSumsV4(nums, target) {
+function twoSumV4(nums, target) {
     let seen = {};
 
     for (let i = 0; i < nums.length; i++) {
@@ -61,6 +61,8 @@ function twoSumsV4(nums, target) {
             seen[nums[i]] = i;
         }
     }
+
+    return [];
 };
 
 
@@ -69,3 +71,63 @@ function twoSumsV4(nums, target) {
 // There is a point of diminishing return so I shouldn't become too obsessive with it, like my first solution was only around 80ms to execute while this newest one was around 40ms. It is double the 
 // time but it still works if needed. However, in the case of my other solutions that used around 250ms of time, that is by far a much greater increase and makes the time spent finding a 
 // better solution far more worth it.
+
+
+const arrayDisplay = document.getElementById('array-display');
+const targetValueDisplay = document.getElementById('target-value-display');
+const resultDisplay = document.getElementById('result-display');
+const radioOptions = document.getElementById('array-options').querySelectorAll('input');
+const targetValueInput = document.getElementById('target-number-input');
+const showResultButton = document.getElementById('show-result');
+
+let currentArr = [];
+let targetValue = 0;
+
+function selectArray(num) {
+    let arr = [];
+
+    switch(num) {
+        case 0: {
+            arr = [2,7,11,15];
+            break;
+        };
+        case 1: {
+            arr = [3,2,4];
+            break;
+        };
+        case 2: {
+            arr = [3,3];
+            break;
+        }
+        case 3: {
+            arr = [1,2,3,4,5,6,7,8,9,10];
+            break;
+        };
+    };
+
+    currentArr = arr;
+    arrayDisplay.innerHTML = JSON.stringify(arr);
+}
+
+function loadEventListeners() {
+    for (const radio of radioOptions) {
+        radio.addEventListener('change', (e) => {
+            selectArray(+e.target.value)
+        });
+    };
+    targetValueInput.addEventListener('change', (e) => {
+        targetValueDisplay.innerHTML = e.target.value;
+        targetValue = +e.target.value;
+    })
+    showResultButton.addEventListener('click', () => {
+        let result = [];
+        if (currentArr.length !== 0 && targetValue !== 0) {
+            result = twoSumV4(currentArr, targetValue);
+        }
+        resultDisplay.innerHTML = JSON.stringify(result);
+    })
+};
+
+arrayDisplay.innerHTML = `[]`
+targetValueDisplay.innerHTML = `0`
+loadEventListeners();
