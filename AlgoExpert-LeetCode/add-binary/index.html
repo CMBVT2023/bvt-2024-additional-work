@@ -5,10 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="./style.css">
-    <title>Add Binary</title>
+    <title>Add Binary LeetCode Problem</title>
 </head>
 <body>
     
+    <div id="main-container">
+        <div id="title-container">
+            <h1>Leet Code Problem:</h1>
+            <h2>67. Add Binary</h2>
+        </div>
+    
+        <div id="example-container">
+            <h3>Binary Numbers</h3>
+            <h3>First Number: <span id="binary-one-display"></span> <br>
+                Second Number: <span id="binary-two-display"></span>
+            </h3>
+
+            <h3>Result: <span id="result-display"></span></h3>
+
+            <div id="array-options">
+                <!-- Inputs are set to text to avoid user using the number slider since it allows values other than 1 or 0. -->
+                <input class="user-input input-colors" type="text" placeholder="Enter first number..." id="first-number-input">
+                <input class="user-input input-colors" type="text" placeholder="Enter second number" id="second-number-input">
+            </div>
+            <button class="user-input input-colors" id="show-result">Show Result</button>
+        </div>
+
+        <div id="notes-container">
+            <h2>TakeAway:</h2>
+            <p>
+                &emsp; My biggest takeaway from this is that rather than assuming, I need to 100% confirm it. I just instinctively assumed that the BigInt value was being exceeded but I should have 
+                instead looked it up and confirmed it, had I done that I would have discovered that I was in fact within range and could have had the potential to go look elsewhere for the issue. Plus, I just
+                assumed that the mdn docs mentioning that parseInt did not work on BigInt, then there was no other method for specifying a radix. While I am disappointed that I gave up too quickly and switched to
+                a method that I knew would be more complicated, I am glad that I went back and saw how close I actually was. Had I taken a couple of seconds to trouble shoot and confirm things, I would have
+                understood the issue and solved it my way initially.
+            </p>
+        </div>
+    </div>
+
 <script src="./app.js"></script>
 </body>
 </html>

@@ -138,7 +138,42 @@ function addBinaryV6(a, b) {
 
 
 // My biggest takeaway from this is that rather than assuming, I need to 100% confirm it. I just instinctively assumed that the BigInt value was being exceeded but I should have 
-// instead looked it up and confirmed it, had I done that I would have discovered that I was infact within range and could have had the potential to go look elsewhere for the issue. Plus, I just
+// instead looked it up and confirmed it, had I done that I would have discovered that I was in fact within range and could have had the potential to go look elsewhere for the issue. Plus, I just
 // assumed that the mdn docs mentioning that parseInt did not work on BigInt, then there was no other method for specifying a radix. While I am disappointed that I gave up too quickly and switched to
 // a method that I knew would be more complicated, I am glad that I went back and saw how close I actually was. Had I taken a couple of seconds to trouble shoot and confirm things, I would have
 // understood the issue and solved it my way initially.
+
+const binaryOneDisplay = document.getElementById('binary-one-display');
+const binaryTwoDisplay = document.getElementById('binary-two-display');
+const resultDisplay = document.getElementById('result-display');
+const binaryOneInput = document.getElementById('first-number-input');
+const binaryTwoInput = document.getElementById('second-number-input');
+const showResultButton = document.getElementById('show-result');
+
+function limitInput(e) {
+    let key = e.target;
+    let badKeys = /[^01]+/gi
+
+    key.value = key.value.replace(badKeys, '');
+}
+
+function loadEventListeners() {
+    binaryOneInput.addEventListener('keyup', (e) => {
+        limitInput(e);
+    })
+    binaryTwoInput.addEventListener('keyup', (e) => {
+        limitInput(e);
+    })
+    binaryOneInput.addEventListener('change', (e) => {
+        binaryOneDisplay.innerHTML = binaryOneInput.value === '' ? 0 : binaryOneInput.value;
+    })
+    binaryTwoInput.addEventListener('change', (e) => {
+        binaryTwoDisplay.innerHTML = binaryTwoInput.value === '' ? 0 : binaryTwoInput.value;
+    })
+    showResultButton.addEventListener('click', () => {
+        let result = addBinaryV5(binaryOneInput.value === '' ? 0 : binaryOneInput.value, binaryTwoInput.value === '' ? 0 : binaryTwoInput.value);
+        resultDisplay.innerHTML = result;
+    })
+}
+
+loadEventListeners()
