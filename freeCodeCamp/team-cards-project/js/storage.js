@@ -68,12 +68,12 @@ export class employeeStorage {
 
     // Returns the employeeArray associated with the passed in key.
     static getEmployeeArray(key) {
-        return JSON.parse(localStorage.getItem(key)) || []
+        return JSON.parse(localStorage.getItem(key)) || [];
     }
 
     // Stores the passed in array into localStorage and sets its key based on the passed in parameter.
     static setEmployeeArray(key, array) {
-        localStorage.setItem(key, JSON.stringify(array))
+        localStorage.setItem(key, JSON.stringify(array));
     }
 
     // Transfers the employeeArray of a business if their id changes.
@@ -87,5 +87,18 @@ export class employeeStorage {
 
         // Stores the saved employeeArray into localStorage using the newKey that was passed in.
         this.setEmployeeArray(newKey, employeeArray);
+    }
+
+    // Appends a newEmployeeObj to the employeeArray associated with the passed in key.
+    // // The two parameters are a key, to define the business' employeeArray to edit, and the second parameter is the newEmployeeObj that will be added to the array. 
+    static addEmployee(key, employeeObj) {
+        // Gets the employeeArray associated with the passed in key.
+        let employeeArray = this.getEmployeeArray(key);
+
+        // Appends the newEmployeeObj to the employeeArray.
+        employeeArray.push(employeeObj);
+
+        // Calls the method to save the new changes to the employeeArray associated with the key.
+        this.setEmployeeArray(key, employeeArray);
     }
 }
