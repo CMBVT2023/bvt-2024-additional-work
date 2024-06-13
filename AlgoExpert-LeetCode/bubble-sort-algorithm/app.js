@@ -22,7 +22,12 @@ function bubbleSort(arr) {
         for (let i = 0; i < arr.length - 1; i++) {
             for (let j = 0; j < arr.length - 1 - i; j++) {
                 if (arr[j] > arr[j+1]) {
-                    [arr[j], arr[j+1]] = [arr[j+1], arr[j]]
+                    // let temp = arr[j];
+                    // arr[j] = arr[j+1];
+                    // arr[j+1] = temp;
+                    // I forgot the semicolon originally and it caused the program to crash and get stuck in an infinite loop.
+                    // // DO NOT FORGET THE ENDING SEMICOLON.
+                    [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
                 } else {
                     notSorted = false
                 }
@@ -33,6 +38,31 @@ function bubbleSort(arr) {
     return arr
 }
 
+const numberArrayDisplay = document.getElementById('array-display');
+const resultDisplay = document.getElementById('result-display');
+const numberInput = document.getElementById('number-input');
+const showResultButton = document.getElementById('show-result');
 
-let arr = [5, 15, 8, 9]
-console.log(bubbleSort(arr));
+let numbers = [];
+
+function populateArray(num) {
+    numbers = [];
+
+    for (let i = 0; i < num; i++) {
+        numbers.push(Math.floor(Math.random() * 100));
+    }
+
+    numberArrayDisplay.innerHTML = JSON.stringify(numbers);
+};
+
+function loadEventListeners() {
+    numberInput.addEventListener('change', (e) => {
+        populateArray(e.target.value > 0 ? +e.target.value : 0);
+    });
+    showResultButton.addEventListener('click', () => {
+        let result = bubbleSort(numbers);
+        resultDisplay.innerHTML = JSON.stringify(result);
+    });
+};
+
+loadEventListeners()
