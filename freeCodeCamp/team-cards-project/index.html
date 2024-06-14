@@ -59,18 +59,18 @@
         <div id="employee-form-container" class="hidden">
             <h1>New Employee</h1>
 
-                <div>
-                    <label for="employee-name-input">Employee Name:</label><input type="text" id="employee-name-input">
-                    <label for="employee-position-input">Employee Position:</label><input type="text" id="employee-position-input">
-                </div>
+                <form id="new-employee-form">
+                    <label for="employee-name-input">Employee Name:</label><input type="text" id="employee-name-input" required>
+                    <label for="employee-position-input">Employee Position:</label><input type="text" id="employee-position-input" required>
+                    <input type="submit" id="create-new-employee" value="Create New Employee">
+                </form>
 
-            <h4 class="header-button" id="create-new-employee">Create New Employee</h4>
         </div>
 
         <div id="display-container">
             <h1>Employees:</h1>
             <h4 class="header-button" id="toggle-new-employee-form">Add New Employee</h4>
-            <div class="employee-cards">
+            <div id="employee-cards">
                 <div id="employee-1">
                     <h1 id="employee-name-display-1">PlaceHolder</h1>
                     <p>Position: <span id="employee-name-display-1">Placeholder</span></p>

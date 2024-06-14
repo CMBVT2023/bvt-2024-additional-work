@@ -1,7 +1,10 @@
 // TODO: 
-// Create forms
-// // For Employees
-// Create module for storing employees
+// Create function to display employees
+// Have the business selection/creation menu open if no businesses already exist
+// Create a way to edit employees
+// Create a way to remove Employees
+// Implement the filter for employees
+// Finalize UI Design
 
 // Imports the object constructors from the objects.js file.
 import * as objectsModule from "./objects.js";
@@ -48,6 +51,7 @@ class AppUI {
 
         // Elements relating to the employee-form-container
         this._employeeFormContainer = document.getElementById('employee-form-container');
+        this._newEmployeeFormElement = document.getElementById('new-employee-form');
         this._newEmployeeNameInput = document.getElementById('employee-name-input');
         this._newEmployeePositionInput = document.getElementById('employee-position-input');
         this._newEmployeeButton = document.getElementById('create-new-employee');
@@ -84,6 +88,10 @@ class AppUI {
         this._ownerNameDisplay.innerHTML = this._selectedBusiness.businessOwner
 
         this._loadBusinessEmployeeCount();
+    }
+
+    _loadEmployees() {
+        this._
     }
 
     // Loads all of the businesses from localStorage into the businessListElement.
@@ -162,6 +170,16 @@ class AppUI {
 
         // Event listeners associated with redirecting the webpage.
         this._newBusinessFormButton.addEventListener('click', this._redirectTeamFormPage.bind(this));
+
+        // Event listener associated with creating a new employee
+        this._newEmployeeFormElement.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (this._selectedBusiness !== undefined) {
+                this._createNewEmployee();
+            } else {
+                alert('Please select a business before creating new employees.')
+            }
+        })
     }
 }
 
