@@ -151,6 +151,23 @@ function pascalTriangleTwoV5(rowIndex) {
     }
 };
 
+// This method utilizes a math equation, binomial coefficient, to solve the triangle row without needing the previous row. While I could have never found this equation on my own, it was simple to find,
+// showing that sometimes the best way to solve things, is to look up the hardest parts, like this math equation, since from there, I was able to figure out the code and how to implement this equation.
+// Again, while this is not my own solution, it does help to show that sometimes the best thing I can do is look up a part that I am struggling with and see if there was something I missed, or if there
+// are other who found the solution for the part I am stuck on. By no means should I look up how to solve a problem completely, and I should always make sure I understand the issue I am having and understand
+// the problem I am trying to solve.
+function pascalTriangleTwoV6(rowIndex) {
+    let currentRow = [1]
+    prev = 1;
+    for (let i = 1; i <= rowIndex; i++) {
+        let nextVal = prev * (rowIndex - i + 1) / i
+        currentRow.push(nextVal);
+        prev = nextVal
+    }
+
+    return currentRow;
+};
+
 // Biggest takeaway, by far, it has to be that I need to think a bit more clearly when copying parts of code from my previous projects or creations. At first, I thought since this used 0-indexing I
 // needed to change the way the rowNumber is calculated since my previous pascal triangle wasn't 0-index, but thinking back to it now it was, even though it wasn't specifically stated. Using an array,
 // instantly means that the problem is 0-index based and that is something I didn't consider and it caused me to get confused and to waste a ton of time fixing and changing things unnecessarily.

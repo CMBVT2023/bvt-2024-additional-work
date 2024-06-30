@@ -66,3 +66,39 @@ function pascalTriangleV2(numRows) {
 
     return finalArr;
 };
+
+// This method utilizes nested for loops to create the triangle. I was under the impression that recursion would use less memory but in reality this method is around the same memory and speed.
+function pascalTriangleV3(numRows) {
+    let pt = []
+    if (numRows > 0) {
+        pt.push([1]);
+    } else {
+        return;
+    }
+
+    // Loops through the number of rows based on the past in variables, row one is already added so the count begins from 1.
+    for (let i = 1; i < numRows; i++) {
+        // Initializes a new array with the first value already added
+        let currentRow = [1];
+
+        // Loops based on the previous length of the row before
+        for (let j = 1; j < pt[i-1].length; j++) {
+            // pushes the value of the number before and at the same position on the previous row.
+            currentRow.push(pt[i-1][j] + pt[i-1][j -1])
+        }
+        // Pushes a value of 1 which will always be the last value of a row.
+        currentRow.push(1)
+        // Pushes the row to the final array before going onto the next or returning the array
+        pt.push(currentRow)
+    }
+
+    // Returns the triangle
+    return pt;
+};
+
+// Biggest takeaway, after learning that you can also use for loops instead of only recursion, I once again have to realize that there are multiple ways to solve problems.
+// Simply because other problems are similar to the one I am working on does not mean that they need to be solved in the exact same way. The fact that I didn't even attempt to use loops
+// to solve this problem shows me that I was too laser focused on making recursion work when I should be focusing on solving the problem in any way I can regardless of the method used.
+// I need to be more open minded and willing to give other methods a try, even if I do solve something, then I should try and see if there is a better or more straight forward method. By far,
+// these problems are showing me that there are multiple ways to solve an issue but the most important thing to do is to find a way to initially solve it and try and make it better. Never accept or
+// use the first method that works, there is almost always a way to improve things, but still make sure that I don't go beyond the point of diminishing return.
