@@ -41,5 +41,41 @@ function productOfArrayV1(nums) {
     return finalArr
 };
 
+// This method was based on the various ones I found under the solutions tab. This method utilizes a pre and suffix multiplication system, all of the values in the various positions represent
+// the product of the numbers multiplied up to that point, whether it be starting from the left to right for the pre or from right to left with the suffix. Rather than having to calculate all of the 
+// products for all numbers to the left and right of the current position, simply taking the number at the same position in both the pre and suffix array and multiply them would provide the result.
+// While I initially thought using three for loops would increase run time, the fact that they are not nested within each other makes a huge difference, and is what allows this method to remain linear,
+// since the loops are all independent of each other. 
+function productOfArrayV2(nums) {
+    // Initializes three arrays, two are created with an length equal to the passed in nums array and are filled with 1s to make the multiplication in place possible, and the last array
+    // is empty.
+    let left = Array(nums.length).fill(1);
+    let right = Array(nums.length).fill(1);
+    let finalArr = [];
+
+    // Loops through the left array, going from left to right and starting at its second position.
+    for (let i = 1; i < nums.length; i++) {
+        // Sets the current position equal to the product of the value of the previous array element and the corresponding position of said element in the nums array.
+        left[i] = left[i - 1] * nums[i - 1];
+    }
+
+    // Loops through the right array, going from right to left and starting at the penultimate position.
+    for (let i = nums.length - 2; i >= 0; i--) {
+        // Sets the current position equal to the product of the value of the next array element and the corresponding position of said element in the nums array.
+        right[i] = right[i + 1] * nums[i + 1];
+    }
+
+    // Loops through the finalArray whose length will be equal to that of the passed in nums array,
+    // the two arrays will always share the same length values so it is unnecessary to declare the finalArray length before hand.
+    for (let i = 0; i < nums.length; i++) {
+        // Pushes the product of the value at the specified point in the left and right array, multiplying the two array elements results in the value of all
+        // the products of the nums array while excluding the value at the current position.
+        finalArr.push(left[i] * right[i])
+    }
+
+    // Returns the finalArray
+    return finalArr
+};
+
 // Biggest takeaway, I need to focus more on learning the big O calculations. Look up more videos on it as it is starting to become more useful to know what each refers to. There is a difference between
 // nested for loops and having two for loops it seems like, but as I said I need to research this way more to better understand.
