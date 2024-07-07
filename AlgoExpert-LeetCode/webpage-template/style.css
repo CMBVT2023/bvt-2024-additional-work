@@ -1,10 +1,10 @@
 :root {
     /* Declares color pallet for the entire page */
-    --main-background: #CAE9FF;
-    --secondary-background: #BEE9E8;
-    --text-color: #1B4965;
-    --input-background-color: #62B6CB;
-    --input-text-color: #5FA8D3;
+    --main-background: #FFFFFF;
+    --secondary-background: #FFFF00;
+    --text-color: #000000;
+    --input-background-color: #00FFFF;
+    --input-text-color: #FF0000;
 }
 
 html {

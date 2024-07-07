@@ -54,9 +54,30 @@ function generateParenthesisV2(n) {
 };
 
 
-// My biggest takeaway from this problem was that just while knowing about some kind of method will always be useful or helpful there are situations in which even having the knowledge or experience with
+// My biggest takeaway from this problem was that just while knowing about some kind of method will always be useful or helpful, there are situations in which even having the knowledge or experience with
 // said method does not matter if I do not have any idea of how to approach the actual problem. This problem was probably the hardest one I have attempted to solve, simply because this was the first one
 // where I had no idea how to even go about doing so. While I knew initially I needed some kind of recursion or a loop, but I had no idea how to check the number of parenthesis being placed or to ensure that
 // the there were as many opens as there were closed and that all placements were valid. I was at a complete lost. Sometimes, while I always dislike doing so, I made the right decision with looking for a 
 // tutorial on solving this answer. Otherwise, I would have wasted even longer on just looking at the screen without having any clue on how to move forward. The best choice I could have made was admitting that
 // I was at a loss and needed help. By getting external help, I learned more than I would have and found some new insights into recursion.
+
+// Initializes html elements.
+const initialDisplay = document.getElementById('initial-display');
+const resultDisplay = document.getElementById('result-display');
+const userInput = document.getElementById('text-input');
+
+// Loads the default eventListener for the webpage.
+function loadEventListener() {
+    // Initializes a eventListener on the userInput element.
+    userInput.addEventListener('change', (e) => {
+        if (userInput.value > 0 && userInput.value < 9) {
+            initialDisplay.innerHTML = userInput.value;
+            resultDisplay.innerHTML = generateParenthesisV2(userInput.value);
+        } else {
+            initialDisplay.innerHTML = userInput.value;
+            resultDisplay.innerHTML = `Invalid Value`;
+        }
+    })
+}
+
+loadEventListener();

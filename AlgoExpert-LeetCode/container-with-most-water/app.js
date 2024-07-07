@@ -93,3 +93,40 @@ function containerWithMostWaterVBeta(height) {
 // switching to a if statement for the first check made the code more efficient. However, trying to nest an if statement within it actually made it less efficient, so like most things, when using
 // a ternary operator in place of a if statement depends. In this case, since the first check would be difficult to implement with a ternary operator, it made more sense to use the if statement. 
 // In the end, it is better to be open to use what is best in the situation and not be tied down or strictly use only one method, like using only for loops instead of while loops. 
+
+// Initializes all html elements
+const arrayDisplay = document.getElementById('array-display');
+const resultDisplay = document.getElementById('result-display');
+const radioOptions = document.getElementById('input-options').querySelectorAll('input');
+
+// Displays the results of the algorithm.
+function displayResult(num) {
+    // Initializes a variable to store the selected array.
+    let containerArray = [];
+
+    // Based on the number passed in, the containerArray variable is set equal to its associated array.
+    if (num == 0) {
+        containerArray = [1,8,6,2,5,4,8,3,7];
+    } else if (num == 1) {
+        containerArray = [1,1];
+    } else if (num == 2) {
+        containerArray = [1,3,7,5,3,4,6];
+    }
+
+    // Calls the algorithm's function and displays the result in the resultDisplay element.
+    resultDisplay.innerHTML = containerWithMostWaterV2(containerArray);
+}
+
+// Loads the defaultEventListeners for the webpage.
+function loadEventListeners() {
+    // Iterates through the list of radio inputs.
+    for (const radio of radioOptions) {
+        // Initializes an eventListener to each radio option.
+        radio.addEventListener('change', () => {
+            displayResult(radio.value);
+        })
+    }
+}
+
+loadEventListeners()
+
