@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+    <title>Merge Sorted Array LeetCode Problem</title>
+</head>
+<body>
+    
+    <div id="main-container">
+        <div id="title-container">
+            <h1>Leet Code Problem:</h1>
+            <h2>88. Merge Sorted Array</h2>
+        </div>
+    
+        <div id="example-container">
+            <h3>Merge Sorted Array</h3>
+            <h3>Initial Arrays: <br>
+                <span id="initial-array-one-display"></span> <br>
+                <span id="initial-array-two-display"></span>
+            </h3>
+
+            <h3>Result: <span id="result-display"></span></h3>
+
+            <!-- Radio Inputs Template -->
+            <div id="radio-options">
+                <div class="label-input-container user-input">
+                    <input type="radio" name="radio-option" id="option-1" value="0"><label for="option-1">[1,2,3,0,0,0], [2,5,6]</label>
+                </div>
+                <div class="label-input-container user-input">
+                    <input type="radio" name="radio-option" id="option-2" value="1"><label for="option-2">[4,5,6,0,0,0], [1,2,3]</label>
+                </div>
+                <div class="label-input-container user-input">
+                    <input type="radio" name="radio-option" id="option-3" value="2"><label for="option-3">[0], [1]</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="notes-container">
+            <h2>TakeAway:</h2>
+            <p>
+                &emsp; Biggest takeaway, by far, the biggest thing I learned was how helpful writing things out and just drawing how the algorithm is supposed to work. I was completely stumped and was stuck on
+                a certain part of the problem yet I was able to over come it by drawing what my code should be doing. This helped me fix some bugs and errors I came across and without attempting this 
+                I would have still been stuck. Also, once again, I need to start looking at the provided info for the problem because the thing that caused me the most problems and that left me without a solution
+                to solve it, was actually avoidable had I realized that both arrays were sorted already, not just the first one. Had I realized that, I would have known that starting from the back of the second
+                array would have provided me the largest value in that array without me having to worry or implement a case in which a lower value occurred after a large value.
+            </p>
+        </div>
+    </div>
+
+<script src="./app.js"></script>
+</body>
+</html>
