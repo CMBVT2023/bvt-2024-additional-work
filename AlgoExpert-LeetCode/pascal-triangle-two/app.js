@@ -174,3 +174,18 @@ function pascalTriangleTwoV6(rowIndex) {
 // Also, I found that sometimes simply because another solution worked using a certain technique or solution it do not strictly translate to other problems. In this case, recursion used too much memory
 // and this whole problem was based on reducing the amount of memory needed while also increasing the speed of the method, so using a while or for loop in this cases presented a faster and less memory
 // intensive solution.
+
+// Initializes the html elements from the webpage.
+const resultDisplay = document.getElementById('result-display');
+const userInput = document.getElementById('number-input');
+
+// Initializes the default event listeners for the webpage.
+function loadEventListeners() {
+    // Initializes an eventListener for the userInput element.
+    userInput.addEventListener('change', () => {
+        // Displays the algorithm's result in the resultDisplay element.
+        resultDisplay.innerHTML = JSON.stringify(pascalTriangleTwoV6(userInput.value));
+    })
+}
+
+loadEventListeners();

@@ -33,3 +33,58 @@ function removeElementV1(nums, val) {
 
     return nums.length - count;
 };
+
+// Initializes the html elements for the webpage.
+const initialArrayDisplay = document.getElementById('initial-array-display');
+const removedValueDisplay = document.getElementById('removed-value-display');
+const resultDisplay = document.getElementById('result-display');
+const radioOptions = document.getElementById('radio-options').querySelectorAll('input');
+const numberInput = document.getElementById('number-input');
+
+let numberArray = [];
+let removeElement = -1;
+
+function displayResult() {
+    if (numberArray.length > 0 && removeElement !== -1) {
+        resultDisplay.innerHTML = JSON.stringify(numberArray.slice(0, removeElementV1(numberArray, +removeElement)));
+    } else if (numberArray.length > 0) {
+        resultDisplay.innerHTML = `Enter a Value to Remove`;
+    } else if (removeElement !== -1) {
+        resultDisplay.innerHTML = `Select an Array`;
+    }
+}
+
+function selectArray(num) {
+    if (num == 0) {
+        numberArray = [3,2,2,3];
+    } else if (num == 1) {
+        numberArray = [3,2,4,6,5,4,8,9,6,3,2,3,6,4,6,7,8,3];
+    } else if (num == 2) {
+        numberArray = [0,1,2,2,3,0,4,2];
+    }
+
+    initialArrayDisplay.innerHTML = JSON.stringify(numberArray);
+    displayResult();
+}
+
+function setRemoveElement(num) {
+    if (num >= 0) {
+        removeElement = num;
+    }
+
+    removedValueDisplay.innerHTML = removeElement;
+    displayResult();
+}
+
+function loadEventListeners() {
+    for (const radio of radioOptions) {
+        radio.addEventListener('change', () => {
+            selectArray(radio.value);
+        })
+    }
+    numberInput.addEventListener('change', () => {
+        setRemoveElement(numberInput.value);
+    })
+}
+
+loadEventListeners();

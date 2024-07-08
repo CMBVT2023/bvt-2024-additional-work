@@ -1,0 +1,74 @@
+:root {
+    /* Declares color pallet for the entire page */
+    --main-background: #D4D6B9;
+    --secondary-background: #66717E;
+    --text-color: #383B53;
+    --input-background-color: #D1CAA1;
+    --input-text-color: #32213A;
+}
+
+html {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: var(--main-background);
+    color: var(--text-color);
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 99vh;
+}
+
+#example-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#array-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-input {
+    width: 25%;
+}
+
+.input-colors {
+    background-color: var(--input-background-color);
+    color: var(--input-text-color);
+}
+
+.input-colors:hover {
+    background-color: var(--input-text-color);
+    color: var(--input-background-color);
+}
+
+.input-colors:focus {
+    outline: var(--input-background-color) solid 1px;
+    background-color: var(--input-text-color);
+    color: var(--input-background-color);
+}
+
+.input-colors:focus::placeholder, .input-colors:hover::placeholder {
+    color: var(--input-background-color);
+}
+
+input[type="radio"] {
+    accent-color: var(--input-text-color);
+}
+
+#notes-container {
+    border: var(--text-color) solid 5px;
+    background-color: var(--secondary-background);
+    padding: 5px;
+    margin-bottom: 5px;
+}

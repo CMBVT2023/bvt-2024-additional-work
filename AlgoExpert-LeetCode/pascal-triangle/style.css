@@ -1,0 +1,81 @@
+:root {
+    /* Declares color pallet for the entire page */
+    --main-background: #6290C8;
+    --secondary-background: #376996;
+    --text-color: #1D3461;
+    --input-background-color: #829CBC;
+    --input-text-color: #1F487E;
+}
+
+html {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: var(--main-background);
+    color: var(--text-color);
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 99vh;
+}
+
+#example-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#array-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-input {
+    width: 25%;
+}
+
+.input-colors {
+    background-color: var(--input-background-color);
+    color: var(--input-text-color);
+}
+
+.input-colors:hover {
+    background-color: var(--input-text-color);
+    color: var(--input-background-color);
+}
+
+.input-colors:focus {
+    outline: var(--input-background-color) solid 1px;
+    background-color: var(--input-text-color);
+    color: var(--input-background-color);
+}
+
+.input-colors:focus::placeholder, .input-colors:hover::placeholder {
+    color: var(--input-background-color);
+}
+
+input[type="radio"] {
+    accent-color: var(--input-text-color);
+}
+
+#result-display {
+    text-align: center;
+    max-height: 250px;
+    height: 250px;
+    overflow-y: auto;
+}
+
+#notes-container {
+    border: var(--text-color) solid 5px;
+    background-color: var(--secondary-background);
+    padding: 5px;
+    margin-bottom: 5px;
+}

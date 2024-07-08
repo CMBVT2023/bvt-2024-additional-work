@@ -18,3 +18,39 @@ function removedDuplicatesV1(nums) {
 
     return unique;
 };
+
+// Initializes all html elements from the webpage.
+const initialDisplay = document.getElementById('initial-display');
+const resultDisplay = document.getElementById('result-display');
+const radioOptions = document.getElementById('radio-options').querySelectorAll('input');
+
+// Displays the result of the algorithm.
+function displayResult(num) {
+    // Initializes a variable to store an array.
+    let numArray = [];
+    // Checks the value of the passed in number and the associated array is set to the numArray variable.
+    if (num == 0) {
+        numArray = [1,1,2];
+    } else if (num == 1) {
+        numArray = [0,0,1,1,1,2,2,3,3,4];
+    } else if (num == 2) {
+        numArray = [0,1,2,4,4,4,5,6,7,7,7,7,8,8,8,9,16,16,20,20];
+    }
+
+    // Displays the associated array in the initialDisplay element.
+    initialDisplay.innerHTML = JSON.stringify(numArray);
+
+    // Displays the result of the algorithm in the resultDisplay element.
+    resultDisplay.innerHTML = JSON.stringify(numArray.slice(0, removedDuplicatesV1(numArray)));
+}
+
+// Loads all default eventListeners for the webpage.
+function loadEventListeners() {
+    for (const radio of radioOptions) {
+        radio.addEventListener('change', () => {
+            displayResult(radio.value);
+        })
+    }
+}
+
+loadEventListeners();

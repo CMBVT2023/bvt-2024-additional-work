@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+    <title>Pascal's Triangle II LeetCode Problem</title>
+</head>
+<body>
+    
+    <div id="main-container">
+        <div id="title-container">
+            <h1>Leet Code Problem:</h1>
+            <h2>119. Pascal's Triangle II</h2>
+        </div>
+    
+        <div id="example-container">
+            <h3>Pascal's Triangle II</h3>
+            <h3>Result:</h3>
+            <h5 id="result-display"></h5>
+
+            <!-- Text Input Template -->
+            <input class="user-input input-colors" type="number" min="0" max="33" placeholder="PlaceHolder..." id="number-input">
+        </div>
+
+        <div id="notes-container">
+            <h2>TakeAway:</h2>
+            <p>
+                &emsp; Biggest takeaway, by far, it has to be that I need to think a bit more clearly when copying parts of code from my previous projects or creations. At first, I thought since this used 0-indexing I
+                needed to change the way the rowNumber is calculated since my previous pascal triangle wasn't 0-index, but thinking back to it now it was, even though it wasn't specifically stated. Using an array,
+                instantly means that the problem is 0-index based and that is something I didn't consider and it caused me to get confused and to waste a ton of time fixing and changing things unnecessarily.
+                Also, I found that sometimes simply because another solution worked using a certain technique or solution it do not strictly translate to other problems. In this case, recursion used too much memory
+                and this whole problem was based on reducing the amount of memory needed while also increasing the speed of the method, so using a while or for loop in this cases presented a faster and less memory
+                intensive solution.
+            </p>
+        </div>
+    </div>
+
+<script src="./app.js"></script>
+</body>
+</html>

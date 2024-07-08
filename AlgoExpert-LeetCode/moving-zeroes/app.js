@@ -30,6 +30,8 @@ function movingZeroesV2(nums) {
             switchingPosition++;
         }
     }
+
+    return nums;
 };
 
 
@@ -40,3 +42,42 @@ function movingZeroesV2(nums) {
 // more time and thinking, I don't believe that my first method could ever be improved since initializing the switching position outside of the if statement would causes issues when moving the zeros, ie 
 // the zeros could be moved back to the front under certain circumstances. Overall, instead of wasting time and attempting to stick with my original method, I should have tried to find a way to swap out
 // what I did or see if I could transform it to a linear equation in some way, since even if said way required me to iterate through the entire array, it would have still been an improvement.
+
+// Initializes all html elements from the webpage.
+const initialDisplay = document.getElementById('initial-display');
+const resultDisplay = document.getElementById('result-display');
+const radioOptions = document.getElementById('radio-options').querySelectorAll('input');
+
+// Displays the result of the algorithm
+function displayResult(num) {
+    // Initializes an array variable.
+    let numArray = [];
+    // Checks the value of the passed in number and sets its associated array equal to the variable.
+    if (num == 0) {
+        numArray =  [0,1,0,3,12];
+    } else if (num == 1) {
+        numArray =  [0];
+    } else if (num == 2) {
+        numArray =  [0,0,6,5,3,9,3,4,0,0,2,4,0,5,3,0];
+    } else if (num == 3) {
+        numArray =  [4,0,9,4,0,6,0,8,6,0,8,6,9,0];
+    }
+
+    // Displays the numArray in the initial display element.
+    initialDisplay.innerHTML = JSON.stringify(numArray);
+
+    // Displays the result returned by the algorithm in the result display element 
+    resultDisplay.innerHTML = JSON.stringify(movingZeroesV2(numArray));
+}
+
+// Loads all of the default eventListeners for the page.
+function loadEventListeners() {
+    // Initializes an eventListener to all of the radio buttons.
+    for (const radio of radioOptions) {
+        radio.addEventListener('change', () => {
+            displayResult(radio.value);
+        })
+    }
+}
+
+loadEventListeners()

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+    <title>Moving Zeroes LeetCode Problem</title>
+</head>
+<body>
+    
+    <div id="main-container">
+        <div id="title-container">
+            <h1>Leet Code Problem:</h1>
+            <h2>283. Moving Zeroes</h2>
+        </div>
+    
+        <div id="example-container">
+            <h3>Moving Zeroes</h3>
+            <h3>Initial Array: <span id="initial-display"></span></h3>
+
+            <h3>Result: <span id="result-display"></span></h3>
+
+            <!-- Radio Inputs Template -->
+            <div id="radio-options">
+                <div class="label-input-container user-input">
+                    <input type="radio" name="radio-option" id="option-1" value="0"><label for="option-1">[0,1,0,3,12]</label>
+                </div>
+                <div class="label-input-container user-input">
+                    <input type="radio" name="radio-option" id="option-2" value="1"><label for="option-2">[0]</label>
+                </div>
+                <div class="label-input-container user-input">
+                    <input type="radio" name="radio-option" id="option-3" value="2"><label for="option-3">[0,0,6,5,3,9,3,4,0,0,2,4,0,5,3,0]</label>
+                </div>
+                <div class="label-input-container user-input">
+                    <input type="radio" name="radio-option" id="option-4" value="3"><label for="option-4">[4,0,9,4,0,6,0,8,6,0,8,6,9,0]</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="notes-container">
+            <h2>TakeAway:</h2>
+            <p>
+                &emsp; Biggest Takeaway, trying to over optimize things is a problem. In my attempt to improve my first method, rather than trying to change my approach or see if I could remove the while loop, I instead 
+                focused on trying to find a way to count the number of zeros and to see when all of them are past the last non-zero value. Yeah, writing this out really shows me how wrong my methodology was. I focused
+                too much on improving the wrong thing and it caused me to overlook the most important thing, the base code. Trying to optimize my approach resulted in me adding loops to ensure that all things worked,
+                which kept extending the time, even though the V2 method always runs through the entire array, simply because it does so only once makes it more efficient than my method could even be. Even after some
+                more time and thinking, I don't believe that my first method could ever be improved since initializing the switching position outside of the if statement would causes issues when moving the zeros, ie 
+                the zeros could be moved back to the front under certain circumstances. Overall, instead of wasting time and attempting to stick with my original method, I should have tried to find a way to swap out
+                what I did or see if I could transform it to a linear equation in some way, since even if said way required me to iterate through the entire array, it would have still been an improvement.
+            </p>
+        </div>
+    </div>
+
+<script src="./app.js"></script>
+</body>
+</html>

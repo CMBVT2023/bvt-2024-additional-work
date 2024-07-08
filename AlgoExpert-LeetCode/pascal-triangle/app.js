@@ -102,3 +102,32 @@ function pascalTriangleV3(numRows) {
 // I need to be more open minded and willing to give other methods a try, even if I do solve something, then I should try and see if there is a better or more straight forward method. By far,
 // these problems are showing me that there are multiple ways to solve an issue but the most important thing to do is to find a way to initially solve it and try and make it better. Never accept or
 // use the first method that works, there is almost always a way to improve things, but still make sure that I don't go beyond the point of diminishing return.
+
+// Initializes the html elements from the webpage.
+const resultDisplay = document.getElementById('result-display');
+const userInput = document.getElementById('number-input');
+
+// Displays the algorithm's result
+function displayResult(num) {
+    // Initializes a variable to store the result of the algorithm.
+    let triangle = pascalTriangleV3(num);
+
+    // Clears the resultDisplay element.
+    resultDisplay.innerHTML = ``;
+    
+    // Iterates through the triangle array and displays each row on a new line in the resultDisplay.
+    for (let i = 0; i < triangle.length; i++) {
+        resultDisplay.innerHTML += `${triangle[i]} <br>`;
+    }
+
+}
+
+// Initializes the default event listeners for the webpage.
+function loadEventListeners() {
+    // Initializes an eventListener for the userInput element.
+    userInput.addEventListener('change', () => {
+        displayResult(userInput.value);
+    })
+}
+
+loadEventListeners();

@@ -13,7 +13,7 @@ function productOfArrayV1(nums) {
     let currentPosition = nums.length - 1;
     let finalArr = [];
 
-    // Loops until the finalArr is equal in size ot the nums array.
+    // Loops until the finalArr is equal in size to the nums array.
     while (finalArr.length !== nums.length) {
         // Takes the number at the beginning of the nums array and temporarily removes it.
         let currentNum = nums.shift();
@@ -78,4 +78,44 @@ function productOfArrayV2(nums) {
 };
 
 // Biggest takeaway, I need to focus more on learning the big O calculations. Look up more videos on it as it is starting to become more useful to know what each refers to. There is a difference between
-// nested for loops and having two for loops it seems like, but as I said I need to research this way more to better understand.
+// nested for loops and having two for loops it seems like, but as I said I need to research this way more to better understand. In terms of the actual problem, I am now realizing how big of a difference there
+// is between running multiple for loops versus running nested for loops. These problems are very helpful in highlighting how much of a difference there is with linear and quadratic time complexity equations.
+// Knowing this has changed my approach going forward since I am now hesitant to use nested for loops unless necessary. Also, it has changed my view of running multiple for loops separately as I thought that
+// if nested for loops are too inefficient, then so are multiple for loops in general, I now realize that I am wrong. Still, problems like these have been very helpful in shifting my focus from getting
+// things to simply work, to instead try and make things work in a optimal way and to treat it like every algorithm I create would be used in the real world, making it useful to find ways to make it quicker or 
+// use less memory.
+
+// Initializes all html elements from the webpage.
+const initialDisplay = document.getElementById('initial-display');
+const resultDisplay = document.getElementById('result-display');
+const radioOptions = document.getElementById('radio-options').querySelectorAll('input');
+
+// Displays the result of the algorithm.
+function displayResult(num) {
+    // Initializes a variable to store an array.
+    let numArray = [];
+    // Checks the value of the passed in number and the associated array is set to the numArray variable.
+    if (num == 0) {
+        numArray = [1,2,3,4];
+    } else if (num == 1) {
+        numArray = [-1,1,0,-3,3];
+    } else if (num == 2) {
+        numArray = [12,59,2,3,5,4,8,9,2,18,20];
+    }
+
+    initialDisplay.innerHTML = JSON.stringify(numArray);
+
+    resultDisplay.innerHTML = JSON.stringify(productOfArrayV2(numArray));
+
+}
+
+// Loads all default eventListeners for the webpage.
+function loadEventListeners() {
+    for (const radio of radioOptions) {
+        radio.addEventListener('change', () => {
+            displayResult(radio.value);
+        })
+    }
+}
+
+loadEventListeners();
