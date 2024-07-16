@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Tutorial Code Along: Ten Steps to Mastering the Fetch API</title>
+</head>
+<body>
+
+    <div id="main-container">
+        <h1><a href="https://www.youtube.com/watch?v=2sQ9xiEAXNo&ab_channel=SteveGriffith-Prof3ssorSt3v3">Ten Steps to Mastering the Fetch API</a></h1>
+
+        <ol>
+            <li>Basic Fetch Requests</li>
+            <li>Async and Await</li>
+            <li>URL Request</li>
+            <li>Responses</li>
+            <li>Generate</li>
+            <li>Authentication</li>
+            <li>Uploading Data</li>
+            <li>Cross Origin Resource Sharing (CORS)</li>
+            <li>Dealing with Multiple Fetch Calls</li>
+            <li>Aborting Fetch Calls</li>
+            <li>Bonus: Measuring Download Progress of a Fetch</li>
+        </ol>
+
+        <div id="part-1" class="notes">
+            <h3>Additional Notes:</h3>
+            <ul>
+                <li>
+                    HTTP Status Codes:
+                    <ul>
+                        <li>100: intermediate status</li>
+                        <li>200: everything worked</li>
+                        <li>300: a redirect occurred</li>
+                        <li>400: the request was not authorized or authentication failed</li>
+                        <li>404: request did not point to a valid URL</li>
+                        <li>500: server side errors</li>
+                    </ul>
+                </li>
+                <li>
+                    If you are chaining then handlers for a promise, the previous then handler must return a promise via a return argument in order for the next then handler to delay its code's execution. <br>
+                    Otherwise there is no delay between both .then handlers.
+                    Example: <br>
+                    fetch(url)<br>
+                    .then("This then handler would need to return a promise in order for the next then handler to execute only when this one is finished or when the promise is returned.")<br>
+                    .then("If the previous then handler never returns a promise, then this code is executed right after the previous then handler without a delay.")
+                </li>
+            </ul>
+            <h3>Takeaway</h3>
+            <p>
+                This mainly shows why fetch and promises are necessary when getting data from an outside source. There is no way to know how long it will take for a client to access data from a separate 
+                server or for a fetch request to access a file from another site. Using a promise allows the webpage's main code to continue executing without having to wait for each fetch request to 
+                complete before moving on with the code execution. Also, this example shows the importance of error handling and that no matter watch, a catch handler should always be present when using then handlers
+                to help troubleshoot and to log errors that might occur, which is important especially when accessing outside resources, servers, or other clients since problems other than code gets introduced.
+            </p> 
+        </div>
+    </div>
+    
+<script src="./app.js" type="module"></script>
+</body>
+</html>
