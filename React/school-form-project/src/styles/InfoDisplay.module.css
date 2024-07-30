@@ -10,4 +10,11 @@
     overflow-y: auto; 
     overflow-x: hidden;
     height: 100vh;
+    box-shadow: 0px 0px 10px 10px #e2ffcd;
+    background-color: #A9FDAC;
+    scrollbar-color: #A9FDAC #6C464E;
+}
+
+#titleStyle {
+    margin-left: 35px;
 }

@@ -15,15 +15,32 @@ export class StudentStorage {
         this.setStudentList(list);
     }
 
-    static checkStudent(id) {
+    static findStudent(id) {
         let list = this.getStudentList();
 
-        for (const item of list) {
-            if (item.studentID == id) {
-                return false;
+        for (const index in list) {
+            if (list[index].studentID == id) {
+                return index;
             }
         }
+    }
 
-        return true;
-    } 
+    static checkStudent(id) {
+        let exists = this.findStudent(id);
+
+        if (exists >= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    static removeStudent(id) {
+        let list = this.getStudentList();
+        let index = this.findStudent(id);
+
+        list.splice(index, 1);
+
+        this.setStudentList(list);
+    }
 }

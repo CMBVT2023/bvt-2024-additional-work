@@ -32,6 +32,7 @@ function DisplayStudent(props) {
                             title='Student ID'
                             variable={student.studentID}
                         />
+                        <button onClick={() => props.remove(student.studentID)}>Delete Student</button>
                     </li>
                 ))}
 
