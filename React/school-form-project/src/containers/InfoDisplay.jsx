@@ -1,11 +1,10 @@
 import React from "react";
 import StudentForm from "./StudentForm";
+import DisplayStudent from "../components/DisplayStudent";
+import { StudentStorage } from '../modules/StudentStorage';
+import styles from '../styles/InfoDisplay.module.css'
 
 // ToDo:
-// Create a module to allow easier creation of new inputs and their display,
-// // Instead of having hard coded user inputs and display inputs, create a module with an array containing all of the required inputs
-// // and map through said array and create the respective inputs and their displays.
-
 // Add a way to save to localStore by submitting the form.
 // Display all saved students in localStorage to their own display container.
 // Add more user inputs.
@@ -13,8 +12,20 @@ import StudentForm from "./StudentForm";
 // Design the UI.
 
 function InfoDisplay() {
+    const [ studentList, setStudentList ] = React.useState(StudentStorage.getStudentList);
+
+    const updateList = () => {
+        setStudentList(StudentStorage.getStudentList);
+        console.log(studentList)
+    }
+
     return (
-        <StudentForm />
+        <div id={styles.mainContainer}>
+            <StudentForm triggerUpdate={updateList}/>
+            <div className={styles.studentsDisplay}>
+                <DisplayStudent students={studentList}/>    
+            </div>
+        </div>
     )
 }
 

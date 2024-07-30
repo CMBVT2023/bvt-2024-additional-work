@@ -15,6 +15,7 @@ function UserInput(props) {
                 onChange={handleChange}
                 value={props.variable}
                 type={props.boxType}
+                required={true}
                 />
         </div>
     )

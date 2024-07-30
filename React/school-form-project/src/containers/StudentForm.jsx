@@ -1,7 +1,9 @@
 import React from 'react';
 import UserInput from '../components/UserInput';
 import DisplayValue from "../components/DisplayValue";
+import { StudentObj } from '../modules/StudentObject';
 import styles from '../styles/StudentForm.module.css';
+import { StudentStorage } from '../modules/StudentStorage';
 
 // First name
 // Last name
@@ -10,7 +12,7 @@ import styles from '../styles/StudentForm.module.css';
 // Homeroom class number
 // Student ID
 
-function StudentForm() {
+function StudentForm({ triggerUpdate }) {
     const [ firstName, setFirstName ] = React.useState('');
     const [ lastName, setLastName ] = React.useState('');
     const [ age, setAge ] = React.useState('');
@@ -18,9 +20,38 @@ function StudentForm() {
     const [ classNumber, setClassNumber ] = React.useState('');
     const [ studentID, setStudentID ] = React.useState('');
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        let newStudentObj = new StudentObj(firstName, 
+                                            lastName, 
+                                            age, 
+                                            address, 
+                                            classNumber, 
+                                            studentID);
+
+        if (StudentStorage.checkStudent(newStudentObj.studentID)) {
+            StudentStorage.addNewStudent(newStudentObj);
+            triggerUpdate();
+        } else {
+            alert('Student ID already assigned.')
+        }
+    }
+
+    const clearInputs = () => {
+        setFirstName('');
+        setLastName('');
+        setAge('');
+        setAddress('');
+        setClassNumber('');
+        setStudentID('');
+    }
+
     return (
-        <div id={styles.mainContainer}>
-            <div className={styles.userInputsDiv}>
+        <div id={styles.formContainer}>
+            <form 
+             className={styles.userInputsDiv}
+             onSubmit={handleSubmit} >
                 <UserInput
                     title='First Name'
                     setVariable={setFirstName}
@@ -57,7 +88,12 @@ function StudentForm() {
                     variable={studentID}
                     boxType={'number'}
                     />
-            </div>
+
+                <div>
+                    <input type='submit'/>
+                    <input type='button' value={'Clear All'} onClick={clearInputs}/>
+                </div>
+            </form>
 
             <div className={styles.valueDisplayDiv}>
                 <DisplayValue 

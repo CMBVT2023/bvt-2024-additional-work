@@ -1,0 +1,13 @@
+#mainContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+
+.studentsDisplay {
+    width: 50vw;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    height: 100vh;
+}

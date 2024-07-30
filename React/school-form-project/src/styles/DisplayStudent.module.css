@@ -1,0 +1,10 @@
+.studentItem {
+    width: 25vw;
+    height: 75vh;
+}
+
+.studentList {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50vw;
+}
