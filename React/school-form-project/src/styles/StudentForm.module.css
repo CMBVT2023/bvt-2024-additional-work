@@ -1,0 +1,30 @@
+html {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+#mainContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}
+
+.valueDisplayDiv, .userInputsDiv {
+    height: 500px;
+    color: red;
+    background-color: bisque;
+    width: 400px;
+}
+
+.userInputsDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.valueDisplayDiv {
+    padding: 10px;
+}

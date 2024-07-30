@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import StudentForm from './containers/FormInputs'
+import InfoDisplay from './containers/InfoDisplay.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <StudentForm />
+    <InfoDisplay />
   </React.StrictMode>,
 )

@@ -1,0 +1,13 @@
+.divStyle {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.labelStyle {
+    margin-right: 12px;
+}
+
+.inputStyle {
+    justify-self: end;
+}

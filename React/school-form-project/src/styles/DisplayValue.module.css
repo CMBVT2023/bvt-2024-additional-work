@@ -1,0 +1,13 @@
+.titleStyle {
+    margin-right: 6px;
+}
+
+.variableStyle {
+    font-size: 18px;
+}
+
+.divStyle {
+    display: flex;
+    align-items: center;
+    height: 75px;
+}
