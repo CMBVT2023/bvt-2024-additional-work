@@ -1,0 +1,50 @@
+table {
+    border: 4px solid black;
+}
+
+tr {
+    border: 4px solid black;
+}
+
+td {
+    border: 4px solid black;
+}
+
+.divStyle {
+    background-color: aliceblue;
+    color: blue;
+}
+
+
+.divChild {
+    background-color: blanchedalmond;
+    color: brown;
+}
+
+.divGrandChild {
+    background-color: burlywood;
+    color: chartreuse;
+}
+
+.divStyle > .divChild {
+    font-size: 10px;
+}
+
+.divStyle > .divChild > .divGrandChild {
+    font-size: 24px;
+}
+
+/* .divStyle > .divChild ~ div {
+    text-align: center;
+} */
+
+.divStyle > .divChild:nth-child(even) {
+    text-align: center;
+}
+
+.overFlowing {
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
