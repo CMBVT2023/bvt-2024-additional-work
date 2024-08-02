@@ -51,10 +51,10 @@ access-control-allow-method
 Bonus: Measuring Download progress
 **/
 
-import { getData } from './js/1-basic-fetch.js';
+// import { getData } from './js/1-basic-fetch.js';
 // import { getData } from './js/2-try-async.js';
-// import { getData } from './3-url-request.js';
-// import { getData } from './4-response.js';
+// import { getData } from './js/3-url-request.js';
+import { getData } from './js/4-response.js';
 // import { getData } from './5-generate.js';
 // import { getData } from './6-auth.js';
 // import { setData } from './7-upload.js';

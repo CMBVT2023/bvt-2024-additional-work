@@ -8,9 +8,11 @@
 <body>
 
     <div id="main-container">
+        <img src="./assets/pexels-photo-1525041.jpeg" id="pic">
+
         <h1><a href="https://www.youtube.com/watch?v=2sQ9xiEAXNo&ab_channel=SteveGriffith-Prof3ssorSt3v3">Ten Steps to Mastering the Fetch API</a></h1>
 
-        <h2>Left off on Part 2 of the video at 17:15.</h2>
+        <h2>Left off on part 5 in the video at 45:30.</h2>
 
         <ol>
             <li>Basic Fetch Requests</li>
@@ -27,7 +29,7 @@
         </ol>
 
         <div id="part-1" class="notes">
-            <h3>Additional Notes:</h3>
+            <h3>Part 1 - Additional Notes:</h3>
             <ul>
                 <li>
                     HTTP Status Codes:
@@ -55,6 +57,94 @@
                 server or for a fetch request to access a file from another site. Using a promise allows the webpage's main code to continue executing without having to wait for each fetch request to 
                 complete before moving on with the code execution. Also, this example shows the importance of error handling and that no matter watch, a catch handler should always be present when using then handlers
                 to help troubleshoot and to log errors that might occur, which is important especially when accessing outside resources, servers, or other clients since problems other than code gets introduced.
+            </p> 
+        </div>
+
+        <div id="part-2" class="notes">
+            <h3>Part 2 - Additional Notes:</h3>
+            <ul>
+                <li>
+                    Async and Await allow the same functionality as .then when using fetch <br>
+                    While it does the same thing it actually pauses code execution when a fetch statement is reached, and only when it
+                    the fetch is completed will it then assign the results to a variable or continue with executing code.
+                </li>
+                <li>
+                    One down side to this method is that you still need to implement some kind of error handling in the form or a try and catch statement.
+                </li>
+               
+            <h3>Takeaway</h3>
+            <p>
+                This mainly showed a different way to write asynchronous fetch statement. While the .then chaining method works, this is just an alternate <br>
+                way to handle fetch statements. Still, even though the base code is easier to write, you still need to take into account errors that can occur by <br>
+                implementing try and catch statements and you have to remember to implement any these fetch statements in a specific async function, otherwise the await <br>
+                key word will not be useable.
+            </p> 
+        </div>
+
+        <div id="part-3" class="notes">
+            <h3>Part 3 - Additional Notes:</h3>
+            <ul>
+                <li>
+                    URL is a new object constructor that allows you to create a url based on a string, in the example it will generate a url and point it towards the
+                    assets folder and then to the local-sample.json, the host part of the url uses the local server ip address, which is your computer's loopback address and the port is
+                    the default port that live server uses. 
+                </li>
+                <li>
+                    Request is another new object constructor that is introduced and it allows you to access a url and do so specifically, it is used in tandem with fetch.The additional options of how you want the data to be
+                    accessed and handled by the browser allows for more control and better handling of the data being pulled from the request, such as caching or only requesting to get data from the server and not send any to it.
+                </li>
+                <li>
+                    <h3>All Cache options when the http cache method.</h3>
+                    <ul>
+                        <li>`default`: cache first, server request if stale, update cache if newer</li>
+                        <li>`reload`: always go to server AND update the cache</li>
+                        <li>`no-store`: always go to server but do not update the cache</li>
+                        <li>`no-cache`: make a conditional request to server and compare, update cache and use latest</li>
+                        <li>`force-cache`: only makes request if there is no HTTP Cache file</li>
+                        <li>`only-if-cache`: from cache or 504 gateway timeout error</li>
+                    </ul>
+                </li>
+                <li>
+                    When creating a request, an object can be passed in as the second parameter that specifies the various options such as the method to use, the cache type, and headers that the user can create.
+                </li>
+               
+            <h3>Takeaway</h3>
+            <p>
+                There are two new object constructors introduced in this example, the request and url object. Up until this point, the way that the fetch requests have access webpages is via entering the url through a string,
+                but by passing that string through a url constructor first, it provides more options when accessing the url, such as pulling the origin, host, and port, which could be helpful for later use. The request constructor
+                provides even more options in the form of how the browser will handle the request to the url, such as if any info is saved to the webpage's cache on the user's computer or if information is only pulled from the webpage 
+                instead of sending any info too.
+            </p> 
+        </div>
+
+        <div id="part-4" class="notes">
+            <h3>Part 4 - Additional Notes:</h3>
+            <ul>
+                <li>
+                    A response object is a container that has a file inside of it, the main body of the response object is the file.
+                </li>
+                <li>
+                    HTTP Request and HTTP Responses have two parts, a head and a body, the header has the various options and the settings of the response or Request
+                    the body is the actual information or the file information, it can be empty or can have something that was pulled or pushed to the webpage.
+                </li>
+                <li>
+                    There are three properties inside of the settings or properties for the response's object parameter, the status code to signify the status, if its good or bad, statusText to describe the status, and headers, which can be custom but they have to start with the 
+                    letter x if it is custom, and there are some you can change and other you cannot alter, the browser can only do so.
+                </li>
+                <li>
+                    For the headers that you are allowed to access from responses, like is this example the content-type and content-length, you use the .get(headerName) on the header property.
+                    Example, to get the size of the response object you would type response.headers.get('content-length'). Response is the variable name for the response created from the request constructor,
+                    headers if the property name that stores that headers object. and .get is the method used to retrieve the value of the passed in header name.
+                </li>
+                <li>
+                    .blob() is used in place of .json() if you are fetching an image or video as it stands for binary large object. Attempting to log a blob() result will just specify the object type and size.
+                    It can displayed on the html page by inserting the blob creating a url via pointing the url to the place that the blob is stored in memory using createObjectURL() method on the URL constructor object.
+                    Example, URL.createObjectURL(blob) will create a url that points to where a variable that stores the blob data from a fetch request is in the webpage's memory.
+                </li>
+            <h3>Takeaway</h3>
+            <p>
+                The response object constructor can be used in tandum with the request object to provide further details to the web browser about the information that a fetch reqeuest pulls. Rather than just pulling an object without having knowledge of its file type or size, response and request can provide details about the file they contain within their body via properties accessible through their head.
+                Also, this tutorial showed the difference and usecases for a blob instead of json when pulling data, basically any time you are pulling an image, video, or audio file, blob is used and not json. Json should only be for text.
             </p> 
         </div>
     </div>
