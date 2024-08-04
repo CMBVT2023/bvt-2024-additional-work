@@ -1,0 +1,38 @@
+Start with installing the JSON server npm packet
+    npm install -g json-server
+        -g installs it globally so it doesn't matter what directory you are running the command in.
+
+Afterwards, create a db.json file, db stands for database, and fill it with some data.
+
+    Example of a JSON file,
+    -Entire thing is within a single javascript object
+    {
+        - posts, comments, and profile are called resources and their values are arrays of
+            various information, and each item in the array needs to have a unique value,
+                such as the id property in each object.
+        - All data has to use "" and not single since this is a json file.
+    "posts": [
+        { "id": "1", "title": "a title", "views": 100 },
+        { "id": "2", "title": "another title", "views": 200 }
+    ],
+    "comments": [
+        { "id": "1", "text": "a comment about post 1", "postId": "1" },
+        { "id": "2", "text": "another comment about post 1", "postId": "1" }
+    ],
+    "profile": {
+        "name": "typicode"
+    }
+    }
+
+A good way to go about storing these json files is to store them in a data folder in the root of your
+project directory since it will allow for easier testing later on.
+
+Once you are ready to run the server, open a new terminal and navigate to the project's directory first
+then run the json-server command.
+
+    json-server --watch ./data/db.json --port 8000
+
+    --watch will trigger it to watch the file, although it seems like it is no longer necessary to include this,
+    then you list the directory path to the .json file, relative to the current directory you are in,
+    and while not necessary, specify the port since it might conflict with live server or the react
+    server's port by default.
