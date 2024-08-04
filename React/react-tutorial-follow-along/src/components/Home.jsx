@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useDebugValue } from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
@@ -8,22 +8,25 @@ const Home = () => {
         { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'Mario', id: 3 }
       ]);
 
+    const [name, setName] = useState('Mario');
+      
       const handleDelete = (id) => {
         const newBlogs = blogs.filter(item => item.id !== id);
         setBlogs(newBlogs);
       }
 
       useEffect(() => {
-        console.log('use effect ran')
-        console.log(blogs)
-      })
+        console.log('use effect ran');
+        console.log(name);
+      }, [name])
 
       
 
     return ( 
         <div className="home">
             <BlogList blogs={blogs} title='All Blogs' handleDelete={handleDelete} />
-            <BlogList blogs={blogs.filter(item => item.author == 'Mario')} title="Mario's Blogs" handleDelete={handleDelete} />
+            <button onClick={() => setName('Luigi')}>Change Name</button>
+            <p>{name}</p>
         </div>
      );
 }
