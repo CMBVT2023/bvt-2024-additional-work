@@ -16,9 +16,8 @@ const Home = () => {
       }
 
       useEffect(() => {
-        console.log('use effect ran');
-        console.log(name);
-      }, [name])
+        // let response = fetch('https://github.com/iamshaunjp/Complete-React-Tutorial/blob/lesson-16/dojo-blog/data/db.json' )
+      }, [])
 
       
 
