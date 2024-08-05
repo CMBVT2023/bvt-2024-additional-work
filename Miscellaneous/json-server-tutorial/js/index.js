@@ -25,7 +25,13 @@
 const container = document.querySelector('.blogs')
 
 const renderPosts = async () => {
-    let uri = 'http://localhost:8000/posts';
+    // // This is the default url without sorting the information.
+    // let uri = 'http://localhost:8000/posts';
+
+    // This is the url for sorting items based on one of the properties '?_sort=' is appended to the url and then it is followed by the property you want to sort.
+    // in this case it is likes.
+    // // _order is no longer a thing, it is now replaced by appending a '-' to the front of the property to be sorted.
+    let uri = new URL('http://localhost:8000/posts?_sort=-likes');
 
     const res = await fetch(uri);
     const posts = await res.json();
