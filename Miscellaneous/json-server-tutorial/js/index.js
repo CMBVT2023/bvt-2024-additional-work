@@ -22,16 +22,26 @@
 
 // javascript for index.html
 
-const container = document.querySelector('.blogs')
+const container = document.querySelector('.blogs');
+const searchForm = document.querySelector('.search')
 
-const renderPosts = async () => {
+const renderPosts = async (searchTerm) => {
     // // This is the default url without sorting the information.
     // let uri = 'http://localhost:8000/posts';
 
     // This is the url for sorting items based on one of the properties '?_sort=' is appended to the url and then it is followed by the property you want to sort.
     // in this case it is likes.
-    // // _order is no longer a thing, it is now replaced by appending a '-' to the front of the property to be sorted.
-    let uri = new URL('http://localhost:8000/posts?_sort=-likes');
+
+    // In the alpha version order was no longer a thing, it is now replaced by appending a '-' to the front of the property to be sorted
+    // // I switched back to version 0 since alpha version was missing a lot of the features.
+    let uri = new URL('http://localhost:8000/posts?_sort=likes&_order=desc');
+    
+    // If searchTerm has a value then the code within the if statement will execute, else if it is undefined like on the initial page load, then it will not execute.
+    if (searchTerm) {
+        // 'q=' specifies to the json-server to retrieve any info that matches to the passed in term, behaves similarly to querySelector.
+        uri += `&q=${searchTerm}`
+        console.log(uri)
+    }
 
     const res = await fetch(uri);
     const posts = await res.json();
@@ -51,5 +61,10 @@ const renderPosts = async () => {
     container.innerHTML = template;
 
 }
+
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    renderPosts(searchForm.term.value.trim())
+})
 
 window.addEventListener('DOMContentLoaded', () => renderPosts())

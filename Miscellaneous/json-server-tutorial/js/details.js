@@ -6,9 +6,13 @@ const id = new URLSearchParams(window.location.search).get('id');
 const Name = new URLSearchParams(window.location.search).get('name');
 const container = document.querySelector('.details');
 
+let jsonServer = new URL('http://localhost:8000/posts/')
+
+const deleteBtn = document.querySelector('.delete')
+
 const renderDetails = async () => {
     // This specifies to the json server, what post we specifically want to fetch, in this case it will return the post with the id value equal to the id parameter in the url.
-    const res = await fetch('http://localhost:8000/posts/' + id)
+    const res = await fetch(jsonServer + id)
     const post = await res.json();
 
     const template = `
@@ -18,5 +22,12 @@ const renderDetails = async () => {
 
     container.innerHTML = template
 }
+
+deleteBtn.addEventListener('click', async (e) => {
+    const res = await fetch(jsonServer + id, {
+        method: 'DELETE'
+    })
+    window.location.replace('./index.html')
+})
 
 window.addEventListener('DOMContentLoaded', () => renderDetails())

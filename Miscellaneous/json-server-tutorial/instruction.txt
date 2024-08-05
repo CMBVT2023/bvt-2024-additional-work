@@ -1,5 +1,7 @@
+MAKE SURE YOU INSTALL VERSION 0.17.4, while the newest alpha version works, it is missing a majority of features at the moment like order and q when querying json files.
+
 Start with installing the JSON server npm packet
-    npm install -g json-server
+    npm install -g json-server@0.17.4
         -g installs it globally so it doesn't matter what directory you are running the command in.
 
 Afterwards, create a db.json file, db stands for database, and fill it with some data.
