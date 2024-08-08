@@ -11,8 +11,15 @@
         <img src="./assets/pexels-photo-1525041.jpeg" id="pic">
 
         <h1><a href="https://www.youtube.com/watch?v=2sQ9xiEAXNo&ab_channel=SteveGriffith-Prof3ssorSt3v3">Ten Steps to Mastering the Fetch API</a></h1>
+        <h2 id="example-header"></h2>
+        <ul id="example-list">
+            <!-- <li data-uid="">
+                <p>First Name: </p>
+                <p>Last Name: </p>
+            </li> -->
+        </ul>
 
-        <h2>Left off on part 5 in the video at 45:30.</h2>
+        <h2>Left off on part 6 of the video at 58:35.</h2>
 
         <ol>
             <li>Basic Fetch Requests</li>
@@ -143,8 +150,40 @@
                 </li>
             <h3>Takeaway</h3>
             <p>
-                The response object constructor can be used in tandum with the request object to provide further details to the web browser about the information that a fetch reqeuest pulls. Rather than just pulling an object without having knowledge of its file type or size, response and request can provide details about the file they contain within their body via properties accessible through their head.
-                Also, this tutorial showed the difference and usecases for a blob instead of json when pulling data, basically any time you are pulling an image, video, or audio file, blob is used and not json. Json should only be for text.
+                The response object constructor can be used in tandem with the request object to provide further details to the web browser about the information that a fetch request pulls. Rather than just pulling an object without having knowledge of its file type or size, response and request can provide details about the file they contain within their body via properties accessible through their head.
+                Also, this tutorial showed the difference and use cases for a blob instead of json when pulling data, basically any time you are pulling an image, video, or audio file, blob is used and not json. Json should only be for text.
+            </p> 
+        </div>
+
+        <div id="part-5" class="notes">
+            <h3>Part 5 - Additional Notes:</h3>
+            <ul>
+                <li>
+                    No matter what, you need to have your fetch requests and responses throw errors in the cases where the fetch failed.
+                    A failed fetch can be caused by numerous things, but what is important to note is that while .catch() is necessary and should always be used,
+                    it does not catch server side errors or instances where the fetch did return information but not the right kind, ie the .ok status isn't correct, in this case it is 
+                    best to always add a check using an if statement to see if the response from the fetch is not ok, if(!response.ok), and in these instances using the create new Error
+                    method to throw an error to the catch statement to prevent any code from executing with the incorrect information from the fetch request.
+                </li>
+                <li>
+                    Also, in instances where you want to add custom properties to say a list item, like a user id that you pulled from a fetch request, html by default does not allow
+                    you to define your own properties within the tags, instead, you need to first define that you are doing so using the 'data-' property. Then you can specify the new property you are
+                    appending to the tag, like in this case 'data-uid' allows for the user id to be stored or saved to the li tag. 
+                </li>
+                <li>
+                    Under instances where you are pulling data from a database, another server, or even a json file and the object that it returns has multiple properties that you don't care about
+                    to simplify the code, you can always use deconstruction, rather than pulling the entire object every time from the specifying the properties you want, by typing ({ prop1, prop2, etc})
+                    will save on having to specify the item.prop1, item.prop2, etc for each individual property, mainly useful when you know you are only pulling one or two properties like in the example.
+                    This has the benefit of making it easier to code and easier to read for others working on the same project.
+                 </li>
+            <h3>Takeaway</h3>
+            <p>
+                This section was mainly about showing the difference between pulling text and json from the fetch request but it was mostly useful in showing good programming practices, like creating a custom property within
+                html elements for later use, like an id, and a better way to update the html on a page when pulling data. Rather than appending data one at a time with a for loop and clearing the innerHtml before hand, which
+                is how I have mainly been doing it, using something like the .map() method and then the .join() method and creating a long string before setting that equal to the innerHTML is better than doing multiple updates individually.
+                This allows for all of the code to format and execute before the user notices any changes, so in cases where the update is slow rather than seeing it slowly update, it will display all at once which can be useful in some cases, or if the item is
+                updated multiple times a second it remove any dramatic changes and only shows the whole fetch and not one piece at a time. Also, it highlighted the importance of having error handling beyond just a .catch() method, while that is always required,
+                it is best to also include a if statement to check that the fetch itself is not ok even if it returned a response, because a fetch statement can still return a response and claim it was "successful" but the response might not be what the user intended to receive.
             </p> 
         </div>
     </div>
