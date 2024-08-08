@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document Object Model - Class Practice</title>
+</head>
+<body>
+    <div id="choiceOne">
+        <form id="madLibFormOne">
+            <input type="text" placeholder="Enter a Name..." id="nameInputOne" required>
+            <input type="text" placeholder="Enter a Profession..." id="professionInputOne" required>
+            <input type="text" placeholder="Enter an Animal..." id="animalInputOne" required>
+            <input type="text" placeholder="Enter a Food..." id="foodInputOne" required>
+            <input type="submit" value="Generate" >
+        </form>
+        <div id="madLibOne" class="hidden">
+            <p>Hello my name is <span id="name1"></span></p>
+            <p>and I am studying to become a <span id="profession1"></span></p>
+            <p>I really like <span id="animal1"></span></p>
+            <p>My favorite food is <span id="food1"></span></p>
+        
+            <button id="reloadBtn">Restart</button>
+        </div>
+    </div>
+
+    <div id="choiceTwo">
+        <form id="madLibFormTwo">
+            <input type="text" placeholder="Enter a Name..." id="nameInputTwo" required>
+            <input type="text" placeholder="Enter an Adjective..." id="adjectiveInputTwo" required>
+            <input type="text" placeholder="Enter an Adverb..." id="adverbTwo" required>
+            <input type="text" placeholder="Enter a Animal..." id="animalInputTwo" required>
+            <input type="text" placeholder="Enter a Place..." id="placeInputTwo" required>
+            <input type="text" placeholder="Enter a verb..." id="verbInputTwo" required>
+            <input type="submit" value="Generate" >
+        </form>
+        <div id="madLibTwo" class="hidden">
+            <p>Dear <span id="name2"></span></p>
+            <p>I am writing to you from a <span id="adjective2"></span> castle in an enchanted forest.</p>
+            <p>I found myself here one day after going for a ride on a <span id="adverb2"></span> <span id="animal2"></span> in <span id="place2"></span></p>
+            <p>I hope one day you can visit, although the only way to get here now is to <span id="verb2"></span>.</p>
+        
+            <button id="reloadBtn">Restart</button>
+        </div>
+    </div>
+
+
+<script src="./app.js"></script>
+</body>
+</html>

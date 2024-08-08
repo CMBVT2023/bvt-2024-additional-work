@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document Object Model Practice</title>
 </head>
 
 
@@ -14,6 +14,7 @@
     <input id="rows" placeholder="How many rows?">
     <input id="cells" placeholder="How many cells?">
     <button onclick="createTable()">Generate Table</button>
+    <button onclick="createTenByTenTable()">Generate 10x10 Table</button>
     <button onclick="resetTable()">Reset</button>
 
     <div id="table-div">
@@ -26,7 +27,7 @@
     
     </div>
 
-    <script>
+    <!-- <script>
         function createTable() {
             var table = document.getElementById('table0');
             console.log(table)
@@ -36,6 +37,7 @@
             var cell,
                 text;
    
+            table.innerHTML = '';
             for (let j = 0; j < rowInput; j++) {
                 var row = table.insertRow(-1);
    
@@ -63,7 +65,8 @@
             // table.removeChild(table.lastChild);
 
        }
-    </script>
+    </script> -->
+    <script src="./app.js"></script>
 </body>
 
 
