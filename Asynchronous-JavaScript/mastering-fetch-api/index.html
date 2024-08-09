@@ -19,7 +19,7 @@
             </li> -->
         </ul>
 
-        <h2>Left off on part 6 of the video at 58:35.</h2>
+        <h2>Left off at 1:24:34 on part 7.</h2>
 
         <ol>
             <li>Basic Fetch Requests</li>
@@ -184,6 +184,69 @@
                 This allows for all of the code to format and execute before the user notices any changes, so in cases where the update is slow rather than seeing it slowly update, it will display all at once which can be useful in some cases, or if the item is
                 updated multiple times a second it remove any dramatic changes and only shows the whole fetch and not one piece at a time. Also, it highlighted the importance of having error handling beyond just a .catch() method, while that is always required,
                 it is best to also include a if statement to check that the fetch itself is not ok even if it returned a response, because a fetch statement can still return a response and claim it was "successful" but the response might not be what the user intended to receive.
+            </p> 
+        </div>
+
+        <div id="part-6" class="notes">
+            <h3>Part 6 - Additional Notes:</h3>
+            <ul>
+                <li>
+                    API stands for application programming interface, a web server somewhere that can provide you with files, and this data will be sent based on which endpoint or url you will use.
+                    In order to be allowed to access this data you have to have a key, or a unique identifier to signify you are the one requesting the data. This also allows the server owner to monitor
+                    the amount of times you are requesting data or attempting to access data and they can put a limit on the amount of access you have.
+                </li>
+                <li>
+                    You want to keep your api keys a secret, you should use an environment variable when using api keys on your site, this way it is possible for people to have access to the data needed
+                    from various websites without them also having access to your personal api keys, while it is accessible through the environment variable, external users do not have access to the value stored
+                    in the variable, thus providing a layer of abstraction.
+                </li>
+                <li>
+                    API keys can be stored in multiple places, in the query string, in the header, or even in cookies. Cookies are basically a header as there is a setCookies header that can contain multiple
+                    things along with the api keys.
+                </li>
+                <li>
+                    Depending on where the API key is needed, you can either pass it through in the search parameter or query string. Another way is to insert it into the header
+                    of your request and this is best done through making a new Header object and using the .append() method on said object, in this case you can use 'x' to specify that
+                    you are inserting a custom header, like 'x-api-key', do note that when appending headers certain checks are run in the background to make sure you are not editing static
+                    header values that are not intended to change, like where the user is making the request from is unchangeable.
+                </li>
+                <li>
+                    There are certain headers that are forbidden and some names are even forbidden. 
+                    <a href="https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name">List Of Forbidden Header Names</a>
+                </li>
+                <li>
+                    Remember, when setting cookies, they only alter the origin where they are created or the domain you are currently on, they are not really meant to be shared. The way to get around this is to modify the request
+                    by adding a cache option with default and a credentials option that allows for various options. 
+                    'omit' option does not send any authorization headers or tokens that have been set for other places,
+                    this is used to prevent accidentally sharing api-keys or authorization tokens between sites since they should always be kept private even from other servers.
+                    'same-origin' is the default as it allows the browser to share things if the origin is the same, ie you are attempting to access information on the same page, cookie information would be shared.
+                    'include' is basically saying you can send cookies no matter the site, usually the browser does not allow this for security issues as this is basically sending private information to random servers
+                    that are not meant to receive them. This provides a huge breach in security as the tokens that are meant to be private are being accepted by random or unknown servers.
+                    The way that the browser prevents this is through locking down all fetch request and preventing the browser from sending or receiving any fetch request.
+                </li>
+                <li>
+                    There is a meta tag that you can include in your browser that defines where certain things like src or scripts can come from. Most important is connect-src, this defines where the browser fetch request
+                    are allows to fetch from, here you can define a space separated list of where information is allows to be received from.
+                </li>
+                <li>
+                    Example Meta Tag:
+                    &lt;meta <br>
+                    http-equiv="Content-Security-Policy" <br>
+                    content="default-src *; <br>
+                      script-src 'self' 'unsafe-inline'; <br>
+                      connect-src *;  (This line is signifying that fetch can be made to any server, even ones that the user might not trust so instead of an * it should always be a list of trusted urls)<br>
+                      img-src 'self' blob: data: http: https: ; <br>
+                    "&gt;
+                </li>
+            </ul>
+            <h3>Takeaway</h3>
+            <p>
+                In most cases, when accessing data from other servers, it is a requirement to have some sort of api key sent with each request to show said server who is making the request and if they are allowed to pull or push information to the server.
+                The use of an API key allows said server to track the amount of information one site has requested and how many times they are requesting it, basically it can be used to limit or track how much information a site attempts to access from the server.
+                These key need to be used but they should always be kept hidden or private. To do this it is best to pass it as an environment variable so that the user can access it while not being able to read it or copy it. From here, the api key can be passed in various
+                ways when making the request, either through the query parameters in the url of the fetch request or by inserting it into the header of the request object. When using cookies it is always a good idea to limit passing them to other servers or sources and this again can be done 
+                via the request object and its credentials options, whether it is set to 'omit', no source other than the one specified has access, 'same-origin', any page that has the same domain as the specified source has access, or 'include' where source has access. Note that the latter should
+                never be used as it is a huge security risk for not just the site owner but for its users, and the browser will stop any fetch request if this is set to prevent these security vulnerabilities.
             </p> 
         </div>
     </div>
